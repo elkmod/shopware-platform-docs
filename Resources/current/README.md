@@ -1,4 +1,4 @@
-# This is our new Developer Home
+# This is our 6.2 Developer Home
 
 **This is a final iteration of the documentation. For the actual/current documentation please look at the `current` directory.**
 

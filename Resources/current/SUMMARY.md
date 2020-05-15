@@ -1,6 +1,6 @@
 # Table of contents
 
-* [This is our new Developer Home](README.md)
+* [This is our 6.2 Developer Home](README.md)
 * [50-how-to](50-how-to/README.md)
   * [010-indepth-guide-bundle](50-how-to/010-indepth-guide-bundle/README.md)
     * [030-database](50-how-to/010-indepth-guide-bundle/030-database.md)
