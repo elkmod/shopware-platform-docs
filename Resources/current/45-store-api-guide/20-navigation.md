@@ -1,22 +1,23 @@
-[titleEn]: <>(Store api navigation routes)
-[hash]: <>(article:store_api_navigation)
+# Navigation
 
-## Navigation
 You can use our store-api to fetch all the categories you need. In the following example we will show you how you can fetch all sorts of navigations, how you can load cms pages with and without categories.
 
-### Get the main navigation
+## Get the main navigation
+
 To get the main navigation of your Sales Channel you use the following route: `store-api.navigation`.
 
 This route needs some parameters:
+
 * `requestActiveId`: here you determine wich category is currently the active category. Regardless of the `depth` parameter, children of this category will be loaded.
-    * You can use aliases (`main-navigation`, `service-navigation`, `footer-navigation`) on this route. They help you to easily get common categories.
+  * You can use aliases \(`main-navigation`, `service-navigation`, `footer-navigation`\) on this route. They help you to easily get common categories.
 * `requestRootId`: this is where you enter your root category of your Sales Channel.
-    * Additionally, you can use the same aliases here as you can on the `requestActiveId` parameter.
+  * Additionally, you can use the same aliases here as you can on the `requestActiveId` parameter.
 * `buildTree`: when setting this parameter to `true` the api returns the categories in a tree like format.
 * `depth`: determines how many layers of categories should get loaded.
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
-```
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
+
+```text
 POST /store-api/v1/navigation/main-navigation/main-navigation
 
 {
@@ -42,15 +43,15 @@ POST /store-api/v1/navigation/main-navigation/main-navigation
 ]
 ```
 
-### Get the service menu
+## Get the service menu
 
-For this example we use the same route (`store-api.navigation`), so if you need to see wich parameters you can use check the example above.
+For this example we use the same route \(`store-api.navigation`\), so if you need to see wich parameters you can use check the example above.
 
-Thanks to the aliases (`service-navigation`) for the categories you easily can fetch data of the service menu.
+Thanks to the aliases \(`service-navigation`\) for the categories you easily can fetch data of the service menu.
 
 Beware, that your Sales Channel has an service navigation assigned to it, otherwise you wont get the expected result.
 
-```
+```text
 POST /store-api/v1/navigation/service-navigation/service-navigation
 
 {
@@ -79,13 +80,13 @@ POST /store-api/v1/navigation/service-navigation/service-navigation
 ]
 ```
 
-### Get the footer navigation
+## Get the footer navigation
 
-To get the footer navigation we're using the same route (`store-api.navigation`) wich is already used in the two examples above. We now use the `footer-navigation` alias to get the footer navigation.
+To get the footer navigation we're using the same route \(`store-api.navigation`\) wich is already used in the two examples above. We now use the `footer-navigation` alias to get the footer navigation.
 
 Note, that your Sales Channel needs a footer-navigation attached to it, otherwise you won't get the data you expected to get.
 
-```
+```text
 POST /store-api/v1/footer-navigation/footer-navigation
 
 {
@@ -127,18 +128,19 @@ POST /store-api/v1/footer-navigation/footer-navigation
 ]
 ```
 
-### Get cms page 
+## Get cms page
 
 To fetch an cms page via the api you can use this route `store-api.cms.detail`.
 
 This route has the following parameters:
+
 * `id`: Here you enter the id of the cms page that you want to fetch
 
 In this route only the data configured in the CMS page is loaded. This route should be used when loading static CMS pages such as landing pages.
 
-If the cms page contains a product listing element, this route supports all parameters of the [store-api.product.listing](./30-products.md). route.
+If the cms page contains a product listing element, this route supports all parameters of the [store-api.product.listing](30-products.md). route.
 
-```
+```text
 POST /store-api/v1/cms/da05c76975104f39a9f283b0b64db930
 
 {
@@ -177,24 +179,21 @@ POST /store-api/v1/cms/da05c76975104f39a9f283b0b64db930
     "id": "da05c76975104f39a9f283b0b64db930",
     "apiAlias": "cms_page"
 }
-
 ```
 
+### Get cms page with category
 
-#### Get cms page with category  
-
-If you want to load a cms page with a category you can use teh following route: `store-api.category.detail`
-In contrast to the `/cms/{id}` route, this route also considers the category settings of the cms page. 
+If you want to load a cms page with a category you can use teh following route: `store-api.category.detail` In contrast to the `/cms/{id}` route, this route also considers the category settings of the cms page.
 
 This route needs one parameter:
+
 * `navigationId`: the id of the navigation you want to fetch
 
-Note, that you cannot use the api aliases like: `main-navigation`, 'footer-navigation', etc... 
-This route supports an alias `home` to load the home page of the sales channel. 
+Note, that you cannot use the api aliases like: `main-navigation`, 'footer-navigation', etc... This route supports an alias `home` to load the home page of the sales channel.
 
-If the cms page contains a product listing element, this route supports all parameters of the [store-api.product.listing](./30-products.md). route.
+If the cms page contains a product listing element, this route supports all parameters of the [store-api.product.listing](30-products.md). route.
 
-```
+```text
 POST /store-api/v1/category/04cfc07532344f938d1c88735b54281e
 
 {
@@ -258,3 +257,4 @@ POST /store-api/v1/category/04cfc07532344f938d1c88735b54281e
     "apiAlias": "category"
 }
 ```
+

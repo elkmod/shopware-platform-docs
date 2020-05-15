@@ -1,21 +1,14 @@
-[titleEn]: <>(Switching content language in administration)
-[metaDescriptionEn]: <>(This HowTo will teach you how the content language is changed and what impacts these changes have.)
-[hash]: <>(article:how_to_admin_language_switch)
+# 670-add-administration-language-switch
 
 ## Overview
 
-The administration's content language is one of Shopware's key USP's.
-It enables users to switch between available languages. Its use will affect the whole administration.
-For example, if you change the content language in the so called `language switch`, every listing or detail page will
-update and use that new language to display and edit content.
-To make sure your custom entity supports translations, look at [overview of translations in the DAL](./../60-references-internals/10-core/130-dal.md). 
-
+The administration's content language is one of Shopware's key USP's. It enables users to switch between available languages. Its use will affect the whole administration. For example, if you change the content language in the so called `language switch`, every listing or detail page will update and use that new language to display and edit content. To make sure your custom entity supports translations, look at [overview of translations in the DAL](../60-references-internals/10-core/130-dal.md).
 
 ## Change language in a listing
 
 In order to change the language in an administration listing, you will have to add the `language switch` component to your smart bar:
 
-```twig
+```text
 {# foobar-list.html.twig #}
 
 <sw-page>
@@ -25,17 +18,12 @@ In order to change the language in an administration listing, you will have to a
 </sw-page>
 ```
 
-Although this slot already bears the name `language switch`, it is not yet fully functional.
-The slot is used to place the `language switch` in the same place on all pages according to Shopware's conventions.
-But why is it not served there by default? Firstly, not all components are translatable.
-Additionally, pages do not know how to handle language switching themselves.
-The `language switch` triggers the language change. Every request afterwards will then use the new language.
-So, as our content is not automatically reloaded by default on switching the language, you will have to listen to the
-`language switch's` change event:
+Although this slot already bears the name `language switch`, it is not yet fully functional. The slot is used to place the `language switch` in the same place on all pages according to Shopware's conventions. But why is it not served there by default? Firstly, not all components are translatable. Additionally, pages do not know how to handle language switching themselves. The `language switch` triggers the language change. Every request afterwards will then use the new language. So, as our content is not automatically reloaded by default on switching the language, you will have to listen to the `language switch's` change event:
 
-```twig
+```text
 <sw-language-switch @change="changeLanguage"></sw-language-switch>
-``` 
+```
+
 ```javascript
 import template from './foobar-list.html.twig';
 const { Component } = Shopware;
@@ -80,7 +68,7 @@ Component.register('foobar-list', {
 
 To change the language on a detail page, you will have to add the `language switch` component into your smart bar as well:
 
-```twig
+```text
 {# foobar-detail.html.twig #}
 
 <sw-page>
@@ -92,9 +80,9 @@ To change the language on a detail page, you will have to add the `language swit
 
 In the listing, you will have to provide reloading logic by listening to the `change` event:
 
-```twig
+```text
 <sw-language-switch @change="loadItem"></sw-language-switch>
-``` 
+```
 
 ```javascript
 import template from './foobar-detail.html.twig';
@@ -135,15 +123,14 @@ Component.register('foobar-detail', {
 });
 ```
 
-This will reload the active entity on a detail page. Be aware, you may loose data here.
-To prevent data loss, a modal will give you the opportunity to save unsaved changes, while switching the language: 
+This will reload the active entity on a detail page. Be aware, you may loose data here. To prevent data loss, a modal will give you the opportunity to save unsaved changes, while switching the language:
 
-```twig
+```text
 <sw-language-switch :saveChangesFunction="saveOnLanguageChange"
                     :abortChangeFunction="abortOnLanguageChange"
                     @change="loadItem">
 </sw-language-switch>
-``` 
+```
 
 ```javascript
 import template from './foobar-detail.html.twig';
@@ -191,11 +178,10 @@ Component.register('foobar-detail', {
     }
 });
 ```
-In case a language beside the system default language is displayed, it is customary to hint at it somehow.
-In Shopware you can simply use the `sw-language-info` component to do that.
-This component displays a short info text about the current selected language and its impacts on the current entity:
 
-```twig
+In case a language beside the system default language is displayed, it is customary to hint at it somehow. In Shopware you can simply use the `sw-language-info` component to do that. This component displays a short info text about the current selected language and its impacts on the current entity:
+
+```text
 <sw-page class="foobar-detail">
     <template #content>
         <sw-card-view v-if="item">
@@ -207,12 +193,9 @@ This component displays a short info text about the current selected language an
 
 ## Change language in a create page
 
-You simply don't. As previously explained, when switching the language every content needs to be reloaded.
-On a creation page there is nothing to reload.
-It is common to re-use the editing page for creation, but you have to make sure that you don't do it while creating.
-In this case, simply disable the component using this attribute:
+You simply don't. As previously explained, when switching the language every content needs to be reloaded. On a creation page there is nothing to reload. It is common to re-use the editing page for creation, but you have to make sure that you don't do it while creating. In this case, simply disable the component using this attribute:
 
-```twig
+```text
 <sw-page>
     <template #language-switch>
         <sw-language-switch :disabled="isCreateMode"></sw-language-switch>
@@ -220,9 +203,7 @@ In this case, simply disable the component using this attribute:
 </sw-page>
 ```
 
-There is still a pitfall to bypass.
-When you create a new entry using a different language than the system default language, you have to switch back to
-it for the creation process:
+There is still a pitfall to bypass. When you create a new entry using a different language than the system default language, you have to switch back to it for the creation process:
 
 ```javascript
 Component.extend('foobar-create', 'foobar-detail', {
@@ -236,7 +217,7 @@ Component.extend('foobar-create', 'foobar-detail', {
 
 The language info differs depending on its entity, so be sure to tell the `sw-language-info` component about it:
 
-```twig
+```text
 <sw-language-info :entityDescription="item.name"
                   :isNewEntity="isCreateMode">
 </sw-language-info>
@@ -246,7 +227,8 @@ The language info differs depending on its entity, so be sure to tell the `sw-la
 
 You can simply display a translated field by reading that field from the translated relation:
 
-```twig
+```text
 {# @var customEntity \FooBar\CustomEntityEntity #}
 {{ customEntity.translated.field }}
 ```
+

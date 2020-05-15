@@ -1,19 +1,19 @@
-[titleEn]: <>(Store api account routes)
-[hash]: <>(article:store_api_account)
+# Account
 
-## Account
 On this page we will show you how you can use the store-api to manage everything about your customer accounts. That includes how you can log in an log out your customers and many more things.
 
-### Login
+## Login
+
 To login a user you can use this route: `store-api.account.login`
 
 This route needs two parameters:
+
 * `username`: this parameter takes the username of the user
 * `password`: here you enter the password of your customer
 
 For this example we are using the account credentials for the dummy user.
 
-```
+```text
 POST /store-api/v1/account/login
 
 {
@@ -27,11 +27,12 @@ POST /store-api/v1/account/login
 }
 ```
 
-### Register
+## Register
 
 To register a customer you need two routes: `store-api.account.register` and `store-api.account.register.confirm`
 
 The `store-api.account.register` needs the following parameters:
+
 * `guest`: decides whether the account is a guest account or not
 * `title`: the title of the customer e.g. 'Dr.'
 * `salutationId`: the id of the salutation
@@ -45,7 +46,7 @@ The `store-api.account.register` needs the following parameters:
 * `shippingAddress`: shipping address of the customer
 * `storefrontUrl`: the url to your storefront 
 
-```
+```text
 POST /store-api/v1/account/register
 
 {
@@ -96,11 +97,12 @@ Whether you have double opt in registration enabled or not the account of your c
 
 If double opt in registration is enabled you need to use this route: `store-api.account.register.confirm` to active the account of you customer.
 
-This route needs two parameters: 
+This route needs two parameters:
+
 * `hash`: the hast to verify the user account
 * `em`: the email of your customer
 
-```
+```text
 POST /store-api/v{version}/account/register-confirm
 
 {
@@ -121,16 +123,17 @@ POST /store-api/v{version}/account/register-confirm
     "id": "2207e9a717854ab1affb8f57cebeead3",
     "apiAlias": "customer"
 }
-``` 
+```
 
-### Logout
+## Logout
+
 Using this route `store-api.account.logout` you can log out a customer.
 
 This route does not need any parameter.
 
 **Note** that you need the `sw-context-token` header for this route, wich contains the context token of the login route response.
 
-```
+```text
 POST /store-api/v1/account/logout
 
 // when you get a 204 http reponse code you successfully logged out your customer.
@@ -140,14 +143,15 @@ POST /store-api/v1/account/logout
 }
 ```
 
-### Get current customer
+## Get current customer
+
 With the following route you can get information about the logged in user: `store-api.account.customer`
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
 
 **Note** that you need the `sw-context-token` header for this route, wich contains the context token of the login route response.
 
-```
+```text
 POST /store-api/v1/account/customer
 
 {
@@ -168,17 +172,19 @@ POST /store-api/v1/account/customer
 }
 ```
 
-### Change profile
+## Change profile
+
 With the `store-api.account.change-profile`-route you can change information about the customer.
 
 This route takes three parameters:
+
 * `salutationId`: the id of the salutation
 * `firstName`: the new firstname of the user
 * `lastName`: the new firstname of the user
 
 **Note** that you need the `sw-context-token` header for this route, wich contains the context token of the login route response.
 
-```
+```text
 POST /store-api/v1/account/change-profile
 
 {
@@ -193,17 +199,19 @@ POST /store-api/v1/account/change-profile
 }
 ```
 
-### Change email
+## Change email
+
 Using the `store-api.account.change-email` route you can change the email of your customer.
 
 It takes in three parameters:
+
 * `email`: the new email the account should get
 * `emailConfirmation`: this parameter confirm that the email the customer entered is correct. The value has to be the sames as the value for the `email` parameter.
 * `password`: the password of the customer
 
 **Note** that you need the `sw-context-token` header for this route, wich contains the context token of the login route response.
 
-```
+```text
 POST /store-api/v1/account/change-email
 
 {
@@ -218,10 +226,12 @@ POST /store-api/v1/account/change-email
 }
 ```
 
-### Change password
+## Change password
+
 When you need to change the password of an user you can use this route: `store-api.account.change-password`
 
 The parameters for this route are:
+
 * `password`: here you enter the old password
 * `newPassword`: this parameters takes the new password
 * `newPasswordConfirm`: and this parameters confirms the new password. It does so by being the same value that in used for the `newPassword` parameter.
@@ -230,7 +240,7 @@ The parameters for this route are:
 
 In this example we change the password with a new password that is more secure than the old one.
 
-```
+```text
 POST /store-api/v1/account/change-password
 
 {
@@ -245,16 +255,18 @@ POST /store-api/v1/account/change-password
 }
 ```
 
-### Reset password
+## Reset password
+
 When a user forgets his password you can use these two routes: `store-api.account.recovery.password` and `store-api.account.recovery.send.mail`
 
 First we send an password reset verification email to the user by sending this request.
 
 The `store-api.account.recovery.send.mail` has two parameters:
+
 * `email`: this parameter needs the email address the customer
 * `storefrontUrl`: for this parameter you enter the base path to the Sales Channel
 
-```
+```text
 POST /store-api/v1/account/recovery-password
 
 {
@@ -271,13 +283,14 @@ POST /store-api/v1/account/recovery-password
 After that, you do a request on this route `store-api.account.recovery.password`.
 
 It needs the following parameters:
+
 * `hash`: here you need the hash that you got from the password recovery email
 * `newPassword`: this is the parameter for the new password of the customer account
 * `newPasswordConfirm`: with this parameter you confirm that the password the user entered is correct.
-    * That means this parameter needs to have the same password that is used for the `newPassword` parameter.
+  * That means this parameter needs to have the same password that is used for the `newPassword` parameter.
 * `storefrontUrl`: this parameters needs the base url of the Sales Channel
 
-```
+```text
 POST /store-api/v1/account/recovery-password-confirm
 
 {
@@ -293,15 +306,17 @@ POST /store-api/v1/account/recovery-password-confirm
 }
 ```
 
-### Change default payment
+## Change default payment
+
 You can change the default payment method of an customer with this route: `store-api.account.set.payment-method`
 
 This route has a parameter the following parameter:
+
 * `paymentMethodId`: This parameter determines which payment method will be the new default payment method for this customer.
 
 **Note** that you need the `sw-context-token` header for this route, wich contains the context token of the login route response.
 
-```
+```text
 POST /store-api/v1/account/change-payment-method/da4aa20cd7b9417094a0eb51426f0912
 
 {
@@ -310,14 +325,15 @@ POST /store-api/v1/account/change-payment-method/da4aa20cd7b9417094a0eb51426f091
 }
 ```
 
-### Order overview
+## Order overview
+
 You can view an order of the customer with the `store-api.order` route.
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
 
 **Note** that you need the `sw-context-token` header for this route, wich contains the context token of the login route response.
 
-```
+```text
 GET /store-api/v1/order
 
 {
@@ -355,13 +371,14 @@ GET /store-api/v1/order
 }
 ```
 
-### Newsletter
+## Newsletter
 
-#### Subscribing to a newsletter
+### Subscribing to a newsletter
 
 You can use the `store-api.newsletter.subscribe` route to sign up customer to an newsletter.
 
 This route has a few parameters:
+
 * `email`: the email of the customer
 * `salutationId`: id of a salutation
 * `firstName`: the first name of the customer
@@ -372,7 +389,7 @@ This route has a few parameters:
 * `option`: the type of the email
 * `storefrontUrl`: url to your storefront
 
-```
+```text
 POST /store-api/v1/newsletter/subscribe
 
 {
@@ -392,14 +409,15 @@ POST /store-api/v1/newsletter/subscribe
 }
 ```
 
-#### Unsubscribe customer from newsletter
+### Unsubscribe customer from newsletter
 
 You can unsubscribe your customer from a newsletter with this route: `store-api.newsletter.unsubscribe`
 
-This route has only one parameter: 
+This route has only one parameter:
+
 * `email`: the email of the customer
 
-```
+```text
 POST /store-api/v1/newsletter/unsubscribe
 
 {
@@ -411,10 +429,12 @@ POST /store-api/v1/newsletter/unsubscribe
 }
 ```
 
-### Contact form
+## Contact form
+
 Use this route `store-api.contact.form` if you want that customers can send messages to your shop.
 
 This route needs a few parameters:
+
 * `salutationId`: here you need to enter the id of the salutation of your customer
 * `firstName`: this parameter takes in the firstname of your customer 
 * `lastName`: this parameter needs the lastname of your customer 
@@ -423,7 +443,7 @@ This route needs a few parameters:
 * `subject`: this parameters determines the parameter for the subject of the email 
 * `comment`: this parameters takes the actual message the customer wants to send you
 
-```
+```text
 POST /store-api/v1/contact-form
 
 {
@@ -441,3 +461,4 @@ POST /store-api/v1/contact-form
     "apiAlias": "contact_form_result"
 }
 ```
+

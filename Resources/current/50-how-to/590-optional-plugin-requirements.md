@@ -1,6 +1,4 @@
-[titleEn]: <>(Optional requirements of a plugin)
-[metaDescriptionEn]: <>(This HowTo will give an example on handle optional requirements of your plugin.)
-[hash]: <>(article:how_to_plugin_requirements)
+# 590-optional-plugin-requirements
 
 ## Overview
 
@@ -8,12 +6,10 @@ This HowTo will show you how to handle optional requirements of your plugin.
 
 ## Starting point
 
-Given your plugin could provide additional features, but for that it needs another plugin.
-But your plugin should also be runnable, if the other plugin is not in the system.
-So adding the other plugin to the `require` section of your `composer.json` file is not an option,
-because that would mean, the other plugin has to be installed and active in the system.
+Given your plugin could provide additional features, but for that it needs another plugin. But your plugin should also be runnable, if the other plugin is not in the system. So adding the other plugin to the `require` section of your `composer.json` file is not an option, because that would mean, the other plugin has to be installed and active in the system.
 
 This is your example service, which extends from a service of another plugin:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -30,8 +26,9 @@ class MyService extends OtherService
 }
 ```
 
-This is how your regular `Resources\config\services.xml` file would look like: 
-```xml
+This is how your regular `Resources\config\services.xml` file would look like:
+
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -44,12 +41,9 @@ This is how your regular `Resources\config\services.xml` file would look like:
 </container>
 ```
 
-If you now install and active your plugin, Shopware will crash if the OtherPlugin is not installed and also activated.
-To prevent that, you need to register the `services.xml` manually,
-and before doing so, you also need to check some preconditions. 
+If you now install and active your plugin, Shopware will crash if the OtherPlugin is not installed and also activated. To prevent that, you need to register the `services.xml` manually, and before doing so, you also need to check some preconditions.
 
-First, rename or move the `Resources\config\services.xml` file, to prevent Shopware from autoloading it,
-e.g to `other_plugin_extension.xml`.
+First, rename or move the `Resources\config\services.xml` file, to prevent Shopware from autoloading it, e.g to `other_plugin_extension.xml`.
 
 Now you need to overwrite the `build` method in your plugin base class.
 
@@ -82,8 +76,7 @@ class MyPlugin extends Plugin
 }
 ```
 
-Use the `kernel.active_plugins` parameter to get information of the active plugins.
-If the plugin is not found in the system or not active, do nothing.
+Use the `kernel.active_plugins` parameter to get information of the active plugins. If the plugin is not found in the system or not active, do nothing.
 
-If the plugin is present in the system and also active, we could use the XmlFileLoader to load our `other_plugin_extension.xml`,
-which contains the declaration of the service which is extending from the other plugin.
+If the plugin is present in the system and also active, we could use the XmlFileLoader to load our `other_plugin_extension.xml`, which contains the declaration of the service which is extending from the other plugin.
+

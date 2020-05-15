@@ -1,18 +1,12 @@
-[titleEn]: <>(Custom storefront controller)
-[metaDescriptionEn]: <>(This HowTo will give an example on writing and calling your own storefront controller.)
-[hash]: <>(article:how_to_storefront_controller)
+# 580-custom-storefront-controller
 
 ## Overview
 
-If you want to call some custom business logic from your template you will need to write your own storefront controller.
-This HowTo will show you how to achieve this, by writing an controller that clears the cart of the user.
-You will hook this controller action to a button on the cart overview page.
+If you want to call some custom business logic from your template you will need to write your own storefront controller. This HowTo will show you how to achieve this, by writing an controller that clears the cart of the user. You will hook this controller action to a button on the cart overview page.
 
 ## Creating a route
 
-Create a class inside the `<plugin base>/src/Storefront/Controller` and name it `ClearCartController`.
-As this controller should be accessible through the storefront extend from the abstract StorefrontController. 
-You need a own route for every controller action, you will use Symfony's `@Route` annotation for this:
+Create a class inside the `<plugin base>/src/Storefront/Controller` and name it `ClearCartController`. As this controller should be accessible through the storefront extend from the abstract StorefrontController. You need a own route for every controller action, you will use Symfony's `@Route` annotation for this:
 
 ```php
 <?php declare(strict_types=1);
@@ -38,13 +32,11 @@ class ClearCartController extends StorefrontController
 }
 ```
 
-Give the Route an URL ("/cart/clear" in this case), a name and define over which HTTP-Verbs this route is reachable.
-Also define that there are no seo-urls for this route.
+Give the Route an URL \("/cart/clear" in this case\), a name and define over which HTTP-Verbs this route is reachable. Also define that there are no seo-urls for this route.
 
-Next you have to tell Symfony that it should search for routes in your /Controller folder.
-Therefore add an `routes.xml` inside the `<plugin base>/src/Resources/config` folder.
+Next you have to tell Symfony that it should search for routes in your /Controller folder. Therefore add an `routes.xml` inside the `<plugin base>/src/Resources/config` folder.
 
-```xml
+```markup
 <?xml version="1.0" encoding="UTF-8" ?>
 <routes xmlns="http://symfony.com/schema/routing"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -59,9 +51,7 @@ With this code you tell Symfony that it should look in your /Controller folder a
 
 ## Building your custom logic
 
-Next you will build the functionality to clear the cart.
-Use the cart service to load the cart associated with the token from the context and then iterate over all lineItems inside the cart and remove them from the cart.
-Your controller now looks like this:
+Next you will build the functionality to clear the cart. Use the cart service to load the cart associated with the token from the context and then iterate over all lineItems inside the cart and remove them from the cart. Your controller now looks like this:
 
 ```php
 <?php declare(strict_types=1);
@@ -105,7 +95,7 @@ class ClearCartController extends StorefrontController
 
 Now you need to register your controller in the DI-Container, therefore edit the `Resources/config/services.xml` to look like this:
 
-```xml
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -126,8 +116,7 @@ Now you need to register your controller in the DI-Container, therefore edit the
 
 ## Rendering Templates
 
-Lastly your Controller Action needs to return a Response object. You can render an own template via `$this->renderStorefront()` or forward to another action.
-In your case you want to reload the cart page to indicate the user that the action was successful, since the cart should be empty now:
+Lastly your Controller Action needs to return a Response object. You can render an own template via `$this->renderStorefront()` or forward to another action. In your case you want to reload the cart page to indicate the user that the action was successful, since the cart should be empty now:
 
 ```php
     /**
@@ -147,10 +136,9 @@ In your case you want to reload the cart page to indicate the user that the acti
 
 ## Triggering your controller
 
-Now you need to trigger your custom action somehow.
-Extend the cart page template and add a anchor element that has an href to your route:
+Now you need to trigger your custom action somehow. Extend the cart page template and add a anchor element that has an href to your route:
 
-```twig
+```text
 {% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
 
 {% block page_checkout_cart_product_table %}
@@ -164,11 +152,9 @@ Extend the cart page template and add a anchor element that has an href to your 
 {% endblock %}
 ```
 
-For more information on how to extend storefront templates, take a look [here](./250-extending-storefront-block.md).
+For more information on how to extend storefront templates, take a look [here](250-extending-storefront-block.md).
 
 ## Source
 
-There's a GitHub repository available, containing this example source.
-Check it out [here](https://github.com/shopware/swag-docs-storefront-controller).
-
+There's a GitHub repository available, containing this example source. Check it out [here](https://github.com/shopware/swag-docs-storefront-controller).
 

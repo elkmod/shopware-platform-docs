@@ -1,5 +1,4 @@
-[titleEn]: <>(Vagrant VM)
-[hash]: <>(article:vagrant_installation)
+# 20-vagrant
 
 If using docker is not an option for you, vagrant is another great technology to quickly get a local Shopware up and running.
 
@@ -14,7 +13,7 @@ For this, the vagrant machine supports SCP/SSH, which is integrated in Editors l
 * [Vagrant](https://www.vagrantup.com/) v2.2.4 or later
 * [VirtualBox](https://www.virtualbox.org/) in a Vagrant compatible version
 * [Git](https://git-scm.com/)
-* [Vagrant Hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) (optional)
+* [Vagrant Hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) \(optional\)
 
 The IP address `192.168.33.10` is used by the vagrant box, so it must not be in use in the network already. If this is not possible, you manually have to change the IP address in the `Vagrantfile` you'll clone in the next step.
 
@@ -22,7 +21,7 @@ The IP address `192.168.33.10` is used by the vagrant box, so it must not be in 
 
 Start by cloning the repository [shopwareLabs/shopware-platform-vagrant](https://github.com/shopwareLabs/shopware-platform-vagrant)
 
-```
+```text
 > git clone git@github.com:shopwareLabs/shopware-platform-vagrant.git
 > cd shopware-platform-vagrant
 ```
@@ -33,7 +32,7 @@ Next, execute `vagrant up` and wait while Vagrant downloads a virtual box image,
 > vagrant up
 ```
 
-*Note: This will take **quite a while** on first execution. But caches will be created and used on any futher `up` call.*
+_Note: This will take **quite a while** on first execution. But caches will be created and used on any futher `up` call._
 
 ## Advanced Setup
 
@@ -41,36 +40,33 @@ If you would like to access the Shopware instance using a hostname, rather than 
 
 Both proxy and SSL can be enabled by editing the `ansible/vars/all.yml`. In this file, you will find the following options and be able to modify them accordingly.
 
-Variable | Type | Default | Description
-----|----|----|----
-proxy_enabled | Boolean (yes/no) | no | Enables the installation of nginx as a reverse proxy
-proxy_hostname | Hostname | "shopware.local" | Defines the hostname that will be used to access the Shopware instance
-proxy_ssl | Boolean (yes/no) | no | Enables SSL
+| Variable | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| proxy\_enabled | Boolean \(yes/no\) | no | Enables the installation of nginx as a reverse proxy |
+| proxy\_hostname | Hostname | "shopware.local" | Defines the hostname that will be used to access the Shopware instance |
+| proxy\_ssl | Boolean \(yes/no\) | no | Enables SSL |
 
 Please notice that you will have to modify your hosts file or use the Vagrant Hostsupdater plugin, when using a reverse proxy setup.
 
-Given the hosts entry is set, you can access the Shopware instance via `https://<proxy_hostname>`, whereas `<proxy_hostname>` is a placeholder for the configured hostname (shopware.local per default).
-
+Given the hosts entry is set, you can access the Shopware instance via `https://<proxy_hostname>`, whereas `<proxy_hostname>` is a placeholder for the configured hostname \(shopware.local per default\).
 
 ## Accessing Shopware
 
 After executing the `vagrant up` command you have a fully fledged Shopware 6 up and running. Access it through your browser.
 
+Basic setup \( ansible vars: `proxy_enabled = no`, `proxy_hostname = shopware.local`, `proxy_ssl = no` \):
 
-Basic setup ( ansible vars: `proxy_enabled = no`, `proxy_hostname = shopware.local`, `proxy_ssl = no` ):
+| URL | UI |
+| :--- | :--- |
+| [http://192.168.33.10](http://192.168.33.10) | Storefront |
+| [http://192.168.33.10/admin](http://192.168.33.10/admin) | Administration |
 
-URL | UI
----- | --------
-[http://192.168.33.10](http://192.168.33.10) | Storefront 
-[http://192.168.33.10/admin](http://192.168.33.10/admin) | Administration
+Advanced proxy setup \( ansible vars: `proxy_enabled = yes`, `proxy_hostname = shopware.local`, `proxy_ssl = yes`, local hosts file modified or Vagrant Hostupdater plugin in use \):
 
-
-Advanced proxy setup ( ansible vars: `proxy_enabled = yes`, `proxy_hostname = shopware.local`, `proxy_ssl = yes`, local hosts file modified or Vagrant Hostupdater plugin in use ):
-
-URL | UI
----- | --------
-[https://shopware.local](https://shopware.local) | Storefront 
-[https://shopware.local/admin](https://shopware.local/admin) | Administration
+| URL | UI |
+| :--- | :--- |
+| [https://shopware.local](https://shopware.local) | Storefront |
+| [https://shopware.local/admin](https://shopware.local/admin) | Administration |
 
 Or use the terminal and access the virtual machine via:
 
@@ -78,17 +74,18 @@ Or use the terminal and access the virtual machine via:
 > vagrant ssh
 > cd shopware-dev/
 > bin/console
-``` 
+```
 
-*Note: You should regularly update the box by executing `vagrant provision` - this will **reset** the box to it's stock state* meaning **Content inside the box is wiped and deleted**
+_Note: You should regularly update the box by executing `vagrant provision` - this will **reset** the box to it's stock state_ meaning **Content inside the box is wiped and deleted**
 
 ## Connecting your IDE
 
 The Vagrant box fully encapsulates the whole Shopware 6 with all its sources. So the development process works just like with any other foreign system. The machine supports **SCP** with the following credentials.
 
-Key |  Setting
-----------|----------
-**Host:** | `192.168.33.10`
-**User:**  | `vagrant`
-**Password:** | `vagrant`
-**Path:** | `~/shopware-dev`
+| Key | Setting |
+| :--- | :--- |
+| **Host:** | `192.168.33.10` |
+| **User:** | `vagrant` |
+| **Password:** | `vagrant` |
+| **Path:** | `~/shopware-dev` |
+

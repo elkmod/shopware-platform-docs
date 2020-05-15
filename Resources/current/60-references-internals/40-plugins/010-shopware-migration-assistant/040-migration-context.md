@@ -1,13 +1,6 @@
-[titleEn]: <>(Migration context)
-[hash]: <>(article:migration_context)
+# 040-migration-context
 
-The central data structure of Shopware Migration Assistant is the migration context. The migration context contains following
-information:
-1. The current connection of migration (which holds the credentials)
-2. Current Profile and Gateway instances
-3. Identifier of the current run
-4. Information on the current processing data ([DataSet](./030-dataSelection-and-dataSet.md))
-5. Offset and limit of the current call
+The central data structure of Shopware Migration Assistant is the migration context. The migration context contains following information: 1. The current connection of migration \(which holds the credentials\) 2. Current Profile and Gateway instances 3. Identifier of the current run 4. Information on the current processing data \([DataSet](030-dataselection-and-dataset.md)\) 5. Offset and limit of the current call
 
 ```php
 <?php declare(strict_types=1);
@@ -58,10 +51,11 @@ class MigrationContext extends Struct implements MigrationContextInterface
     {
         return $this->gateway;
     }
-    
+
     public function setGateway(GatewayInterface $gateway): void
     {
         $this->gateway = $gateway;
     }
 }
 ```
+

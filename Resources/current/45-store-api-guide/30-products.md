@@ -1,37 +1,35 @@
-[titleEn]: <>(Store api product routes)
-[hash]: <>(article:store_api_product)
+# Products
 
-## Products
 In this article we will show how you load product listings, searches and suggest searches via the API.
 
-### Get a product listing
-To get a product listing of a category you use the following route: `store-api.product.listing`
-This route only needs the 'categoryId' parameter. 
+## Get a product listing
 
-If such a product listing is determined via the API, the settings of the corresponding sales channel take effect, which means that 
-the standard aggregations are loaded automatically.
+To get a product listing of a category you use the following route: `store-api.product.listing` This route only needs the 'categoryId' parameter.
+
+If such a product listing is determined via the API, the settings of the corresponding sales channel take effect, which means that the standard aggregations are loaded automatically.
 
 By default, the following aggregations are also loaded:
+
 * `price` - Determines a `stats` aggregation for the prices 
 * `rating` - Determines a `max` aggregation for the average product ratings
 * `shipping-free` - Determines a `max` aggregation if there are free shipping products
 * `manufacturer` - Determines an `entity` aggregation to determine all manufacturers of the listing
 * `properties` - Determines an entity aggregation to determine all product properties that occur in the listing.
 
-```
+```text
 POST /store-api/v1/product-listing/256b32bb62c84ecd86ddcb16df87ef28
 
 {
     "includes": {
-		"product_listing_sorting": ["key"],
-		"product_manufacturer": ["id", "name"],
-		"price_aggregation": ["min", "max"],
-		"product_group": ["id", "name", "options"],
-		"product_group_option": ["id", "name"],
-		"product": ["id", "name", "calculatedPrice", "cover"],
-		"media": ["id", "url"],
-		"product_media": ["media"],
-		"calculated_price": ["unitPrice", "totalPrice"]
+        "product_listing_sorting": ["key"],
+        "product_manufacturer": ["id", "name"],
+        "price_aggregation": ["min", "max"],
+        "product_group": ["id", "name", "options"],
+        "product_group_option": ["id", "name"],
+        "product": ["id", "name", "calculatedPrice", "cover"],
+        "media": ["id", "url"],
+        "product_media": ["media"],
+        "calculated_price": ["unitPrice", "totalPrice"]
     }
 }
 
@@ -157,9 +155,10 @@ POST /store-api/v1/product-listing/256b32bb62c84ecd86ddcb16df87ef28
 }
 ```
 
-#### Seo Filters
-In addition to the standard API functions such as `filter` or `aggregations`, this route also supports seo filters, which are also available in the 
-Shopware 6 storefront application:
+### Seo Filters
+
+In addition to the standard API functions such as `filter` or `aggregations`, this route also supports seo filters, which are also available in the Shopware 6 storefront application:
+
 * `min-price` - Short hand to set a minimum price filter
 * `max-price` - Short hand to set a maximum price filter
 * `rating` - Short hand to set a filter for the average rating of a product
@@ -169,36 +168,31 @@ Shopware 6 storefront application:
 * `p` - Short hand for the `page` parameter
 * `order` - Short hand for a sort that is registered in the system. The available sorts are contained in the response 
 
-#### Behaviors
-In addition to the seo filters and the standard API filters, this route also offers other parameters with which the result of the route
-can be influenced. These parameters refer to the aggregations determined and are used for various purposes:
+### Behaviors
 
-**`no-aggregations`** - No aggregations are loaded. This is used, for example, in the storefront if a filtering or sorting has taken place and then only the product list is updated.
-**`reduce-aggregations`** - All `post-filters` are used as `filters`. This means that the aggregations will only contain values that would lead to a further result.
-**`only-aggregations`** - This parameter sets the internal `limit` to `0`, so that no products are loaded and only the aggregations are returned. 
-In the storefront this parameter is used to update the filters and in combination with the `reduce-aggregations` parameter to deactivate filters that would lead to an empty result.
+In addition to the seo filters and the standard API filters, this route also offers other parameters with which the result of the route can be influenced. These parameters refer to the aggregations determined and are used for various purposes:
 
-### Get a product search
-Product searches can be queried in the Store API via the route 'store-api.search'.
-This route supports all features that are also supported in the 'store-api.product.listing'.
-Unlike the `store-api.product.listing` the parameter `search` is required instead of the `categoryId`.
-This parameter is a search term to be searched for.
+**`no-aggregations`** - No aggregations are loaded. This is used, for example, in the storefront if a filtering or sorting has taken place and then only the product list is updated. **`reduce-aggregations`** - All `post-filters` are used as `filters`. This means that the aggregations will only contain values that would lead to a further result. **`only-aggregations`** - This parameter sets the internal `limit` to `0`, so that no products are loaded and only the aggregations are returned. In the storefront this parameter is used to update the filters and in combination with the `reduce-aggregations` parameter to deactivate filters that would lead to an empty result.
 
-```
+## Get a product search
+
+Product searches can be queried in the Store API via the route 'store-api.search'. This route supports all features that are also supported in the 'store-api.product.listing'. Unlike the `store-api.product.listing` the parameter `search` is required instead of the `categoryId`. This parameter is a search term to be searched for.
+
+```text
 POST /store-api/v1/search
 
 {
-	"search": "Awesome Iron",
+    "search": "Awesome Iron",
     "includes": {
-		"product_listing_sorting": ["key"],
-		"product_manufacturer": ["id", "name"],
-		"price_aggregation": ["min", "max"],
-		"product_group": ["id", "name", "options"],
-		"product_group_option": ["id", "name"],
-		"product": ["id", "name", "calculatedPrice", "cover"],
-		"media": ["id", "url"],
-		"product_media": ["media"],
-		"calculated_price": ["unitPrice", "totalPrice"]
+        "product_listing_sorting": ["key"],
+        "product_manufacturer": ["id", "name"],
+        "price_aggregation": ["min", "max"],
+        "product_group": ["id", "name", "options"],
+        "product_group_option": ["id", "name"],
+        "product": ["id", "name", "calculatedPrice", "cover"],
+        "media": ["id", "url"],
+        "product_media": ["media"],
+        "calculated_price": ["unitPrice", "totalPrice"]
     }
 }
 
@@ -375,20 +369,20 @@ POST /store-api/v1/search
 }
 ```
 
-### Get a product suggest
-To load a product suggest search, the route 'store-api.search.suggest' can be used.
-This works in the same way as the `store-api.search` but no aggregations are loaded here.
+## Get a product suggest
 
-```
+To load a product suggest search, the route 'store-api.search.suggest' can be used. This works in the same way as the `store-api.search` but no aggregations are loaded here.
+
+```text
 POST /store-api/v1/search-suggest
 {
-	"search": "Awesome Iron",
+    "search": "Awesome Iron",
     "includes": {
-		"product_manufacturer": ["id", "name"],
-		"product": ["id", "name", "calculatedPrice", "cover"],
-		"media": ["id", "url"],
-		"product_media": ["media"],
-		"calculated_price": ["unitPrice", "totalPrice"]
+        "product_manufacturer": ["id", "name"],
+        "product": ["id", "name", "calculatedPrice", "cover"],
+        "media": ["id", "url"],
+        "product_media": ["media"],
+        "calculated_price": ["unitPrice", "totalPrice"]
     }
 }
 
@@ -460,3 +454,4 @@ POST /store-api/v1/search-suggest
     "apiAlias": "product_listing"
 }
 ```
+

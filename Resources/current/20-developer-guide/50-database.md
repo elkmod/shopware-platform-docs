@@ -1,35 +1,18 @@
-[titleEn]: <>(Database access)
-[hash]: <>(article:developer_database)
+# 50-database
 
 ## Database guide
 
-In contrast to most Symfony applications, Shopware uses no ORM but a thin
-abstraction layer called the data abstraction layer (DAL). The
-[DAL](./../60-references-internals/10-core/130-dal.md)
-is implemented with the specific needs of Shopware in mind and lets developers
-access the database via pre-defined interfaces. Some concepts used by the DAL,
-like Criteria, may sound familiar to you if you know
-[Doctrine](https://symfony.com/doc/current/doctrine.html)
-or other ORMs. For in-depth documentation about the DAL, visit the
-[data abstraction layer](./../60-references-internals/10-core/130-dal.md)
-documentation in the internals section.
+In contrast to most Symfony applications, Shopware uses no ORM but a thin abstraction layer called the data abstraction layer \(DAL\). The [DAL](../60-references-internals/10-core/130-dal.md) is implemented with the specific needs of Shopware in mind and lets developers access the database via pre-defined interfaces. Some concepts used by the DAL, like Criteria, may sound familiar to you if you know [Doctrine](https://symfony.com/doc/current/doctrine.html) or other ORMs. For in-depth documentation about the DAL, visit the [data abstraction layer](../60-references-internals/10-core/130-dal.md) documentation in the internals section.
 
 ## CRUD
 
-To give you a quick overview and a few workable examples, let's start with the
-CRUD (create, read, update, delete) operations.
+To give you a quick overview and a few workable examples, let's start with the CRUD \(create, read, update, delete\) operations.
 
-In each of the following examples an `EntityRepository` is used. This is the
-recommended way for developers to interface with the DAL or the database in
-general.
+In each of the following examples an `EntityRepository` is used. This is the recommended way for developers to interface with the DAL or the database in general.
 
 ### Preconditions
 
-Before using the repositories, you'll need to get them from the DIC. This is
-done with
-[constructor injection](https://symfony.com/doc/current/service_container/injection_types.html#constructor-injection)
-, so you'll need to extend your services constructor by expecting an
-`EntityRepositoryInterface`:
+Before using the repositories, you'll need to get them from the DIC. This is done with [constructor injection](https://symfony.com/doc/current/service_container/injection_types.html#constructor-injection) , so you'll need to extend your services constructor by expecting an `EntityRepositoryInterface`:
 
 ```php
 // AcmeExamplePlugin/src/Service/DalExampleService.php
@@ -42,7 +25,7 @@ public function __construct (EntityRepositoryInterface $productRepository)
 
 Then, configure the `product.repository` service to be injected:
 
-```xml
+```markup
 <!-- AcmeExamplePlugin/src/Resources/config/service.xml -->
 
 <service id="Acme\ExamplePlugin\Service\DalExampleService">
@@ -50,10 +33,7 @@ Then, configure the `product.repository` service to be injected:
 </service>
 ```
 
-You can read more about dependency injection and service registration in
-Shopware in the
-[services HowTo](./../50-how-to/070-add-service.md)
-.
+You can read more about dependency injection and service registration in Shopware in the [services HowTo](../50-how-to/070-add-service.md) .
 
 ### Creating entities
 
@@ -73,14 +53,11 @@ $this->productRepository->create(
 );
 ```
 
-Read more in the
-[database abstraction layer](./../60-references-internals/10-core/130-dal.md)
-documentation.
+Read more in the [database abstraction layer](../60-references-internals/10-core/130-dal.md) documentation.
 
 ### Reading entities
 
-To search for IDs, you may simply pass an array of IDs to the `Criteria`
-constructor:
+To search for IDs, you may simply pass an array of IDs to the `Criteria` constructor:
 
 ```php
 $this->productRepository->search(
@@ -104,9 +81,7 @@ $this->productRepository->search(
 );
 ```
 
-To find out more about filters, have a look at the
-[filters](./../60-references-internals/10-core/130-dal.md)
-documentation.
+To find out more about filters, have a look at the [filters](../60-references-internals/10-core/130-dal.md) documentation.
 
 ### Updating entities
 
@@ -126,9 +101,7 @@ $this->productRepository->update(
 );
 ```
 
-Find out more in the
-[database abstraction layer](./../60-references-internals/10-core/130-dal.md)
-documentation.
+Find out more in the [database abstraction layer](../60-references-internals/10-core/130-dal.md) documentation.
 
 ### Deleting entities
 
@@ -148,24 +121,15 @@ $this->productRepository->delete(
 
 ## Enrich results with associations
 
-Associations allow you to select more than the data of just one entity when
-searching using the DAL. Assuming you've already built a `Criteria` object
-for your search, an association can be added using the `addAssociation` method:
+Associations allow you to select more than the data of just one entity when searching using the DAL. Assuming you've already built a `Criteria` object for your search, an association can be added using the `addAssociation` method:
 
 ```php
 $criteria->addAssociation('lineItems');
 ```
 
-Learn more in the
-[associations](./../60-references-internals/10-core/130-dal.md)
-documentation.
+Learn more in the [associations](../60-references-internals/10-core/130-dal.md) documentation.
 
 ## Going further with extensions and custom entities
 
-The DAL makes it possible to extend existing entities using new relations. This
-can be useful when you need just a bit of additional data. Read more about
-entity extensions
-[here](./../60-references-internals/10-core/130-dal.md)
-. Adding your own custom entity is possible as well and covered in-depth in the
-[custom entity HowTo](./../50-how-to/050-custom-entity.md)
-.
+The DAL makes it possible to extend existing entities using new relations. This can be useful when you need just a bit of additional data. Read more about entity extensions [here](../60-references-internals/10-core/130-dal.md) . Adding your own custom entity is possible as well and covered in-depth in the [custom entity HowTo](../50-how-to/050-custom-entity.md) .
+

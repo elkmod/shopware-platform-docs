@@ -1,55 +1,53 @@
-[titleEn]: <>(Twig templates)
-[hash]: <>(article:theme_twig_templates)
+# 30-twig-templates
 
 In Shopware 6 we use the [Twig](https://twig.symfony.com/) template engine to render the HTML in the storefront.
 
-The templates can be found in [`platform/src/Storefront/Resources/views/storefront/`](https://github.com/shopware/platform/tree/master/src/Storefront/Resources/views) 
-Here is a brief overview of the structure and the most important template sections:
+The templates can be found in [`platform/src/Storefront/Resources/views/storefront/`](https://github.com/shopware/platform/tree/master/src/Storefront/Resources/views) Here is a brief overview of the structure and the most important template sections:
 
-```
+```text
 # vendor/shopware/platform/src/Storefront/Resources/views/storefront
 ├── base.html.twig
 │
 ├── block       # Part of the content management system
-│   ├── cms-block-category-navigation.html.twig
-│   ├── cms-block-center-text.html.twig
-│   ├── cms-block-form.html.twig
-│   ├── ...
+│   ├── cms-block-category-navigation.html.twig
+│   ├── cms-block-center-text.html.twig
+│   ├── cms-block-form.html.twig
+│   ├── ...
 │
 ├── element     # Part of the content management system
-│   ├── cms-element-category-navigation.html.twig
-│   ├── cms-element-form
-│   ├── cms-element-form.html.twig
-│   ├── ...
+│   ├── cms-element-category-navigation.html.twig
+│   ├── cms-element-form
+│   ├── cms-element-form.html.twig
+│   ├── ...
 │
 ├── section     # Part of the content management system
-│   ├── cms-section-block-container.html.twig
-│   ├── cms-section-default.html.twig
-│   └── cms-section-sidebar.html.twig
+│   ├── cms-section-block-container.html.twig
+│   ├── cms-section-default.html.twig
+│   └── cms-section-sidebar.html.twig
 │
 ├── component   # Shared content templates form the basis of the pages.
-│   ├── account
-│   ├── address
-│   ├── analytics.html.twig
-│   ├── checkout
-│   ├── ...
+│   ├── account
+│   ├── address
+│   ├── analytics.html.twig
+│   ├── checkout
+│   ├── ...
 │
 ├── layout      # Layout templates. Navigation, header and footer content templates are located here.
-│   ├── breadcrumb.html.twig
-│   ├── cookie
-│   ├── footer
-│   ├── header
-│   ├── ...
+│   ├── breadcrumb.html.twig
+│   ├── cookie
+│   ├── footer
+│   ├── header
+│   ├── ...
 │
 ├── page        # The concrete templates rendered by the page controllers. This directory contains full page templates as well as private local includes and the pagelet ajax response templates if necessary.
-│   ├── account
-│   ├── checkout
-│   ├── content
-│   ├── error
-│   ├── newsletter
-│   ├── product-detail
-│   ├── search
-│   └── sitemap
+│   ├── account
+│   ├── checkout
+│   ├── content
+│   ├── error
+│   ├── newsletter
+│   ├── product-detail
+│   ├── search
+│   └── sitemap
 │
 └── utilities   # Technical necessities used across the content, header and footer sections across all domain concepts.   
     ├── alert.html.twig
@@ -60,7 +58,7 @@ Here is a brief overview of the structure and the most important template sectio
 
 The `base.html.twig` is the root file of the storefront which holds every rendered component.
 
-So, for instance, if you would like to modify the header, you would want to recreate the specific directory structure in order to be able to overwrite or extend the already existing elements. The storefront header in the `header.html.twig` file (which is later included into the `base.html.twig`) is located inside the `platform/src/Storefront/Resources/views/storefront/layout/header` directory.
+So, for instance, if you would like to modify the header, you would want to recreate the specific directory structure in order to be able to overwrite or extend the already existing elements. The storefront header in the `header.html.twig` file \(which is later included into the `base.html.twig`\) is located inside the `platform/src/Storefront/Resources/views/storefront/layout/header` directory.
 
 ## Blocks
 
@@ -72,7 +70,7 @@ In this example we want add some extra content like the shop name below the logo
 
 First we create a new file inside our theme.
 
-```shell
+```text
 # move into your theme folder
 $ cd custom/plugins/MyTheme
 
@@ -85,7 +83,7 @@ $ touch src/Resources/app/storefront/views/layout/header/logo.html.twig
 
 Then we extend the existing file through the `sw_extends` command.
 
-```twig
+```text
 # src/Resources/app/storefront/views/layout/header/logo.html.twig
 
 {% sw_extends '@Storefront/storefront/layout/header/logo.html.twig' %}
@@ -95,7 +93,7 @@ After that you save this new file. Everything should be rendered like before.
 
 To add new content into to template you can override the `layout_header_logo_link` block from the `logo.html.twig` like this.
 
-```twig
+```text
 # src/Resources/app/storefront/views/layout/header/logo.html.twig
 
 {# extend the original twig file #}
@@ -104,24 +102,23 @@ To add new content into to template you can override the `layout_header_logo_lin
 {# override the original twig block #} 
 {% block layout_header_logo_link %}
 
-	{# 
-		call the `parent` function to keep the old behavior,
-		otherwise the block gets overridden
-	#}
-	{{ parent() }}
-	
-	{# modified content added to the block #}
-	<span>Company name of shop owner</span>
-	
+    {# 
+        call the `parent` function to keep the old behavior,
+        otherwise the block gets overridden
+    #}
+    {{ parent() }}
+
+    {# modified content added to the block #}
+    <span>Company name of shop owner</span>
+
 {% endblock %}
 ```
 
 ## Reuse of existing elements
 
-If you build your own feature and you need e.g. an element to display the price of the current product you can
-include existing partials with `sw_include` like this.
+If you build your own feature and you need e.g. an element to display the price of the current product you can include existing partials with `sw_include` like this.
 
-```twig
+```text
     <div class="my-theme an-alternative-product-view">
         ...
 
@@ -136,6 +133,5 @@ include existing partials with `sw_include` like this.
 
 ## Template multi inheritance
 
-Due to the plugin and theme system in Shopware 6 it is possible that one storefront template gets extended by multiple plugins or themes, but [Twig](https://twig.symfony.com/) does not allow multi inheritance out of the box. 
-Therefore we created our own twig functions `sw_extends` and `sw_include`, that work like twigs native [`extends`](https://twig.symfony.com/doc/2.x/tags/extends.html) or [`include`](https://twig.symfony.com/doc/2.x/tags/include.html), except that they allow multi inheritance. 
-So it is really important to use the `sw_extends` and `sw_include`, instead of the native `extends` and `include`.
+Due to the plugin and theme system in Shopware 6 it is possible that one storefront template gets extended by multiple plugins or themes, but [Twig](https://twig.symfony.com/) does not allow multi inheritance out of the box. Therefore we created our own twig functions `sw_extends` and `sw_include`, that work like twigs native [`extends`](https://twig.symfony.com/doc/2.x/tags/extends.html) or [`include`](https://twig.symfony.com/doc/2.x/tags/include.html), except that they allow multi inheritance. So it is really important to use the `sw_extends` and `sw_include`, instead of the native `extends` and `include`.
+

@@ -1,20 +1,12 @@
-[titleEn]: <>(Add data to a storefront page)
-[metaDescriptionEn]: <>(This HowTo will give an example on adding data to a storefront page.)
-[hash]: <>(article:how_to_add_storefront_data)
+# 540-add-data-to-a-storefront-page
 
 ## Overview
 
-Pages or Pagelets are the objects that get handed to the templates and provide all necessary information for the template to render.
-For more information of the concepts behind Pages and Pagelets look [here](./../60-references-internals/30-storefront/10-composite-data-loading.md).
-If you make template changes you probably want to display some data that is currently not available in the page.
-In this case you will have to listen on the page loaded event and then load the additional data and add it to the page object. 
-This HowTo will show you how to achieve this, by adding the total number of active products to the footer pagelet and displaying them in the storefront.
+Pages or Pagelets are the objects that get handed to the templates and provide all necessary information for the template to render. For more information of the concepts behind Pages and Pagelets look [here](../60-references-internals/30-storefront/10-composite-data-loading.md). If you make template changes you probably want to display some data that is currently not available in the page. In this case you will have to listen on the page loaded event and then load the additional data and add it to the page object. This HowTo will show you how to achieve this, by adding the total number of active products to the footer pagelet and displaying them in the storefront.
 
 ## Register to an Event
 
-In order to register to an Event you first have to know to which event you want to register your subscriber. All Pages or Pagelets throw loaded Events and this is the right event to subscribe to if you want to add data to the page.
-You find more information on how to register to events in this [HowTo](./040-register-subscriber.md).
-In our case we want to add data to the Footer Pagelet so we need to subscribe to the `FooterPageletLoadedEvent`.
+In order to register to an Event you first have to know to which event you want to register your subscriber. All Pages or Pagelets throw loaded Events and this is the right event to subscribe to if you want to add data to the page. You find more information on how to register to events in this [HowTo](040-register-subscriber.md). In our case we want to add data to the Footer Pagelet so we need to subscribe to the `FooterPageletLoadedEvent`.
 
 ```php
 <?php declare(strict_types=1);
@@ -41,7 +33,7 @@ class FooterSubscriber implements EventSubscriberInterface
 
 The next thing we need to do is register our subscriber in the DI-Container and tag it as an event subscriber:
 
-```xml
+```markup
 <!-- in Resources/config/services.xml -->
 <service id="Swag\ExtendPage\Storefront\Subscriber\FooterSubscriber">
     <tag name="kernel.event_subscriber"/>
@@ -81,13 +73,12 @@ Now that we have registered our Subscriber to the right event we first need to f
 
 and we have to adjust our service definition to inject the product repository:
 
-```xml
+```markup
 <service id="Swag\ExtendPage\Storefront\Subscriber\FooterSubscriber">
     <argument type="service" id="product.repository"/>
     <tag name="kernel.event_subscriber"/>
 </service>
 ```
-
 
 The whole subscriber now looks like this:
 
@@ -142,7 +133,7 @@ class FooterSubscriber implements EventSubscriberInterface
 
 and the services.xml looks like:
 
-```xml
+```markup
 <?xml version="1.0" ?>
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -158,12 +149,11 @@ and the services.xml looks like:
 
 ## Displaying the data in the storefront
 
-To display the additional data we need to override the footer template and render the data.
-You can find detailed information on how to extend templates and override blocks [here](./250-extending-storefront-block.md).
+To display the additional data we need to override the footer template and render the data. You can find detailed information on how to extend templates and override blocks [here](250-extending-storefront-block.md).
 
 For our case we extend the footer template and add a new column to the navigation block:
 
-```twig
+```text
 <!-- in Resources/views/storefront/layout/footer/footer.html.twig -->
 {% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
 
@@ -180,7 +170,5 @@ For our case we extend the footer template and add a new column to the navigatio
 
 ## Source
 
-There's a GitHub repository available, containing this example source.
-Check it out [here](https://github.com/shopware/swag-docs-extend-page).
-
+There's a GitHub repository available, containing this example source. Check it out [here](https://github.com/shopware/swag-docs-extend-page).
 

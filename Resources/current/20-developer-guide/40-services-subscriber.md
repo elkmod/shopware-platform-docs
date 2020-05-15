@@ -1,15 +1,8 @@
-[titleEn]: <>(Services and Subscriber)
-[metaDescriptionEn]: <>(Register a custom subscriber in order to respond to Shopware 6 events)
-[hash]: <>(article:developer_services_subscriber)
+# 40-services-subscriber
 
 ## Plugin base class
 
-Registering a custom subscriber requires to load a custom `services.xml` file with your plugin.
-This is done in your plugins base class by using the `build` method.
-Make sure to have a look at the guide about the [plugin base class](./10-plugin-base.md) for further information.
-Registering a custom subscriber requires to load a `services.xml` file with your plugin.
-This is done by either placing a file with name `services.xml` into a directory called `src/Resources/config/` or by overriding
-the method `getServicesFilePath` of your plugin base class.
+Registering a custom subscriber requires to load a custom `services.xml` file with your plugin. This is done in your plugins base class by using the `build` method. Make sure to have a look at the guide about the [plugin base class](10-plugin-base.md) for further information. Registering a custom subscriber requires to load a `services.xml` file with your plugin. This is done by either placing a file with name `services.xml` into a directory called `src/Resources/config/` or by overriding the method `getServicesFilePath` of your plugin base class.
 
 ```php
 // SubscriberPlugin/src/SubscriberPlugin.php
@@ -30,13 +23,11 @@ class SubscriberPlugin extends Plugin
 }
 ```
 
-Basically, that's it already if you're familiar with [Symfony subscribers](https://symfony.com/doc/current/event_dispatcher.html#creating-an-event-subscriber).
-Don't worry, we got you covered here as well.
+Basically, that's it already if you're familiar with [Symfony subscribers](https://symfony.com/doc/current/event_dispatcher.html#creating-an-event-subscriber). Don't worry, we got you covered here as well.
 
 ## Creating the subscriber class
 
-As mentioned above, a subscriber for Shopware 6 looks exactly the same like in Symfony itself.
-Therefore, this is how your subscriber could then look like:
+As mentioned above, a subscriber for Shopware 6 looks exactly the same like in Symfony itself. Therefore, this is how your subscriber could then look like:
 
 ```php
 <?php declare(strict_types=1);
@@ -67,17 +58,13 @@ class MySubscriber implements EventSubscriberInterface
 
 In this example, the subscriber would be located in the `<plugin root>/src/Subscriber` directory.
 
-The subscriber is now listening for the `product.loaded` event to trigger.
-Unfortunately, your subscriber is not even loaded yet - this will be done in the previously registered `services.xml` file.
+The subscriber is now listening for the `product.loaded` event to trigger. Unfortunately, your subscriber is not even loaded yet - this will be done in the previously registered `services.xml` file.
 
 ## Introducing your subscriber via services.xml
 
-Registering your subscriber to Shopware 6 is also as simple as it is in Symfony.
-You're simply registering your (subscriber) service by mentioning it in the `services.xml`.
-The only difference to a normal service is, that you need to add the `kernel.event_subscriber` tag to your subscriber for it
-to be recognized as such.
+Registering your subscriber to Shopware 6 is also as simple as it is in Symfony. You're simply registering your \(subscriber\) service by mentioning it in the `services.xml`. The only difference to a normal service is, that you need to add the `kernel.event_subscriber` tag to your subscriber for it to be recognized as such.
 
-```xml
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -92,10 +79,9 @@ to be recognized as such.
 </container>
 ```
 
-That's it, your subscriber service is now automatically loaded at runtime and it should start listening to the mentioned events
-to be dispatched.
+That's it, your subscriber service is now automatically loaded at runtime and it should start listening to the mentioned events to be dispatched.
 
 ## Source
 
-There's a GitHub repository available, containing this example source.
-Check it out [here](https://github.com/shopware/swag-docs-subscriber-plugin).
+There's a GitHub repository available, containing this example source. Check it out [here](https://github.com/shopware/swag-docs-subscriber-plugin).
+

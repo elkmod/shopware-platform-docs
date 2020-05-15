@@ -1,21 +1,17 @@
-[titleEn]: <>(Store api authentication)
-[hash]: <>(article:store_api_auth)
+# Authentication
 
-## Authentication
-
-The authentication for the Store api is really simple. Each sales channel
-has an `accessKey`, which can be generated in the administration or over the admin api.
-This `accessKey` is used for the authentication by providing it in the `sw-access-key`
+The authentication for the Store api is really simple. Each sales channel has an `accessKey`, which can be generated in the administration or over the admin api. This `accessKey` is used for the authentication by providing it in the `sw-access-key`
 
 You can test the authentication by sending a request to the `store-api/v1/context` endpoint
-```
+
+```text
 GET http://shopware.development/store-api/v1/context
 --header sw-access-key SWSCYKQZODFVTVHJEHI0RFN0RG
 
 {
-	"includes": {
-		"sales_channel_context": ["token"]
-	}
+    "includes": {
+        "sales_channel_context": ["token"]
+    }
 }
 
 {
@@ -24,32 +20,30 @@ GET http://shopware.development/store-api/v1/context
 }
 ```
 
-The response contains a `token`. This token is the context token which can be used to switch the different values
-of your current "session" like active language, currency or shipping location.
+The response contains a `token`. This token is the context token which can be used to switch the different values of your current "session" like active language, currency or shipping location.
 
 The token can be provided in each request in the `sw-context-token` header:
 
-```
+```text
 GET http://shopware.development/store-api/v1/context
 --header sw-access-key SWSCYKQZODFVTVHJEHI0RFN0RG
 --header sw-context-token OCqj5ZEnpS0W9KgseOofPLqGArVjd5CE
 
 {
-	"includes": {
-		"sales_channel_context": ["token"]
-	}
+    "includes": {
+        "sales_channel_context": ["token"]
+    }
 }
 
 {
     "token": "OCqj5ZEnpS0W9KgseOofPLqGArVjd5CE",
     "apiAlias": "sales_channel_context"
 }
-``` 
-
-When you not providing the token, you will get a new session and persisted data, like the cart, will be lost.
-Some Store API routes generate, for security reasons, a new token - such as the customer login route.
-
 ```
+
+When you not providing the token, you will get a new session and persisted data, like the cart, will be lost. Some Store API routes generate, for security reasons, a new token - such as the customer login route.
+
+```text
 POST /store-api/v1/account/login
 --header sw-access-key SWSCYKQZODFVTVHJEHI0RFN0RG
 --header sw-context-token OCqj5ZEnpS0W9KgseOofPLqGArVjd5CE
@@ -67,3 +61,4 @@ POST /store-api/v1/account/login
 ```
 
 After receiving the new token, you should provide the new token, otherwise your session data will be lost.
+

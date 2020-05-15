@@ -1,35 +1,28 @@
-[titleEn]: <>(HttpClient)
-[hash]: <>(article:administration_http_client)
+# 20-http-client
 
-We provide the HttpClient for fetching and sending data to the Api and external services. It is an
-wrapper around the popular HTTP client Axios.
+We provide the HttpClient for fetching and sending data to the Api and external services. It is an wrapper around the popular HTTP client Axios.
 
 ## Access the httpClient
 
-You can access the httpClient from the global Shopware object: 
+You can access the httpClient from the global Shopware object:
+
 ```javascript
 const httpClient = Shopware.Application.getContainer('init').httpClient;
 ```
 
 ## Relevant functions
 
-`httpClient.request(config)`
- : Send a request to the server
+`httpClient.request(config)` : Send a request to the server
 
-`httpClient.get(url[, config])`
- : Send a get request to the server
+`httpClient.get(url[, config])` : Send a get request to the server
 
-`httpClient.delete(url[, config])`
- : Send a delete request to the server
+`httpClient.delete(url[, config])` : Send a delete request to the server
 
-`httpClient.post(url[, data[, config]])`
- : Send a post request to the server
+`httpClient.post(url[, data[, config]])` : Send a post request to the server
 
-`httpClient.put(url[, data[, config]])`
- : Send a put request to the server
- 
- `httpClient.patch(url[, data[, config]])`
-  : Send a patch request to the server
+`httpClient.put(url[, data[, config]])` : Send a put request to the server
+
+`httpClient.patch(url[, data[, config]])` : Send a patch request to the server
 
 ## Config values
 
@@ -99,3 +92,4 @@ const config = {
   })
 }
 ```
+

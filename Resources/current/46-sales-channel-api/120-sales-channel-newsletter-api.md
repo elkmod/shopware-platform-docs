@@ -1,28 +1,27 @@
-[titleEn]: <>(SalesChannel-API newsletter endpoint)
-[hash]: <>(article:api_sales_channel_newsletter)
+# 120-sales-channel-newsletter-api
 
 The newsletter endpoint is used to subscribe, confirm and unsubscribe to newsletters. It can also be used to change newsletter recipient related information.
 
 ## Subscribe to newsletters
 
-**POST  /sales-channel-api/v1/newsletter/subscribe**
+**POST /sales-channel-api/v1/newsletter/subscribe**
 
-**Description:** Subscribe to a newsletter. 
+**Description:** Subscribe to a newsletter.
 
 **Parameter:**
 
-| Name                                   | Type    | Notes                                                       | Required |
-| ---------------------------------------| ------- | ----------------------------------------------------------- | :------: |
-| email                                  | string  |                                                             |    ✔     |
-| salutationId                           | uuid    |                                                             |          |
-| title                                  | string  |                                                             |          |
-| languageId                             | uuid    |                                                             |          |
-| firstName                              | string  |                                                             |          |
-| lastName                               | string  |                                                             |          |
-| street                                 | string  |                                                             |          |
-| zipcode                                | string  |                                                             |          |
-| city                                   | string  |                                                             |          |
-| customFields                           | array   |                                                             |          |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| email | string |  | ✔ |
+| salutationId | uuid |  |  |
+| title | string |  |  |
+| languageId | uuid |  |  |
+| firstName | string |  |  |
+| lastName | string |  |  |
+| street | string |  |  |
+| zipcode | string |  |  |
+| city | string |  |  |
+| customFields | array |  |  |
 
 **Header:** sw-context-token is required
 
@@ -30,16 +29,16 @@ The newsletter endpoint is used to subscribe, confirm and unsubscribe to newslet
 
 ## Confirm to newsletters
 
-**POST  /sales-channel-api/v1/newsletter/confirm**
+**POST /sales-channel-api/v1/newsletter/confirm**
 
-**Description:** confirmation of subscription to newsletters. 
+**Description:** confirmation of subscription to newsletters.
 
 **Parameter:**
 
-| Name     | Type   | Notes                                               | Required |
-|----------|--------|-----------------------------------------------------|:--------:|
-| hash     | string | hash from subscription mail                         |    ✔     |
-| em       | string | email hashed in sha1 to validate the confirmation   |    ✔     |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| hash | string | hash from subscription mail | ✔ |
+| em | string | email hashed in sha1 to validate the confirmation | ✔ |
 
 **Header:** sw-context-token is required
 
@@ -47,13 +46,13 @@ The newsletter endpoint is used to subscribe, confirm and unsubscribe to newslet
 
 ## Unsubscribe password
 
-**POST  /sales-channel-api/v1/newsletter/unsubscribe**
+**POST /sales-channel-api/v1/newsletter/unsubscribe**
 
 **Parameter:**
 
-| Name     | Type   | Notes | Required |
-| -------- | ------ | ----- | :------: |
-| email    | string |       |    ✔     |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| email | string |  | ✔ |
 
 **Header:** sw-context-token is required
 
@@ -61,21 +60,21 @@ The newsletter endpoint is used to subscribe, confirm and unsubscribe to newslet
 
 ## Update recipient information
 
-**POST  /sales-channel-api/v1/newsletter/update**
+**POST /sales-channel-api/v1/newsletter/update**
 
 **Parameter:**
 
-| Name                                   | Type    | Notes                                                       | Required |
-| ---------------------------------------| ------- | ----------------------------------------------------------- | :------: |
-| salutationId                           | uuid    |                                                             |          |
-| title                                  | string  |                                                             |          |
-| languageId                             | uuid    |                                                             |          |
-| firstName                              | string  |                                                             |          |
-| lastName                               | string  |                                                             |          |
-| street                                 | string  |                                                             |          |
-| zipcode                                | string  |                                                             |          |
-| city                                   | string  |                                                             |          |
-| customFields                           | array   |                                                             |          |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| salutationId | uuid |  |  |
+| title | string |  |  |
+| languageId | uuid |  |  |
+| firstName | string |  |  |
+| lastName | string |  |  |
+| street | string |  |  |
+| zipcode | string |  |  |
+| city | string |  |  |
+| customFields | array |  |  |
 
 **Header:** sw-context-token is required
 
@@ -86,9 +85,9 @@ The newsletter endpoint is used to subscribe, confirm and unsubscribe to newslet
 ```javascript
     const accessKey = '{insert your storefront access key}';
     const baseUrl = '{insert your url}';
-    
+
     const randomStr = Math.random().toString(36).substring(2, 15);
-    
+
     let recipient = {
         email: `max.mustermann_${randomStr}@example.com`,
         firstName: 'Max',
@@ -122,7 +121,7 @@ The newsletter endpoint is used to subscribe, confirm and unsubscribe to newslet
         const salutation = await getSalutation();
         recipient['salutationId'] = salutation.id;
         await subscribeRecipient(recipient);
-        
+
         console.log('Subscribed');
 
     }
@@ -131,3 +130,4 @@ The newsletter endpoint is used to subscribe, confirm and unsubscribe to newslet
         console.log('Newsletter example completed');
     });
 ```
+

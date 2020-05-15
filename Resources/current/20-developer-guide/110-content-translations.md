@@ -1,9 +1,7 @@
-[titleEn]: <>(Content translations)
-[hash]: <>(article:developer_translations)
-
 # Content translations
 
 ## DAL
+
 This guide will handle how to properly translate your custom entities.
 
 ### Translatable fields in definition
@@ -25,12 +23,12 @@ use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 class CustomEntityDefinition extends EntityDefinition
 {
     public const ENTITY_NAME = 'custom_entity';
-    
+
     public function getEntityName(): string
     {
         return self::ENTITY_NAME;
     }
-    
+
     public function getCollectionClass(): string
     {
         return CustomEntityCollection::class;
@@ -51,10 +49,7 @@ class CustomEntityDefinition extends EntityDefinition
 }
 ```
 
-This class defined a string field `technical_name`, which must not be translated, since its main purpose is to be a unique identifier, next to the ID.
-Now imagine this class would also provide a `label` field, which is also basically a `StringField`.
-Simply adding a `StringField` here is tempting, isn't it?
-Since a `label` should be translatable, you have to add a `TranslatedField` instead.
+This class defined a string field `technical_name`, which must not be translated, since its main purpose is to be a unique identifier, next to the ID. Now imagine this class would also provide a `label` field, which is also basically a `StringField`. Simply adding a `StringField` here is tempting, isn't it? Since a `label` should be translatable, you have to add a `TranslatedField` instead.
 
 ```php
 protected function defineFields(): FieldCollection
@@ -74,8 +69,7 @@ Additionally to the `TranslatedField`, you also need an `TranslationsAssociation
 
 ### Translation association in entity
 
-Your custom entity now comes with a new field named 'label', marked as a `TranslatedField`.
-Next thing you gotta add this translation association to your custom entity.
+Your custom entity now comes with a new field named 'label', marked as a `TranslatedField`. Next thing you gotta add this translation association to your custom entity.
 
 ```php
 <?php declare(strict_types=1);
@@ -106,21 +100,17 @@ class CustomEntity extends Entity
         $this->translations = $translations;
     }
 }
-
 ```
 
 The class `CustomEntityTranslationCollection` will be added in the next steps, don't worry.
 
 ### Custom translation entity
 
-Since the translation is going to be saved in another table just for your custom entity,
-the translations need an own `Entity`, `EntityDefinition` and an `EntityCollection` class, such as the `CustomEntityTranslationCollection` mentioned above.
+Since the translation is going to be saved in another table just for your custom entity, the translations need an own `Entity`, `EntityDefinition` and an `EntityCollection` class, such as the `CustomEntityTranslationCollection` mentioned above.
 
-So, once more, let's create all these classes. By default, Shopware 6 places the entity translation classes
-inside a directory called `Aggregate`.
-In this example, the directory structure would look like this:
+So, once more, let's create all these classes. By default, Shopware 6 places the entity translation classes inside a directory called `Aggregate`. In this example, the directory structure would look like this:
 
-```
+```text
 <plugin-root>
     └──src
         ├── Custom
@@ -136,13 +126,9 @@ In this example, the directory structure would look like this:
 
 #### Translation Entity Definition
 
-First of all you need to extend from `EntityTranslationDefinition` here.
-Also have a look at the "new" method `getParentDefinitionClass`, which only has to to the parent definition class,
-`CustomEntityDefinition` in this case.
+First of all you need to extend from `EntityTranslationDefinition` here. Also have a look at the "new" method `getParentDefinitionClass`, which only has to to the parent definition class, `CustomEntityDefinition` in this case.
 
-The fields only have to contain the actually translatable fields from the parent definition, `label` in this case.
-Everything else is already handled by the `EntityTranslationDefinition`, for example adding an `updatedAt`, a `createdAt`
-and a `languageId` field.
+The fields only have to contain the actually translatable fields from the parent definition, `label` in this case. Everything else is already handled by the `EntityTranslationDefinition`, for example adding an `updatedAt`, a `createdAt` and a `languageId` field.
 
 ```php
 <?php declare(strict_types = 1);
@@ -187,12 +173,7 @@ class CustomEntityTranslationDefinition extends EntityTranslationDefinition
 
 #### Translation Entity
 
-The entity class for the translation also comes with some new requirements.
-First of all, the entity has to extend from `TranslationEntity`.
-This way the translation default fields mentioned in the previous step, like `languageId`, are already added
-as a property with getters and setters. 
-Additional to that you to add your custom translated field(s), `label` in this example, as well as the
-parent's id, `customEntityId` in this case, as well as a property for the actual `CustomEntity` object.
+The entity class for the translation also comes with some new requirements. First of all, the entity has to extend from `TranslationEntity`. This way the translation default fields mentioned in the previous step, like `languageId`, are already added as a property with getters and setters. Additional to that you to add your custom translated field\(s\), `label` in this example, as well as the parent's id, `customEntityId` in this case, as well as a property for the actual `CustomEntity` object.
 
 ```php
 <?php declare(strict_types = 1);
@@ -305,16 +286,15 @@ class CustomEntityTranslationCollection extends EntityCollection
 }
 ```
 
-Note the helper method `filterByLanguageId`, which is **not required**.
-It comes in handy, when searching for the translation for a given language.
+Note the helper method `filterByLanguageId`, which is **not required**. It comes in handy, when searching for the translation for a given language.
 
 ### Registering your custom entity
 
-Now it's time to actually register your new entity in the DI container.
-All you have to do is to register your `EntityDefinition` using the `shopware.entity.definition` tag.
+Now it's time to actually register your new entity in the DI container. All you have to do is to register your `EntityDefinition` using the `shopware.entity.definition` tag.
 
 This is how your `services.xml` could look like:
-```xml
+
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -391,18 +371,13 @@ SQL;
 }
 ```
 
-The columns `language_id`, `created_at` and `updated_at` are part of your entity by default, so you have to add them in
-your table.
-Also, the column `custom_entity_id` comes by default, but is obviously named after your parent entity, `custom_entity` in this case.
+The columns `language_id`, `created_at` and `updated_at` are part of your entity by default, so you have to add them in your table. Also, the column `custom_entity_id` comes by default, but is obviously named after your parent entity, `custom_entity` in this case.
 
-Note the primary key definition and the foreign keys, as they are also very important for your database.
-You might have noticed, that the translation table does not come with an actual ID column - the primary key consists
-of the parent entity ID and the language ID.
+Note the primary key definition and the foreign keys, as they are also very important for your database. You might have noticed, that the translation table does not come with an actual ID column - the primary key consists of the parent entity ID and the language ID.
 
 ### Reading your custom entity translations
 
-Reading translations for your entity works exactly like reading an association for your entity,
-since it technically is an association.
+Reading translations for your entity works exactly like reading an association for your entity, since it technically is an association.
 
 ```php
 /** @var EntityRepositoryInterface $customRepository */
@@ -415,25 +390,23 @@ $customEntity = $customRepository->search(
 $customEntityTranslation = $customEntity->getTranslations()->filterByLanguageId(Defaults::LANGUAGE_SYSTEM)->first();
 ```
 
-In this example, the ID of your custom entity, whose technical name equals to 'FOO', is requested.
-Additional to that, the translation for the entity is read.
+In this example, the ID of your custom entity, whose technical name equals to 'FOO', is requested. Additional to that, the translation for the entity is read.
 
 ## Administration
 
 ### Global usage
 
-The content language in the administration is globally. When you change you content language then all modules work
-with this content language. You can find the active content language id in the context object.
+The content language in the administration is globally. When you change you content language then all modules work with this content language. You can find the active content language id in the context object.
 
 ```javascript
 Shopware.Context.api.languageId // active content language
 Shopware.Context.api.systemLanguageId // default content language
 ```
 
-The repository uses the active language id for fetching data. It saves them automatically to the right property. Here an 
-example with English as the default language:
+The repository uses the active language id for fetching data. It saves them automatically to the right property. Here an example with English as the default language:
 
 Active language is English:
+
 ```javascript
 const demoManufacturer = {
     id: '143daac4cc354634a4955ca6503fcde3',
@@ -447,6 +420,7 @@ const demoManufacturer = {
 ```
 
 Active language is German:
+
 ```javascript
 const demoManufacturer = {
     id: '143daac4cc354634a4955ca6503fcde3',
@@ -461,20 +435,15 @@ const demoManufacturer = {
 
 ### How to modify translatable values
 
-You should work on the main property (e.g. `demoManufacturer.name`) when you want to change the actual data. Shopware has
-the functionality to inherit from the default language. Therefore it could be possible that some properties are null. In our
-example the name in German matches the English name. Then we don´t need to set the name twice because the name is inherited
-from the English language.
+You should work on the main property \(e.g. `demoManufacturer.name`\) when you want to change the actual data. Shopware has the functionality to inherit from the default language. Therefore it could be possible that some properties are null. In our example the name in German matches the English name. Then we don´t need to set the name twice because the name is inherited from the English language.
 
-To get the actual representative value you can use the `translated` property. This property is read-only and should not be 
-modified. It is helpful for listings or when you want to use the default value as an placeholder text in input fields.
+To get the actual representative value you can use the `translated` property. This property is read-only and should not be modified. It is helpful for listings or when you want to use the default value as an placeholder text in input fields.
 
 ### Best practice for changing the content language
 
-You should only use the `sw-language-switch` component when you want to change the content language. The reason for this is
-that it combines the best practices to change your language:
+You should only use the `sw-language-switch` component when you want to change the content language. The reason for this is that it combines the best practices to change your language:
 
-```vue
+```text
 <sw-language-switch
     :abortChangeFunction="abortOnLanguageChange"
     :saveChangesFunction="saveOnLanguageChange"
@@ -482,13 +451,9 @@ that it combines the best practices to change your language:
 </sw-language-switch>
 ```
 
-The two function properties `abortChangeFunction` and `saveOnLanguageChange` should be used to provide the best experience
-for changing the language.
+The two function properties `abortChangeFunction` and `saveOnLanguageChange` should be used to provide the best experience for changing the language.
 
-To validate if the content language should be allowed to switch you can use the `abortChangeFunction`. 
-There are reason why this could be dangerous. One reason is when the user changed data but does not save them yet.
-When the provided function return `true`, then there will be a warning modal which notify the user that there are unsaved
-data.
+To validate if the content language should be allowed to switch you can use the `abortChangeFunction`. There are reason why this could be dangerous. One reason is when the user changed data but does not save them yet. When the provided function return `true`, then there will be a warning modal which notify the user that there are unsaved data.
 
 ```javascript
 abortOnLanguageChange() {
@@ -496,8 +461,7 @@ abortOnLanguageChange() {
 }
 ```
 
-In this warning the user can directly save the data if he wants. Then it will call the `saveChangesFunction` and wait
-until the Promise is resolved. After everything is saved the content language get switched.
+In this warning the user can directly save the data if he wants. Then it will call the `saveChangesFunction` and wait until the Promise is resolved. After everything is saved the content language get switched.
 
 ```javascript
 saveOnLanguageChange() {
@@ -505,9 +469,7 @@ saveOnLanguageChange() {
 }
 ```
 
-Now the content language was successfully switched. Our actual data is not updated yet. This is why we implemented our
-`onChangeLanguage` function for the `on-change` event. It reloads automatically all data so that the user see now the data
-in the new selected content language.
+Now the content language was successfully switched. Our actual data is not updated yet. This is why we implemented our `onChangeLanguage` function for the `on-change` event. It reloads automatically all data so that the user see now the data in the new selected content language.
 
 ```javascript
 onChangeLanguage() {
@@ -517,25 +479,24 @@ onChangeLanguage() {
 
 ## Storefront
 
-The translated content in the storefront is similar to the administration. You have
-the actual representative value in `entity.translated.yourProperty`.
+The translated content in the storefront is similar to the administration. You have the actual representative value in `entity.translated.yourProperty`.
 
-You can access this values in two ways. The first way is to use a twig filter. This filter
-is get called with `trans`. This should be the best solution in most ways.
+You can access this values in two ways. The first way is to use a twig filter. This filter is get called with `trans`. This should be the best solution in most ways.
 
-```twig
+```text
 {{ manufacturer.name|trans }}
 ```
 
 Another possibility is to get the property directly from the `translated` value.
 
-````twig
+```text
 {{ manufacturer.translated.name }}
-````
+```
 
-For security reason it is useful to sanitize the content values before you output them.
-You can use the `sw_sanitize` filter to do this.
-````twig
+For security reason it is useful to sanitize the content values before you output them. You can use the `sw_sanitize` filter to do this.
+
+```text
 {{ manufacturer.name|trans|sw_sanitize }}
 {{ manufacturer.translated.name|sw_sanitize }}
-````
+```
+

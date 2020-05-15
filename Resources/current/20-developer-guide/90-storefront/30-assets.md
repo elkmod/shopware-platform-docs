@@ -1,18 +1,16 @@
-[titleEn]: <>(Assets)
-[hash]: <>(article:developer_storefront_assets)
+# 30-assets
 
-Your plugin can include custom SCSS, JavaScript and other assets. It may require some custom styling 
-to look decent and a few lines of JavaScript to add special features.
+Your plugin can include custom SCSS, JavaScript and other assets. It may require some custom styling to look decent and a few lines of JavaScript to add special features.
 
 ## Injecting into the storefront
 
-
 ## Using custom SCSS
+
 When it comes to CSS and SCSS, they are processed by a PHP SASS compiler.
 
-In order to add some custom SCSS in your plugin, you just need to add a `base.scss` with your custom styles in the
-following place:
-```
+In order to add some custom SCSS in your plugin, you just need to add a `base.scss` with your custom styles in the following place:
+
+```text
 .
 ├── composer.json
 └── src
@@ -30,25 +28,23 @@ following place:
 ```
 
 To apply your styles and test them, please use some test code:
-```
+
+```text
 // YourPluginRoot/src/Resources/app/storefront/src/scss/base.scss
 body {
     background-color: blue;
 }
 ```
-Afterwards, you need to compile your template by using the `bin/console theme:compile` command - Your custom styles 
-should be available then.
+
+Afterwards, you need to compile your template by using the `bin/console theme:compile` command - Your custom styles should be available then.
 
 ## Using custom JS
 
-JavaScript cannot be compiled by PHP, so [webpack](https://webpack.js.org/) is being used for that.
-By default your plugin is using shopware's default webpack configuration, as you must ship your plugin 
-with the JavaScript already compiled. 
+JavaScript cannot be compiled by PHP, so [webpack](https://webpack.js.org/) is being used for that. By default your plugin is using shopware's default webpack configuration, as you must ship your plugin with the JavaScript already compiled.
 
-Since Shopware knows where your style files are located, they are automatically compiled, compressed 
-and loaded into the storefront. In the case of JavaScript, 
-you have your 'main.js' as entry point within the following directory:
-```
+Since Shopware knows where your style files are located, they are automatically compiled, compressed and loaded into the storefront. In the case of JavaScript, you have your 'main.js' as entry point within the following directory:
+
+```text
 .
 ├── composer.json
 └── src
@@ -66,21 +62,21 @@ you have your 'main.js' as entry point within the following directory:
 ```
 
 Add some test code in order to see if it works out:
-```
+
+```text
 // PluginRoot/src/Resources/app/storefront/src/src/main.js
 console.log('MyPlugin JS loaded');
 ```
 
-In the end, by running the command `bin/console theme:compile` your custom JS plugin is loaded. 
-By default, the compiled js file is saved as 
-<plugin root>/src/resources/app/storefront/dist/storefront/js/<plugin-name>.js`.
-It is detected by Shopware automatically.
+In the end, by running the command `bin/console theme:compile` your custom JS plugin is loaded. By default, the compiled js file is saved as
+
+/src/resources/app/storefront/dist/storefront/js/.js\`. It is detected by Shopware automatically.
 
 ## Using custom assets
 
-If you want to use custom assets, please put those assets here:
-​
-```
+If you want to use custom assets, please put those assets here: ​
+
+```text
 # PluginRoot
 .
 ├── composer.json
@@ -90,11 +86,10 @@ If you want to use custom assets, please put those assets here:
     │   │   └── your-image.png <-- Asset file here
     └── YourPlugin.php
 ```
-​
-Next, please run `bin/console asset:install` command. This will copy your plugin assets over to the 
-`public/bundles` folder:
-​
-```
+
+​ Next, please run `bin/console asset:install` command. This will copy your plugin assets over to the `public/bundles` folder: ​
+
+```text
 # shopware-root/public
 .
 ├── administration
@@ -103,17 +98,18 @@ Next, please run `bin/console asset:install` command. This will copy your plugin
 └── yourplugin
     └── le-logo.png <-- Your asset is copied here
 ```
+
 ​
+
 ### Linking to assets:
-​
-You can link to the asset with the twig 
-[asset](https://symfony.com/doc/current/templates.html#linking-to-css-javascript-and-image-assets) function:
-​
-```
+
+​ You can link to the asset with the twig [asset](https://symfony.com/doc/current/templates.html#linking-to-css-javascript-and-image-assets) function: ​
+
+```text
 <img src="{{ asset('bundles/yourplugin/your-logo.png') }}">
 ```
 
 ## HowTo guide concerning storefront assets
 
-If you want a detailed tutorial on how to use custom storefront assets, we got you covered. Please refer to 
-[the how-to-guide concerning assets](./../../50-how-to/330-storefront-assets.md) for further information. 
+If you want a detailed tutorial on how to use custom storefront assets, we got you covered. Please refer to [the how-to-guide concerning assets](../../50-how-to/330-storefront-assets.md) for further information.
+

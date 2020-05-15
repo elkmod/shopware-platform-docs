@@ -1,9 +1,8 @@
-[titleEn]: <>(SCSS and Styling)
-[hash]: <>(article:theme_scss)
+# 50-scss
 
-The stylesheets are written in [SASS](https://sass-lang.com/). The folder structure is inspired by the [7-1 pattern](https://sass-guidelin.es/#architecture) structure. 
+The stylesheets are written in [SASS](https://sass-lang.com/). The folder structure is inspired by the [7-1 pattern](https://sass-guidelin.es/#architecture) structure.
 
-```
+```text
 <platform/src/Storefront/Resources/app/storefront/src/scss>
 └── abstract
 └── base
@@ -15,10 +14,9 @@ The stylesheets are written in [SASS](https://sass-lang.com/). The folder struct
 └── base.scss
 ```
 
-Shopware 6 looks inside your `theme.json` file to find a "style" array which contains all SCSS files which should be loaded by your theme.
-By default you get the Shopware Storefront SCSS plus an additional entry point for your own SCSS. You can also extend this array with more SCSS files.
+Shopware 6 looks inside your `theme.json` file to find a "style" array which contains all SCSS files which should be loaded by your theme. By default you get the Shopware Storefront SCSS plus an additional entry point for your own SCSS. You can also extend this array with more SCSS files.
 
-```json
+```javascript
 {
   "name": "Just another theme",
 
@@ -38,7 +36,7 @@ To try it out, open up the `base.scss` file from your theme.
 
 Inside of the `.scss` file, add some styles like this:
 
-```scss
+```css
 // src/Resources/app/storefront/src/scss/base.scss
 body {
     background: blue;
@@ -62,13 +60,15 @@ In this example, the background of the `body` will be changed.
 In case you want to use the same color in several places, but want to define it just one time you can use variables for this.
 
 Create a `abstract/variables.scss` file inside your "scss" folder and define your background color variable.
-```scss
+
+```css
 // in variables.scss
 $sw-storefront-assets-color-background: blue;
 ```
 
 Inside your `base.scss` file you can now import your previously defined variables and use them:
-```scss
+
+```css
 // in base.scss
 @import 'abstract/variables.scss';
 
@@ -85,16 +85,15 @@ The storefront theme is implemented as a skin on top of the [Boostrap toolkit](h
 
 ### Override default SCSS variables
 
-To override default variables like for example `$border-radius` from Bootstrap you should use a slightly different approach then explained in the [storefront assets](./../50-how-to/330-storefront-assets.md) how-to.
+To override default variables like for example `$border-radius` from Bootstrap you should use a slightly different approach then explained in the [storefront assets](../50-how-to/330-storefront-assets.md) how-to.
 
 Bootstrap 4 is using the `!default` flag for it's own default variables. Variable overrides have to be declared beforehand.
 
-More information: https://getbootstrap.com/docs/4.0/getting-started/theming/#variable-defaults
+More information: [https://getbootstrap.com/docs/4.0/getting-started/theming/\#variable-defaults](https://getbootstrap.com/docs/4.0/getting-started/theming/#variable-defaults)
 
-To be able to override Bootstrap variables you can define an additional SCSS entry point in your `theme.json` which is declared before `@Storefront`.
-This entry point is called `overrides.scss`:
+To be able to override Bootstrap variables you can define an additional SCSS entry point in your `theme.json` which is declared before `@Storefront`. This entry point is called `overrides.scss`:
 
-```json
+```javascript
 {
   "name": "Just another theme",
   "author": "Just another author",
@@ -120,7 +119,7 @@ This entry point is called `overrides.scss`:
 
 In the `overrides.scss` you can now override default variables like `$border-radius` globally:
 
-```scss
+```css
 /*
 Override variable defaults
 ==================================================
@@ -144,10 +143,9 @@ Please only add variable overrides in this file. You should not write CSS code l
 
 The Shopware default theme is using [Bootstrap](https://getbootstrap.com/) with additional custom styling.
 
-If you want to build your theme only upon the Bootstrap SCSS you can use the `@StorefrontBootstrap` placeholder instead of the `@Storefront` bundle in the `style` section of your `theme.json`.
-This gives you the ability to use the Bootstrap SCSS without the Shopware Storefront "skin". Therefore all the SCSS from `src/Storefront/Resources/app/storefront/src/scss/skin` will not be available in your theme.
+If you want to build your theme only upon the Bootstrap SCSS you can use the `@StorefrontBootstrap` placeholder instead of the `@Storefront` bundle in the `style` section of your `theme.json`. This gives you the ability to use the Bootstrap SCSS without the Shopware Storefront "skin". Therefore all the SCSS from `src/Storefront/Resources/app/storefront/src/scss/skin` will not be available in your theme.
 
-```json
+```javascript
 {
   "style": [
     "@StorefrontBootstrap",
@@ -155,6 +153,7 @@ This gives you the ability to use the Bootstrap SCSS without the Shopware Storef
   ]
 }
 ```
+
 * This option can only be used in the `style` section of the `theme.json`. You must not use it in `views` or `script`.
 * All theme variables like `$sw-color-brand-primary` are also available when using the Bootstrap option.
 * You can only use either `@StorefrontBootstrap` or `@Storefront`. They should not be used at the same time. The `@Storefront` bundle **includes** the Bootstrap SCSS already.

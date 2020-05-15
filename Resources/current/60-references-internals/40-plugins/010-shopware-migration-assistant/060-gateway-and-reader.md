@@ -1,16 +1,12 @@
-[titleEn]: <>(Gateway and reader)
-[hash]: <>(article:migration_reader)
+# 060-gateway-and-reader
 
-Users will have to specify a gateway for the connection. The gateway defines the way of communicating with the source system.
-Behind the user interface we use `Reader` objects to read the data from the source system.
-For the `shopware55` profile we have the `api` gateway, which communicates via http/s with the source system,
-and the `local` gateway, which communicates directly with the source system's database. Thus both systems must be on the 
-same server for successfully using the `local` gateway.
+Users will have to specify a gateway for the connection. The gateway defines the way of communicating with the source system. Behind the user interface we use `Reader` objects to read the data from the source system. For the `shopware55` profile we have the `api` gateway, which communicates via http/s with the source system, and the `local` gateway, which communicates directly with the source system's database. Thus both systems must be on the same server for successfully using the `local` gateway.
 
 ## Gateway
-The gateway defines how to communicate from Shopware 6 with your source system like Shopware 5. Every profile
-needs to have at least one gateway. Gateways need to be defined in the corresponding service xml using the `shopware.migration.gateway` tag:
-```xml
+
+The gateway defines how to communicate from Shopware 6 with your source system like Shopware 5. Every profile needs to have at least one gateway. Gateways need to be defined in the corresponding service xml using the `shopware.migration.gateway` tag:
+
+```markup
 <!-- Shopware Profile Gateways -->
 <service id="SwagMigrationAssistant\Profile\Shopware\Gateway\Local\ShopwareLocalGateway">
     <argument type="service" id="SwagMigrationAssistant\Profile\Shopware\Gateway\Local\ReaderRegistry" />
@@ -31,11 +27,11 @@ needs to have at least one gateway. Gateways need to be defined in the correspon
     <tag name="shopware.migration.gateway" />
 </service>
 ```
-If you want to use the `ShopwareApiGateway`, you will have to download the corresponding Shopware 5 plugin
-[Shopware Migration Connector](https://github.com/shopware/SwagMigrationConnector), first.
 
-This tag is used by `GatwayRegistry`. This registry loads all tagged gateways and chooses a suitable gateway based on
-the migration's context and a unique identifier, composed by a combination of profile and gateway name:
+If you want to use the `ShopwareApiGateway`, you will have to download the corresponding Shopware 5 plugin [Shopware Migration Connector](https://github.com/shopware/SwagMigrationConnector), first.
+
+This tag is used by `GatwayRegistry`. This registry loads all tagged gateways and chooses a suitable gateway based on the migration's context and a unique identifier, composed by a combination of profile and gateway name:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -90,9 +86,8 @@ class GatewayRegistry implements GatewayRegistryInterface
 }
 ```
 
-The gateway class has to implement the `GatewayInterface` to support all required methods. As you can see below,
-the gateway uses the right readers which internally open a connection to the source system to receive
-the entity data:
+The gateway class has to implement the `GatewayInterface` to support all required methods. As you can see below, the gateway uses the right readers which internally open a connection to the source system to receive the entity data:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -241,15 +236,14 @@ class ShopwareLocalGateway implements ShopwareGatewayInterface
 }
 ```
 
-Another task of the gateway is to fetch the environment information of the source system. The gateway
-creates a connection to the source system and instantiates the environment reader to get the data from the source system.
+Another task of the gateway is to fetch the environment information of the source system. The gateway creates a connection to the source system and instantiates the environment reader to get the data from the source system.
 
-Also the Counting Information from the [DataSets](./030-dataSelection-and-dataSet.md) will be fetched by the gateway.
+Also the Counting Information from the [DataSets](030-dataselection-and-dataset.md) will be fetched by the gateway.
 
 ## Reader
-In case of the local gateway, each entity has a local reader.
-These local readers fetch the data of the source system.
-To prepare this data, the structure can be modified and associated data can be fetched:
+
+In case of the local gateway, each entity has a local reader. These local readers fetch the data of the source system. To prepare this data, the structure can be modified and associated data can be fetched:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -315,3 +309,4 @@ class LocalMediaReader extends LocalAbstractReader implements LocalReaderInterfa
     }
 }
 ```
+

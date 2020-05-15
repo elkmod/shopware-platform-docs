@@ -1,6 +1,4 @@
-[titleEn]: <>(Working with the Rest-API and an HTTP Client)
-[metaDescriptionEn]: <>(One of the big advantages of working with Shopware 6 is the Rest-API it comes with. Learn how to work with this API in a PHP context here)
-[hash]: <>(article:how_to_api_http_client)
+# 260-working-with-the-api-and-an-http-client
 
 Some things are not easy to solve without an API. For these cases Shopware 6 has a REST-API!
 
@@ -10,13 +8,11 @@ Shopware 6 comes with a powerful REST-API. You can use this API by using a HTTP-
 
 ## Warning
 
-For reasons of simplicity we wrote a Shopware 6 plugin, but in most cases this is not a good use case. Please do not
-call the Shopware 6 API through a plugin unless you do have a really good reason to do so!
+For reasons of simplicity we wrote a Shopware 6 plugin, but in most cases this is not a good use case. Please do not call the Shopware 6 API through a plugin unless you do have a really good reason to do so!
 
 ## API Entrypoint
 
-Let's create a class that makes use of [Guzzle](http://docs.guzzlephp.org), which is already included in the
-`shopware/core`, so that we can add multiple helpful functions to this class and simplify the use of the API.
+Let's create a class that makes use of [Guzzle](http://docs.guzzlephp.org), which is already included in the `shopware/core`, so that we can add multiple helpful functions to this class and simplify the use of the API.
 
 ```php
 <?php declare(strict_types=1);
@@ -41,7 +37,7 @@ class RestService
 
 `<plugin root>/src/Service/RestService.php`
 
-```xml
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -58,9 +54,7 @@ class RestService
 
 ## OAuth Token
 
-The Admin API is secured via [OAuth authentication](https://de.wikipedia.org/wiki/OAuth), so we need some helpers to get
-the authentication token before we do any further requests. Therefore, we extend our `RestService` class to do this
-during the constructor.
+The Admin API is secured via [OAuth authentication](https://de.wikipedia.org/wiki/OAuth), so we need some helpers to get the authentication token before we do any further requests. Therefore, we extend our `RestService` class to do this during the constructor.
 
 ```php
 <?php declare(strict_types=1);
@@ -104,7 +98,7 @@ class RestService
         $this->restClient = new Client();
         $this->config = $config;
     }
-    
+
     private function getAdminAccess(): void
     {
         $body = \json_encode([
@@ -128,7 +122,7 @@ class RestService
 
         $this->setAccessData($body);
     }
-    
+
     private function setAccessData(array $body): void
     {
         $this->accessToken = $body['access_token'];
@@ -158,12 +152,11 @@ class RestService
 }
 ```
 
-Note our extension of the constructor! First we get the `SystemConfigService` to ask for information we can maintain in
-the `administration`.
+Note our extension of the constructor! First we get the `SystemConfigService` to ask for information we can maintain in the `administration`.
 
 Since we have changed our `RestService` constructor we need to change our `services.xml`.
 
-```xml
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -176,12 +169,11 @@ Since we have changed our `RestService` constructor we need to change our `servi
         </service>
     </services>
 </container>
-``` 
+```
 
-Now we need to add a `config.xml` to our plugin so that we can maintain the required data information in the
-administration.
+Now we need to add a `config.xml` to our plugin so that we can maintain the required data information in the administration.
 
-```xml
+```markup
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
@@ -220,14 +212,11 @@ administration.
 </config>
 ```
 
-For further information about the `config.xml`, see the
-[config.xml documentation](./../60-references-internals/40-plugins/070-plugin-config.md).
+For further information about the `config.xml`, see the [config.xml documentation](../60-references-internals/40-plugins/070-plugin-config.md).
 
 ## Authorization problems
 
-One of the problems that can occur when working with the Admin API is that your access token has expired. To 
-avoid having to deal with this problem we have already included the refresh token and expiration time in our properties,
-so let's start automatically generating a new access token.
+One of the problems that can occur when working with the Admin API is that your access token has expired. To avoid having to deal with this problem we have already included the refresh token and expiration time in our properties, so let's start automatically generating a new access token.
 
 ```php
 <?php
@@ -235,7 +224,7 @@ so let's start automatically generating a new access token.
 class RestService
 {
     ...
-    
+
     private function send(RequestInterface $request, string $uri)
     {
         if ($this->expiresAt <= (new \DateTime())) {
@@ -248,7 +237,7 @@ class RestService
 
         return $this->restClient->send($request);
     }
-    
+
     private function refreshAuthToken(): void
     {
         $body = \json_encode([
@@ -286,13 +275,13 @@ use Psr\Http\Message\ResponseInterface;
 class RestService
 {
     ...
-    
+
     public function request(string $method, string $uri, ?array $body = null): ResponseInterface
     {
         if ($this->accessToken === null || $this->refreshToken === null || $this->expiresAt === null) {
             $this->getAdminAccess();
         }
-        
+
         $bodyEncoded = json_encode($body);
 
         $request = $this->createShopwareApiRequest($method, $uri, $bodyEncoded);
@@ -302,8 +291,7 @@ class RestService
 }
 ```
 
-The `request` function makes it easy to send API requests. It requests the API credentials if they do not already exist,
-and converts your request into a Admin API request. All you have to do is call the `request` function as follows:
+The `request` function makes it easy to send API requests. It requests the API credentials if they do not already exist, and converts your request into a Admin API request. All you have to do is call the `request` function as follows:
 
 ```php
 $this->restService->request('GET', 'product');
@@ -313,13 +301,11 @@ The first parameter is the HTTP method to be used.
 
 The second parameter is the route / entity name you want to call. Some examples would be `product`, `rule` or `language`.
 
-The third parameter is the data you might want to send to the API. These data can be written as an `array` and is
-encoded by PHP according to the JSON scheme.
+The third parameter is the data you might want to send to the API. These data can be written as an `array` and is encoded by PHP according to the JSON scheme.
 
-If you want to know more about how to work with the API, we recommend you take a look at the
-[API documentation](./../40-admin-api-guide/__categoryInfo.md)
+If you want to know more about how to work with the API, we recommend you take a look at the [API documentation](../40-admin-api-guide/__categoryinfo.md)
 
 ## Source
 
-There is a GitHub repository available, containing an example plugin.
-Check it out [here](https://github.com/shopware/swag-docs-rest-api-handling)
+There is a GitHub repository available, containing an example plugin. Check it out [here](https://github.com/shopware/swag-docs-rest-api-handling)
+

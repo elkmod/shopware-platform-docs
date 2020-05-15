@@ -1,63 +1,63 @@
-[titleEn]: <>(Reading entities)
-[hash]: <>(article:admin_api_read)
+# Reading entities
 
-## Reading entities
-The Admin API is designed so that all entities of the system can be read in the same way. 
-Once an entity is registered in the system, it can be written and read via API.
-The appropriate routes for the entity are generated automatically and follow the rest pattern. 
+The Admin API is designed so that all entities of the system can be read in the same way. Once an entity is registered in the system, it can be written and read via API. The appropriate routes for the entity are generated automatically and follow the rest pattern.
 
-The entity object `customer_group` is available under the endpoint `api/v1/customer-group`.
-If an entity is addressed via the relation of a main route, the corresponding property name of the association is used here.
+The entity object `customer_group` is available under the endpoint `api/v1/customer-group`. If an entity is addressed via the relation of a main route, the corresponding property name of the association is used here.
 
-An example: 
+An example:
+
 * The `ManufacturerEntity` is registered as `product_manufacturer` in the system and can be read `api/v1/product-manufacturer`.
 * The `ProductEntity` has an association with the property name `manufacturer`, which refers to the `ManufacturerEntity`. 
 * The manufacturer of a product can then be read over `api/v1/product/{productId}/manufacturer`.
 
 For an entity object, the system automatically creates the following routes through which the entity object can be read:
 
-| Name  | Method   | Route                   | Usage |
-| ----- | ------ | ----------------------- | ------ |
-| api.customer_group.list       | GET  | /api/v{version}/customer-group             | Allows to read a list of this entity |
-| api.customer_group.detail     | GET  | /api/v{version}/customer-group/{id}        | Allows to fetch a single entity |
-| api.customer_group.search     | POST | /api/v{version}/search/customer-group      | Allows to perform a complex search |
-| api.customer_group.search-ids | POST | /api/v{version}/search-ids/customer-group  | Allows to perform a complex search and fetching only matching ids |
+| Name | Method | Route | Usage |
+| :--- | :--- | :--- | :--- |
+| api.customer\_group.list | GET | /api/v{version}/customer-group | Allows to read a list of this entity |
+| api.customer\_group.detail | GET | /api/v{version}/customer-group/{id} | Allows to fetch a single entity |
+| api.customer\_group.search | POST | /api/v{version}/search/customer-group | Allows to perform a complex search |
+| api.customer\_group.search-ids | POST | /api/v{version}/search-ids/customer-group | Allows to perform a complex search and fetching only matching ids |
 
 A list of all routes and registered entities in the system can be read via the `/api/v1/_info/*` routes:
+
 * `/api/v1/_info/openapi3.json`
 * `/api/v1/_info/open-api-schema.json`
 * `/api/v1/_info/entity-schema.json`
 
-### Search endpoint
-The Admin API supports a wide range of filtering, aggregation and sorting capabilities. However, according to the REST definition, data should only be read via GET,
-we have provided the `/api/v1/search/*` route for this. This working with complex filters or other components that can be mapped via DAL. 
+## Search endpoint
 
-### Parameter overview
+The Admin API supports a wide range of filtering, aggregation and sorting capabilities. However, according to the REST definition, data should only be read via GET, we have provided the `/api/v1/search/*` route for this. This working with complex filters or other components that can be mapped via DAL.
+
+## Parameter overview
+
 When reading the data, the following parameters are available to influence the result:
 
-| Parameter           | Usage                                                                     | 
-| ------------------- | ------------------------------------------------------------------------- |
-| `includes`          | Restricts the output to the defined fields                                |
-| `ids`               | Limits the search to a list of Ids                                        |
-| `total-count-mode`  | Defines whether a total must be determined                                |
-| `page`              | Defines at which page the search result should start                      |
-| `limit`             | Defines the number of entries to be determined                            |
-| `filter`            | Allows you to filter the result and aggregations                          |
-| `post-filter`       | Allows you to filter the result, but not the aggregations                 |
-| `query`             | Enables you to determine a ranking for the search result                  |
-| `term`              | Enables you to determine a ranking for the search result                  |
-| `sort`              | Defines the sorting of the search result                                  |
-| `grouping`          | Lets you group records by fields                                          |
-| `associations`      | Allows to load additional data to the standard data of an entity          |
+| Parameter | Usage |
+| :--- | :--- |
+| `includes` | Restricts the output to the defined fields |
+| `ids` | Limits the search to a list of Ids |
+| `total-count-mode` | Defines whether a total must be determined |
+| `page` | Defines at which page the search result should start |
+| `limit` | Defines the number of entries to be determined |
+| `filter` | Allows you to filter the result and aggregations |
+| `post-filter` | Allows you to filter the result, but not the aggregations |
+| `query` | Enables you to determine a ranking for the search result |
+| `term` | Enables you to determine a ranking for the search result |
+| `sort` | Defines the sorting of the search result |
+| `grouping` | Lets you group records by fields |
+| `associations` | Allows to load additional data to the standard data of an entity |
 
-#### includes parameter
-The `includes` parameter allows you to restrict the returned fields. 
+### includes parameter
+
+The `includes` parameter allows you to restrict the returned fields.
 
 * Purpose: The response size is reduced - mandatory for mobile applications
 * Purpose: When debugging, the response is smaller and you can concentrate on the essential fields
 
-Endpoint: 
-```
+Endpoint:
+
+```text
 POST /api/v1/search/product
 {
     "includes": {
@@ -83,13 +83,13 @@ POST /api/v1/search/product
 }
 ```
 
-##### api alias
-The `includes` parameter is defined as an object. The key is always defined as the api alias of an object. The alias of an object is unique in the system.
-For entities, this is the entity name: `product`, `product_manufacturer`, `order_line_item`, ...
-This pattern applies not only to simple fields but also to associations:
+#### api alias
 
-Endpoint: 
-```
+The `includes` parameter is defined as an object. The key is always defined as the api alias of an object. The alias of an object is unique in the system. For entities, this is the entity name: `product`, `product_manufacturer`, `order_line_item`, ... This pattern applies not only to simple fields but also to associations:
+
+Endpoint:
+
+```text
 POST /api/v1/search/product
 {
     "includes": {
@@ -121,12 +121,13 @@ POST /api/v1/search/product
 }
 ```
 
-#### ids parameter
+### ids parameter
+
 The `ids` parameter allows you to limit the search to a list of Ids.
 
 * Purpose: Selectively read out several records. Works as a multi get request
 
-```
+```text
 POST /api/v1/search/product
 {
     "ids": [
@@ -162,21 +163,21 @@ POST /api/v1/search/product
 }
 ```
 
-#### total-count-mode
-The `total-count-mode` parameter can be used to define whether the total for the total number of hits should be determined for the search query.
-This parameter supports the following values:
+### total-count-mode
+
+The `total-count-mode` parameter can be used to define whether the total for the total number of hits should be determined for the search query. This parameter supports the following values:
 
 * `0 [default]` - No total is determined 
-    * Purpose: This is the most performing mode because MySQL Server does not need to run the `SQL_CALC_FOUND_ROWS` in the background.
-    * Purpose: Should be used if pagination is not required
+  * Purpose: This is the most performing mode because MySQL Server does not need to run the `SQL_CALC_FOUND_ROWS` in the background.
+  * Purpose: Should be used if pagination is not required
 * `1` - An exact total is determined.
-    * Purpose: Should be used if a pagination with exact page number has to be displayed
-    * Disadvantage: Performance intensive. Here you have to work with `SQL_CALC_FOUND_ROWS`
+  * Purpose: Should be used if a pagination with exact page number has to be displayed
+  * Disadvantage: Performance intensive. Here you have to work with `SQL_CALC_FOUND_ROWS`
 * `2` - It is determined whether there is a next page
-    * Advantage: Good performance, same as `0`.
-    * Purpose: Can be used well for infinite scrolling, because with infinite scrolling the information is enough to know if there is a next page to load 
+  * Advantage: Good performance, same as `0`.
+  * Purpose: Can be used well for infinite scrolling, because with infinite scrolling the information is enough to know if there is a next page to load 
 
-```
+```text
 POST /api/v1/search/product
 {
     "total-count-mode": 1,
@@ -197,12 +198,13 @@ POST /api/v1/search/product
 }
 ```
 
-#### term parameter
-The `term` parameter allows a free text search on an entity. The fields used to determine the `_score` value can be defined in the entity. 
-The `query` parameter allows a more precise controlling via the API.
+### term parameter
+
+The `term` parameter allows a free text search on an entity. The fields used to determine the `_score` value can be defined in the entity. The `query` parameter allows a more precise controlling via the API.
+
 * Purpose: To implement a search function, where the server should decide what to search for.
 
-```
+```text
 POST /api/v1/search/product
 {
     "term": "Awesome Bronze",
@@ -236,14 +238,15 @@ POST /api/v1/search/product
         }
     ]
 }
-
 ```
 
-#### page & limit parameter
+### page & limit parameter
+
 The `page` and `limit` parameters can be used to control pagination:
+
 * Purpose: Listings are implemented with these parameters.
 
-```
+```text
 POST /api/v1/search/product
 {
     "page": 1,
@@ -285,18 +288,18 @@ POST /api/v1/search/product
         }
     ]    
 }
-
 ```
 
-#### filter parameter
+### filter parameter
+
 The `filter` parameter allows you to filter the result and aggregations. Different filter types are available here.
 
 * Purpose: This can be used to implement api queries for specific scenarios: 
-    * "Give me all orders that have the payment status open".
-    * "Give me all products from manufacturer xxx"
-    * ...
- 
-``` 
+  * "Give me all orders that have the payment status open".
+  * "Give me all products from manufacturer xxx"
+  * ...
+
+```text
 POST /api/v1/search/product
 {
     "filter": [
@@ -321,11 +324,11 @@ POST /api/v1/search/product
 }
 ```
 
-#### query parameter
-The `query` parameter allows you to create a search query that returns a `_score` for each found entity.
-Any filter type can be used for the `query`. A `score` has to be defined for each query. The sum of the matching queries then results in the total `_score` value.
+### query parameter
 
-```
+The `query` parameter allows you to create a search query that returns a `_score` for each found entity. Any filter type can be used for the `query`. A `score` has to be defined for each query. The sum of the matching queries then results in the total `_score` value.
+
+```text
 {
     "query": [
         {
@@ -386,13 +389,15 @@ Any filter type can be used for the `query`. A `score` has to be defined for eac
 }
 ```
 
-#### sort parameter
+### sort parameter
+
 The `sort` parameter allows to control the sorting of the result. Several sorts can be transferred at the same time.
+
 * The `field` parameter defines which field is to be used for sorting.
 * The `order` parameter defines the sort direction.
 * The parameter `naturalSorting` allows to use a [Natural Sorting Algorithm](https://en.wikipedia.org/wiki/Natural_sort_order) 
 
-```
+```text
 {
     "limit": 5,
     "sort": [
@@ -436,15 +441,14 @@ The `sort` parameter allows to control the sorting of the result. Several sorts 
 }
 ```
 
-#### aggregations parameter
-With the `aggregation` parameter, meta data can be determined for a search query.
-There are different types of aggregations which are listed in the reference documentation.
-A simple example is the determination of the average price from a product search query:
+### aggregations parameter
+
+With the `aggregation` parameter, meta data can be determined for a search query. There are different types of aggregations which are listed in the reference documentation. A simple example is the determination of the average price from a product search query:
 
 * Purpose: Calculation of statistics and metrics
 * Purpose: Determination of possible filters
 
-```
+```text
 {
     "limit": 1,
     "includes": {
@@ -477,21 +481,19 @@ A simple example is the determination of the average price from a product search
 }
 ```
 
+### post-filter parameter
 
-#### post-filter parameter
 The `post-filter` parameter allows you to filter the result. However, unlike the `filter` parameter, it has no effect on the result of the aggregations.
 
-*Purpose*: The purpose of this filter is a little more complex. This type of filter is actually only used for listings, where an end user can further filter a listing.
+_Purpose_: The purpose of this filter is a little more complex. This type of filter is actually only used for listings, where an end user can further filter a listing.
 
-Here is an example: In the storefront, the active category is set as `filter`, because this is the basis for the listing. 
-Filters that the customer selects in the filter panel are then applied as `post-filter` (manufacturer filter, price filter, properties, ...). 
-These do not affect the aggregations, so that e.g. the complete list is still displayed in the manufacturer filter.  
+Here is an example: In the storefront, the active category is set as `filter`, because this is the basis for the listing. Filters that the customer selects in the filter panel are then applied as `post-filter` \(manufacturer filter, price filter, properties, ...\). These do not affect the aggregations, so that e.g. the complete list is still displayed in the manufacturer filter.
 
 The following example shows how filters and post-filters affect the results of a search.
 
 1: First, we execute a request in which we want to query a list of products and determine the total count and the average product price:
 
-```
+```text
 POST /api/v1/search/product
 {
     "limit": 1,
@@ -526,12 +528,13 @@ POST /api/v1/search/product
 ```
 
 Summary:
-* A total of 65 products were found (`"total": 65,`)
-* The average price of the determined products is 434.37€ (`"avg": 434.3709677419355`)
+
+* A total of 65 products were found \(`"total": 65,`\)
+* The average price of the determined products is 434.37€ \(`"avg": 434.3709677419355`\)
 
 2: Now we will add a filter in which only active products will be considered:
 
-```
+```text
 {
     "limit": 1,
     "total-count-mode": 1,
@@ -568,14 +571,15 @@ Summary:
 ```
 
 Impact:
-* A total of 45 active products were found (`"total": 45,`) 
-    * The `filter` parameter affects the `total`
-* The average price of the active products determined is 399.26€ (`"avg": 399.26190476190476"`)
-    * The `filter` parameter is taken into account when determining the aggregations
+
+* A total of 45 active products were found \(`"total": 45,`\) 
+  * The `filter` parameter affects the `total`
+* The average price of the active products determined is 399.26€ \(`"avg": 399.26190476190476"`\)
+  * The `filter` parameter is taken into account when determining the aggregations
 
 3: Now we set the active filter as a `post-filter`:
 
-```
+```text
 {
     "limit": 1,
     "total-count-mode": 1,
@@ -612,19 +616,22 @@ Impact:
 ```
 
 Impact:
-* A total of 45 active products were found (`"total": 45,`) 
-    * The `post-filter` parameter affects the `total`
-* The average price of the active products determined is 434.37€ (`"avg": 434.3709677419355"`)
-    * The `post-filter` parameter is **not** considered when determining aggregations
 
-#### grouping parameter
+* A total of 45 active products were found \(`"total": 45,`\) 
+  * The `post-filter` parameter affects the `total`
+* The average price of the active products determined is 434.37€ \(`"avg": 434.3709677419355"`\)
+  * The `post-filter` parameter is **not** considered when determining aggregations
+
+### grouping parameter
+
 The `grouping` parameter allows you to group the result over fields. It is the `GROUP BY` definition of the underlying SQL statement.
 
-**Purpose**: This can be used to realize queries like: 
+**Purpose**: This can be used to realize queries like:
+
 * "Give me one product for each manufacturer"
 * "Give me one order per day"
 
-```
+```text
 {
     "limit": 5,
     "includes": {
@@ -652,11 +659,11 @@ The `grouping` parameter allows you to group the result over fields. It is the `
 }
 ```
 
-#### associations parameter
-The `associations` parameter allows you to load additional data to the minimal data set of an entity without sending an extra request.
-The key of the parameter is the property name of the association in the entity. Within this key an almost complete search query can be defined:  
+### associations parameter
 
-```
+The `associations` parameter allows you to load additional data to the minimal data set of an entity without sending an extra request. The key of the parameter is the property name of the association in the entity. Within this key an almost complete search query can be defined:
+
+```text
 POST /api/v1/search/category
 {
     "limit": 1,
@@ -719,13 +726,13 @@ POST /api/v1/search/category
         }
     ]    
 }
-
 ```
 
-### Language header
+## Language header
+
 By default, the API delivers the entities via the system language. However, this can be controlled via the `sw-language-id` header.
 
-```
+```text
 POST /api/v1/search/product
 --header 'sw-language-id: be01bd336c204f20ab86eab45bbdbe45'
 
@@ -746,14 +753,13 @@ POST /api/v1/search/product
         }
     ]    
 }
-``` 
-
-#### Translated property
-If a field is not translated, it has the value `null`. 
-However, to avoid sending multiple requests to get the final translation of an entity (Shopware 6 has a three layer language inheritance) there is the field `translated`.
-In this field, all fields are already translated for the provided language, considering the inheritance:
-
 ```
+
+### Translated property
+
+If a field is not translated, it has the value `null`. However, to avoid sending multiple requests to get the final translation of an entity \(Shopware 6 has a three layer language inheritance\) there is the field `translated`. In this field, all fields are already translated for the provided language, considering the inheritance:
+
+```text
 POST /api/v1/search/product
 --header 'sw-language-id: be01bd336c204f20ab86eab45bbdbe45'
 
@@ -779,13 +785,11 @@ POST /api/v1/search/product
 }
 ```
 
-### Inheritance header
-Shopware 6 allows developers to define inheritance between parent and child. This has been used, for example, for products and their variants.
-Certain fields of a variant can therefore inherit the data from the parent product or define them themselves.
-However, the Admin API initially only delivers the data of its own record, without considering parent-child inheritance.
-To tell the API that the inheritance should be considered, the header `sw-inheritance` must be sent with the data:
+## Inheritance header
 
-```
+Shopware 6 allows developers to define inheritance between parent and child. This has been used, for example, for products and their variants. Certain fields of a variant can therefore inherit the data from the parent product or define them themselves. However, the Admin API initially only delivers the data of its own record, without considering parent-child inheritance. To tell the API that the inheritance should be considered, the header `sw-inheritance` must be sent with the data:
+
+```text
 POST /api/v1/search/product
 --header 'sw-inheritance: 1'
 
@@ -820,4 +824,4 @@ POST /api/v1/search/product
     ]
 }
 ```
- 
+

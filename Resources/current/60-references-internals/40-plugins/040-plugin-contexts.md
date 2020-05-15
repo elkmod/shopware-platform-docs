@@ -1,20 +1,19 @@
-[titleEn]: <>(Plugin - Contexts)
-[hash]: <>(article:plugin_contexts)
+# 040-plugin-contexts
 
 ## Overview
+
 In this guide, you will learn which plugin contexts exist and what they are used for.
 
 ## InstallContext
 
 The `InstallContext` holds the following information.
 
-| Field                  | Type                             | Usage                          |
-|------------------------|----------------------------------|--------------------------------|
-| plugin                 | \Shopware\Core\Framework\Plugin  | The plugin to install          |
-| context                | \Shopware\Core\Framework\Context | The shop context               |
-| currentShopwareVersion | string                           | The current `Shopware` version |
-| currentPluginVersion   | string                           | The current plugin version     |
-
+| Field | Type | Usage |
+| :--- | :--- | :--- |
+| plugin | \Shopware\Core\Framework\Plugin | The plugin to install |
+| context | \Shopware\Core\Framework\Context | The shop context |
+| currentShopwareVersion | string | The current `Shopware` version |
+| currentPluginVersion | string | The current plugin version |
 
 You can access this fields by their getter methods.
 
@@ -29,14 +28,13 @@ $installContext->getCurrentShopwareVersion();
 
 The `UninstallContext` holds the following information.
 
-| Field                  | Type                             | Usage                                                |
-|------------------------|----------------------------------|------------------------------------------------------|
-| plugin                 | \Shopware\Core\Framework\Plugin  | The plugin to uninstall                              |
-| context                | \Shopware\Core\Framework\Context | The shop context                                     |
-| currentShopwareVersion | string                           | The current `Shopware` version                       |
-| currentPluginVersion   | string                           | The current plugin version                           |
-| keepUserData           | bool                             | Holds information if the User-Data should be deleted |
-
+| Field | Type | Usage |
+| :--- | :--- | :--- |
+| plugin | \Shopware\Core\Framework\Plugin | The plugin to uninstall |
+| context | \Shopware\Core\Framework\Context | The shop context |
+| currentShopwareVersion | string | The current `Shopware` version |
+| currentPluginVersion | string | The current plugin version |
+| keepUserData | bool | Holds information if the User-Data should be deleted |
 
 You can access this fields by their getter methods.
 
@@ -52,14 +50,13 @@ $uninstallContext->keepUserData();
 
 The `UpdateContext` holds the following information.
 
-| Field                  | Type                             | Usage                           |
-|------------------------|----------------------------------|---------------------------------|
-| plugin                 | \Shopware\Core\Framework\Plugin  | The plugin to update            |
-| context                | \Shopware\Core\Framework\Context | The shop context                |
-| currentShopwareVersion | string                           | The current `Shopware` version  |
-| currentPluginVersion   | string                           | The current plugin version      |
-| updatePluginVersion    | string                           | The plugin version to update to |
-
+| Field | Type | Usage |
+| :--- | :--- | :--- |
+| plugin | \Shopware\Core\Framework\Plugin | The plugin to update |
+| context | \Shopware\Core\Framework\Context | The shop context |
+| currentShopwareVersion | string | The current `Shopware` version |
+| currentPluginVersion | string | The current plugin version |
+| updatePluginVersion | string | The plugin version to update to |
 
 You can access this fields by their getter methods.
 
@@ -78,3 +75,4 @@ The `ActivateContext` holds the same information as the `InstallContext`.
 ## DeactivateContext
 
 The `DeactivateContext` holds the same information as the `InstallContext`.
+

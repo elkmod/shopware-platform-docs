@@ -1,17 +1,12 @@
-[titleEn]: <>(Using setter injection in plugins)
-[metaDescriptionEn]: <>(This HowTo will show you how to use setting injection in your plugin class. This allows using private and your own services in the activate and deactivate method.)
-[hash]: <>(article:how_to_setter_injection)
+# 620-plugin-setter-injection
 
 ## Overview
 
-Sometimes you need to do complex initialization operations in your activate method.
-Most shopware services are private, so you cannot get them directly from the container.
-To inject them into your `Plugin` class, you have to use setter injection.
+Sometimes you need to do complex initialization operations in your activate method. Most shopware services are private, so you cannot get them directly from the container. To inject them into your `Plugin` class, you have to use setter injection.
 
 ## Automatic setter injection
 
-You can benefit from autowiring simply by adding a `required` annotation to your setters.
-Plugins definitions are always registered as public and with autowire in the container.
+You can benefit from autowiring simply by adding a `required` annotation to your setters. Plugins definitions are always registered as public and with autowire in the container.
 
 For example:
 
@@ -65,10 +60,9 @@ class SetterInjection extends Plugin
 
 ## Manual setter injection
 
-If you want more control about how your service is injected, you can do it manually, by using your services.xml.
-The automatic injection is still happening.
+If you want more control about how your service is injected, you can do it manually, by using your services.xml. The automatic injection is still happening.
 
-```xml
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -84,3 +78,4 @@ The automatic injection is still happening.
     </services>
 </container>
 ```
+

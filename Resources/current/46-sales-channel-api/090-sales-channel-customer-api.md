@@ -1,53 +1,52 @@
-[titleEn]: <>(SalesChannel-API customer endpoint)
-[hash]: <>(article:api_sales_channel_customer)
+# 090-sales-channel-customer-api
 
 The customer endpoint is used to register and log in customers. It can also be used to change and receive customer related information.
 
 ## Register a customer
 
-**POST  /sales-channel-api/v1/customer**
+**POST /sales-channel-api/v1/customer**
 
-**Description:** Register a new customer. 
+**Description:** Register a new customer.
 
 **Parameter:**
 
-| Name                                   | Type    | Notes                                                       | Required |
-| ---------------------------------------| ------- | ----------------------------------------------------------- | :------: |
-| salutationId                           | uuid    |                                                             |    ✔     |
-| title                                  | string  |                                                             |          |
-| firstName                              | string  |                                                             |    ✔     |
-| lastName                               | string  |                                                             |    ✔     |
-| guest                                  | bool    |                                                             |          |
-| email                                  | string  |                                                             |    ✔     |
-| password                               | string  | Only required when guest is false                           |          |
-| birthdayDay                            | integer |                                                             |          |
-| birthdayMonth                          | integer |                                                             |          |
-| birthdayYear                           | integer |                                                             |          |
-| billingAddress.company                 | string  |                                                             |          |
-| billingAddress.department              | string  |                                                             |          |
-| billingAddress.vatId                   | string  |                                                             |          |
-| billingAddress.street                  | string  |                                                             |    ✔     |
-| billingAddress.additionalAddressLine1  | string  |                                                             |          |
-| billingAddress.additionalAddressLine2  | string  |                                                             |          |
-| billingAddress.zipcode                 | string  |                                                             |    ✔     |
-| billingAddress.city                    | string  |                                                             |    ✔     |
-| billingAddress.countryId               | uuid    |                                                             |    ✔     |
-| billingAddress.countryStateId          | uuid    |                                                             |          |
-| billingAddress.phoneNumber             | string  |                                                             |          |
-| shippingAddress.salutationId           | uuid    | Only required, when shippingAddress is given                |          |
-| shippingAddress.firstName              | string  | Only required, when shippingAddress is given                |          |
-| shippingAddress.lastName               | string  | Only required, when shippingAddress is given                |          |
-| shippingAddress.company                | string  |                                                             |          |
-| shippingAddress.department             | string  |                                                             |          |
-| shippingAddress.vatId                  | string  |                                                             |          |
-| shippingAddress.street                 | string  | Only required, when shippingAddress is given                |          |
-| shippingAddress.additionalAddressLine1 | string  |                                                             |          |
-| shippingAddress.additionalAddressLine2 | string  |                                                             |          |
-| shippingAddress.zipcode                | string  | Only required, when shippingAddress is given                |          |
-| shippingAddress.city                   | string  | Only required, when shippingAddress is given                |          |
-| shippingAddress.phoneNumber            | string  |                                                             |          |
-| shippingAddress.countryId              | uuid    | Only required, when shippingAddress is given                |          |
-| shippingAddress.countryStateId         | uuid    |                                                             |          |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| salutationId | uuid |  | ✔ |
+| title | string |  |  |
+| firstName | string |  | ✔ |
+| lastName | string |  | ✔ |
+| guest | bool |  |  |
+| email | string |  | ✔ |
+| password | string | Only required when guest is false |  |
+| birthdayDay | integer |  |  |
+| birthdayMonth | integer |  |  |
+| birthdayYear | integer |  |  |
+| billingAddress.company | string |  |  |
+| billingAddress.department | string |  |  |
+| billingAddress.vatId | string |  |  |
+| billingAddress.street | string |  | ✔ |
+| billingAddress.additionalAddressLine1 | string |  |  |
+| billingAddress.additionalAddressLine2 | string |  |  |
+| billingAddress.zipcode | string |  | ✔ |
+| billingAddress.city | string |  | ✔ |
+| billingAddress.countryId | uuid |  | ✔ |
+| billingAddress.countryStateId | uuid |  |  |
+| billingAddress.phoneNumber | string |  |  |
+| shippingAddress.salutationId | uuid | Only required, when shippingAddress is given |  |
+| shippingAddress.firstName | string | Only required, when shippingAddress is given |  |
+| shippingAddress.lastName | string | Only required, when shippingAddress is given |  |
+| shippingAddress.company | string |  |  |
+| shippingAddress.department | string |  |  |
+| shippingAddress.vatId | string |  |  |
+| shippingAddress.street | string | Only required, when shippingAddress is given |  |
+| shippingAddress.additionalAddressLine1 | string |  |  |
+| shippingAddress.additionalAddressLine2 | string |  |  |
+| shippingAddress.zipcode | string | Only required, when shippingAddress is given |  |
+| shippingAddress.city | string | Only required, when shippingAddress is given |  |
+| shippingAddress.phoneNumber | string |  |  |
+| shippingAddress.countryId | uuid | Only required, when shippingAddress is given |  |
+| shippingAddress.countryStateId | uuid |  |  |
 
 **Response:** If successful, the customerId will be returned.
 
@@ -55,22 +54,22 @@ The customer endpoint is used to register and log in customers. It can also be u
 
 ### Log in a customer
 
-**POST  /sales-channel-api/v1/customer/login**
+**POST /sales-channel-api/v1/customer/login**
 
-**Description:** Log in a customer. 
+**Description:** Log in a customer.
 
 **Parameter:**
 
-| Name     | Type   | Notes                                               | Required |
-|----------|--------|-----------------------------------------------------|:--------:|
-| username | string | By default, the e-mail address is used as username  |    ✔     |
-| password | string | Plain password. Hashing will be handled by Shopware |    ✔     |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| username | string | By default, the e-mail address is used as username | ✔ |
+| password | string | Plain password. Hashing will be handled by Shopware | ✔ |
 
-**Response:** If successful, the sw-context-token will be returned. Include this token as a HTTP header for all future requests.
+**Response:** If successful, the sw-context-token will be returned. Include this token as a HTTP header for all future requests.
 
 ### Log out a customer
 
-**POST  /sales-channel-api/v1/customer/logout**
+**POST /sales-channel-api/v1/customer/logout**
 
 **Header:** sw-context-token is required
 
@@ -78,14 +77,14 @@ The customer endpoint is used to register and log in customers. It can also be u
 
 ## Get a order overview
 
-**GET  /sales-channel-api/v1/customer/order**
+**GET /sales-channel-api/v1/customer/order**
 
 **Parameter:**
 
-| Name  | Type | Notes       | Required |
-| ----- | ---- | ----------- | :------: |
-| limit | int  | Default: 10 |          |
-| page  | int  | Default: 1  |          |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| limit | int | Default: 10 |  |
+| page | int | Default: 1 |  |
 
 **Header:** sw-context-token is required
 
@@ -93,14 +92,14 @@ The customer endpoint is used to register and log in customers. It can also be u
 
 ## Update email address
 
-**PATCH  /sales-channel-api/v1/customer/email**
+**PATCH /sales-channel-api/v1/customer/email**
 
 **Parameter:**
 
-| Name              | Type   | Notes | Required |
-| ----------------- | ------ | ----- | :------: |
-| email             | string |       |    ✔     |
-| emailConfirmation | string |       |    ✔     |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| email | string |  | ✔ |
+| emailConfirmation | string |  | ✔ |
 
 **Header:** sw-context-token is required
 
@@ -108,13 +107,13 @@ The customer endpoint is used to register and log in customers. It can also be u
 
 ## Update password
 
-**PATCH  /sales-channel-api/v1/customer/password**
+**PATCH /sales-channel-api/v1/customer/password**
 
 **Parameter:**
 
-| Name     | Type   | Notes | Required |
-| -------- | ------ | ----- | :------: |
-| password | string |       |    ✔     |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| password | string |  | ✔ |
 
 **Header:** sw-context-token is required
 
@@ -122,20 +121,19 @@ The customer endpoint is used to register and log in customers. It can also be u
 
 ## Update profile information
 
-**PATCH 
-/sales-channel-api/v1/customer**
+**PATCH /sales-channel-api/v1/customer**
 
 **Parameter:**
 
-| Name          | Type   | Notes                                               | Required |
-| ------------- | ------ | --------------------------------------------------- | :------: |
-| firstName     | string |                                                     |          |
-| lastName      | string |                                                     |          |
-| title         | string |                                                     |          |
-| salutation    | string |                                                     |          |
-| birthdayDay   | int    | Required if one of the other birthday fields is set |          |
-| birthdayMonth | int    | Required if one of the other birthday fields is set |          |
-| birthdayYear  | int    | Required if one of the other birthday fields is set |          |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| firstName | string |  |  |
+| lastName | string |  |  |
+| title | string |  |  |
+| salutation | string |  |  |
+| birthdayDay | int | Required if one of the other birthday fields is set |  |
+| birthdayMonth | int | Required if one of the other birthday fields is set |  |
+| birthdayYear | int | Required if one of the other birthday fields is set |  |
 
 **Header:** sw-context-token is required
 
@@ -143,7 +141,7 @@ The customer endpoint is used to register and log in customers. It can also be u
 
 ## Get detailed customer information
 
-**GET  /sales-channel-api/v1/customer**
+**GET /sales-channel-api/v1/customer**
 
 **Header:** sw-context-token is required
 
@@ -165,26 +163,25 @@ The customer endpoint is used to register and log in customers. It can also be u
 
 **Header:** sw-context-token is required
 
-**Response:** Detailed information about the specified address id.
-Note: The address id must be assigned with the customer currently logged in.
+**Response:** Detailed information about the specified address id. Note: The address id must be assigned with the customer currently logged in.
 
 ### Create customer address
 
-**POST /sales-channel-api/v1/customer/address**
+**POST /sales-channel-api/v1/customer/address**
 
 **Header:** sw-context-token is required
 
 **Parameter:**
 
-| Name          | Type   | Notes                                               | Required |
-| ------------- | ------ | --------------------------------------------------- | :------: |
-| id            | uuid   |                                                     |          |
-| lastName      | string |                                                     |          |
-| title         | string |                                                     |          |
-| salutation    | string |                                                     |          |
-| birthdayDay   | int    | Required if one of the other birthday fields is set |          |
-| birthdayMonth | int    | Required if one of the other birthday fields is set |          |
-| birthdayYear  | int    | Required if one of the other birthday fields is set |          |
+| Name | Type | Notes | Required |
+| :--- | :--- | :--- | :---: |
+| id | uuid |  |  |
+| lastName | string |  |  |
+| title | string |  |  |
+| salutation | string |  |  |
+| birthdayDay | int | Required if one of the other birthday fields is set |  |
+| birthdayMonth | int | Required if one of the other birthday fields is set |  |
+| birthdayYear | int | Required if one of the other birthday fields is set |  |
 
 ### Delete customer address
 
@@ -196,28 +193,28 @@ Note: The address id must be assigned with the customer currently logged in.
 
 ### Set default shipping address
 
-**PATCH  /sales-channel-api/v1/customer/address/{id}/default-shipping**
+**PATCH /sales-channel-api/v1/customer/address/{id}/default-shipping**
 
 **Header:** sw-context-token is required
 
-**Response:** AddressId if successful
+**Response:** AddressId if successful
 
 ### Set default billing address
 
-**PATCH  /sales-channel-api/v1/customer/address/{id}/default-billing**
+**PATCH /sales-channel-api/v1/customer/address/{id}/default-billing**
 
 **Header:** sw-context-token is required
 
-**Response:** AddressId if successful
+**Response:** AddressId if successful
 
 ## Full example
 
 ```javascript
     const accessKey = '{insert your storefront access key}';
     const baseUrl = '{insert your url}';
-    
+
     const randomStr = Math.random().toString(36).substring(2, 15);
-    
+
     let customer = {
         email: `max.mustermann_${randomStr}@example.com`,
         firstName: 'Max',
@@ -302,3 +299,4 @@ Note: The address id must be assigned with the customer currently logged in.
         console.log('Customer example completed');
     });
 ```
+

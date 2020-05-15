@@ -1,13 +1,12 @@
-[titleEn]: <>(Store api sales channel routes)
-[hash]: <>(article:store_api_sales_channel)
+# Sales Channel
 
-## Sales Channel
 On this page you can find all the api routes that are able to give you information about the Sales Channel
 
-### Get current context
+## Get current context
+
 If you want to get the current context you can use the following route `store-api.context`.
 
-```
+```text
 GET /store-api/v1/context
 
 {
@@ -42,12 +41,13 @@ GET /store-api/v1/context
 }
 ```
 
-### Available languages
+## Available languages
+
 To get all languages of an Sales Channel you can use the following route `store-api.language`
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
 
-```
+```text
 POST /store-api/v1/language
 
 {
@@ -73,12 +73,13 @@ POST /store-api/v1/language
 ]
 ```
 
-### Available currencies
+## Available currencies
+
 With `store-api.currency` you can fetch all currencies that are available in this Sales Channel.
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
 
-```
+```text
 POST /store-api/v1/currency
 
 {
@@ -110,11 +111,12 @@ POST /store-api/v1/currency
 ]
 ```
 
-### Switch context
+## Switch context
 
 When you want to switch the context you can use this route: `store-api.switch-context`
 
 This route needs the following parameters:
+
 * `currencyId`: id of the currency 
 * `languageId`: id of the language
 * `billingAddressId`: id of the billing address id
@@ -126,7 +128,7 @@ This route needs the following parameters:
 
 Note, for this route to work the customer has to be logged in.
 
-```
+```text
 PATCH /store-api/v1/context
 
 {
@@ -144,13 +146,13 @@ PATCH /store-api/v1/context
 }
 ```
 
-### Seo resolving
+## Seo resolving
 
 When you want to get Information about your SEO Urls then you can use this route: `store-api.seo.url`
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
 
-```
+```text
 GET /store-api/v1/seo-url
 
 {
@@ -178,3 +180,4 @@ GET /store-api/v1/seo-url
     },
 ]
 ```
+

@@ -1,50 +1,30 @@
-[titleEn]: <>(Payment plugin)
-[metaDescriptionEn]: <>(Payments are an essential part of the checkout process. That's the reason why Shopware 6 offers an easy platform on which you can build payment plugins. Learn here, how that's done.)
-[hash]: <>(article:how_to_payment_plugin)
+# 010-payment-plugin
 
-Payments are an essential part of the checkout process.
-That's the reason why Shopware 6 offers an easy platform on which you can build payment plugins.
+Payments are an essential part of the checkout process. That's the reason why Shopware 6 offers an easy platform on which you can build payment plugins.
 
 ## Payment handler
 
-Shopware 6 has a few default payment handler which can be found under `Shopware\Core\Checkout\Payment\Cart\PaymentHandler`. 
+Shopware 6 has a few default payment handler which can be found under `Shopware\Core\Checkout\Payment\Cart\PaymentHandler`.
 
 ## Creating a custom payment handler
 
 You can create your own payment handler by implementing one of the following interfaces:
 
-|               Interface             |   DI container tag            |                               Usage                                 |
-|-------------------------------------|-------------------------------|---------------------------------------------------------------------|
-| SynchronousPaymentHandlerInterface  | shopware.payment.method.sync  | Payment can be handled locally, e.g. pre-payment                    |
+| Interface | DI container tag | Usage |
+| :--- | :--- | :--- |
+| SynchronousPaymentHandlerInterface | shopware.payment.method.sync | Payment can be handled locally, e.g. pre-payment |
 | AsynchronousPaymentHandlerInterface | shopware.payment.method.async | A redirect to an external payment provider is required, e.g. PayPal |
 
 Depending on the interface, those two methods are required:
 
-* `pay`: This method will be called after an order has been placed.
-You receive a `Shopware\Core\Checkout\Payment\Cart\AsyncPaymentTransactionStruct|Shopware\Core\Checkout\Payment\Cart\SyncPaymentTransactionStruct` which contains the transactionId,
-order details, the amount for the transaction, a return URL, payment method information and language information.
-Please be aware, Shopware 6 supports multiple transactions and you have to use the amount provided and not the total order amount.
-If you're using the `AsynchronousPaymentHandlerInterface`, the `pay` method has to return a `RedirectResponse` to redirect the customer to an external payment provider.
-Note: The `AsyncPaymentTransactionStruct` contains a return URL.
-Pass this URL to the external payment provider to ensure that the customer will be redirected back to the shop to this URL.
-If an error occurs while e.g. calling the API of your external payment provider you should throw an `AsyncPaymentProcessException`.
-Shopware will handle this exception and set the transaction to the `cancelled` state.
-The same happens if you are using the `SynchronousPaymentHandlerInterface`: throw a `SyncPaymentProcessException` in an error case.
+* `pay`: This method will be called after an order has been placed. You receive a `Shopware\Core\Checkout\Payment\Cart\AsyncPaymentTransactionStruct|Shopware\Core\Checkout\Payment\Cart\SyncPaymentTransactionStruct` which contains the transactionId, order details, the amount for the transaction, a return URL, payment method information and language information. Please be aware, Shopware 6 supports multiple transactions and you have to use the amount provided and not the total order amount. If you're using the `AsynchronousPaymentHandlerInterface`, the `pay` method has to return a `RedirectResponse` to redirect the customer to an external payment provider. Note: The `AsyncPaymentTransactionStruct` contains a return URL. Pass this URL to the external payment provider to ensure that the customer will be redirected back to the shop to this URL. If an error occurs while e.g. calling the API of your external payment provider you should throw an `AsyncPaymentProcessException`. Shopware will handle this exception and set the transaction to the `cancelled` state. The same happens if you are using the `SynchronousPaymentHandlerInterface`: throw a `SyncPaymentProcessException` in an error case.
+* `finalize`: The `finalize` method is only required if you implemented the `AsynchronousPaymentHandlerInterface`, returned a `RedirectResponse` in your `pay` method and the customer has been redirected from the payment provider back to Shopware 6. You must check here if the payment was successful or not and update the order transaction state accordingly. Similar to the pay action you are able to throw exceptions if some error cases occur. Throw the `CustomerCanceledAsyncPaymentException` if the customer canceled the payment process on the payment provider site. If another general error occurs throw the `AsyncPaymentFinalizeException` e.g. if your call to the payment provider API fails. Again Shopware will handle these exceptions and will set the transaction to the `cancelled` state.
 
-* `finalize`: The `finalize` method is only required if you implemented the `AsynchronousPaymentHandlerInterface`,
-returned a `RedirectResponse` in your `pay` method and the customer has been redirected from the payment provider back to Shopware 6. 
-You must check here if the payment was successful or not and update the order transaction state accordingly.
-Similar to the pay action you are able to throw exceptions if some error cases occur.
-Throw the `CustomerCanceledAsyncPaymentException` if the customer canceled the payment process on the payment provider site.
-If another general error occurs throw the `AsyncPaymentFinalizeException` e.g. if your call to the payment provider API fails.
-Again Shopware will handle these exceptions and will set the transaction to the `cancelled` state.
-
-Both methods get the `\Shopware\Core\System\SalesChannel\SalesChannelContext` injected. Please note, that this class contains properties, which are nullable.
-If you want to use these information, ensure in your code, that they are set and not `NULL` 
+Both methods get the `\Shopware\Core\System\SalesChannel\SalesChannelContext` injected. Please note, that this class contains properties, which are nullable. If you want to use these information, ensure in your code, that they are set and not `NULL`
 
 You also need to make sure to register your custom payment in the DI container.
 
-```xml
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -151,9 +131,7 @@ class ExamplePayment implements AsynchronousPaymentHandlerInterface
 
 ### Synchronous example
 
-In this example, changing the `stateId` of the order should already be done in the `pay` method, since there will be no `finalize` method.
-If you have to execute some logic which might fail, e.g. a call to an external API, you should throw a `SyncPaymentProcessException`
-Shopware will handle this exception and set the transaction to the `cancelled` state.
+In this example, changing the `stateId` of the order should already be done in the `pay` method, since there will be no `finalize` method. If you have to execute some logic which might fail, e.g. a call to an external API, you should throw a `SyncPaymentProcessException` Shopware will handle this exception and set the transaction to the `cancelled` state.
 
 ```php
 <?php declare(strict_types=1);
@@ -188,12 +166,10 @@ class ExamplePayment implements SynchronousPaymentHandlerInterface
 
 ## Setting up new payment method
 
-The handler itself is not used yet, since there is no payment method actually using the handler mentioned above.
-The payment method can be added to the system while installing your plugin.
-You can set the value for `afterOrderEnabled` to decide if your PaymentMethod should be enabled for a change of the payment after the Order is created.
-This can be changed by the shop owner in the payment settings.
+The handler itself is not used yet, since there is no payment method actually using the handler mentioned above. The payment method can be added to the system while installing your plugin. You can set the value for `afterOrderEnabled` to decide if your PaymentMethod should be enabled for a change of the payment after the Order is created. This can be changed by the shop owner in the payment settings.
 
 An example for your plugin could look like this:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -304,12 +280,9 @@ class PaymentPlugin extends Plugin
 
 ## Identify your payment
 
-You can identify your payment by the entity property `formattedHandlerIdentifier`.
-It shortens the original handler identifier (php class reference):
-`Custom/Payment/SEPAPayment` to `handler_custom_sepapayment`
-The syntax for the shortening can be looked up in `Shopware\Core\Checkout\Payment\DataAbstractionLayer\PaymentHandlerIdentifierSubscriber`.
+You can identify your payment by the entity property `formattedHandlerIdentifier`. It shortens the original handler identifier \(php class reference\): `Custom/Payment/SEPAPayment` to `handler_custom_sepapayment` The syntax for the shortening can be looked up in `Shopware\Core\Checkout\Payment\DataAbstractionLayer\PaymentHandlerIdentifierSubscriber`.
 
 ## Source
 
-There's a GitHub repository available, containing this example source.
-Check it out [here](https://github.com/shopware/swag-docs-payment-plugin).
+There's a GitHub repository available, containing this example source. Check it out [here](https://github.com/shopware/swag-docs-payment-plugin).
+

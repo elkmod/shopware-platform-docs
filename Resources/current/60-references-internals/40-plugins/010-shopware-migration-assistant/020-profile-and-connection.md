@@ -1,25 +1,19 @@
-[titleEn]: <>(Profile and Connection)
-[hash]: <>(article:migration_profile_connection)
+# 020-profile-and-connection
 
-Users of the plugin can create connections to different source systems.
-A connection is used to allow multiple migrations from the same source and update the right data (mapping).
-Connections require a specific profile, indicating the type of source system.
-Users can, for example, create a connection to a Shopware shop using the Shopware 5.5 profile.
-Developers are able to create their own profiles from scratch and connect to different source systems or just build up on and extend existing ones.
+Users of the plugin can create connections to different source systems. A connection is used to allow multiple migrations from the same source and update the right data \(mapping\). Connections require a specific profile, indicating the type of source system. Users can, for example, create a connection to a Shopware shop using the Shopware 5.5 profile. Developers are able to create their own profiles from scratch and connect to different source systems or just build up on and extend existing ones.
 
 ## Profile
-The base of Shopware Migration Assistant is the profile, which enables you to migrate your shop system to Shopware 6.
-Shopware Migration Assistant comes with the default Shopware 5.5 profile and is located in the shopware55.xml:
 
-```xml
+The base of Shopware Migration Assistant is the profile, which enables you to migrate your shop system to Shopware 6. Shopware Migration Assistant comes with the default Shopware 5.5 profile and is located in the shopware55.xml:
+
+```markup
 <!-- Shopware 5.5 Profile -->
 <service id="SwagMigrationAssistant\Profile\Shopware55\Shopware55Profile">
     <tag name="shopware.migration.profile"/>
 </service>
 ```
 
-In order to identify itself, the profile has to implement a `getName` function, that returns the unique name of the profile.
-The profile is used together with the [gateway](./060-gateway-and-reader.md) to check and apply the right processing during a migration run.
+In order to identify itself, the profile has to implement a `getName` function, that returns the unique name of the profile. The profile is used together with the [gateway](060-gateway-and-reader.md) to check and apply the right processing during a migration run.
 
 ```php
 <?php declare(strict_types=1);
@@ -54,11 +48,10 @@ class Shopware55Profile implements ShopwareProfileInterface
 ```
 
 ## Connection
-To connect Shopware 6 to your source system (e.g. Shopware 5), you will need a connection entity. The connection
-includes all important information for your migration run. It contains the credentials for the API or database access,
-the actual [premapping](./050-premapping.md) and the profile, [gateway](./060-gateway-and-reader.md) combination which is used for your migration:
 
- ```php
+To connect Shopware 6 to your source system \(e.g. Shopware 5\), you will need a connection entity. The connection includes all important information for your migration run. It contains the credentials for the API or database access, the actual [premapping](050-premapping.md) and the profile, [gateway](060-gateway-and-reader.md) combination which is used for your migration:
+
+```php
 <?php declare(strict_types=1);
 
 namespace SwagMigrationAssistant\Migration\Connection;
@@ -86,4 +79,5 @@ class SwagMigrationConnectionDefinition extends EntityDefinition
         ]);
     }
 }
- ```
+```
+

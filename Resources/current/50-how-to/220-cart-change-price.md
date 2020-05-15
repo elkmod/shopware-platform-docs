@@ -1,26 +1,16 @@
-[titleEn]: <>(Change price of item in cart)
-[metaDescriptionEn]: <>(This HowTo will tackle the issue of changing the price of an item itself in the cart dynamically.)
-[hash]: <>(article:how_to_cart_change_price)
+# 220-cart-change-price
 
 ## Overview
 
-This HowTo will tackle the issue of changing the price of an item itself in the cart dynamically.
-The following example is **not** recommended if you want to add a discount / surcharge to your products.
-Make sure to check out the HowTo about [adding a discount into the cart dynamically](./230-cart-add-discount.md).
+This HowTo will tackle the issue of changing the price of an item itself in the cart dynamically. The following example is **not** recommended if you want to add a discount / surcharge to your products. Make sure to check out the HowTo about [adding a discount into the cart dynamically](230-cart-add-discount.md).
 
-Changing the price like it's done in the following example should rarely be done and only with great caution.
-A live-shopping plugin would be a good example about when to actually change an item's price instead of adding
-a discount / surcharge.
+Changing the price like it's done in the following example should rarely be done and only with great caution. A live-shopping plugin would be a good example about when to actually change an item's price instead of adding a discount / surcharge.
 
 ## Scenario
 
 For this HowTo the following scenario is given:
 
-You want to create a plugin, whose main purpose it is to overwrite the price of an item in the cart dynamically.
-In this example, the prices are fetched from a database-table.
-You've already created your own working plugin with a custom entity for those prices.
-If you don't know how that's done, have a look at our [developer guide](./../20-developer-guide/10-plugin-base.md) and
-our [HowTo to create a custom entity](./050-custom-entity.md).
+You want to create a plugin, whose main purpose it is to overwrite the price of an item in the cart dynamically. In this example, the prices are fetched from a database-table. You've already created your own working plugin with a custom entity for those prices. If you don't know how that's done, have a look at our [developer guide](../20-developer-guide/10-plugin-base.md) and our [HowTo to create a custom entity](050-custom-entity.md).
 
 The custom entity could look something like that:
 
@@ -86,18 +76,16 @@ class OverwrittenPriceEntity extends Entity
 
 As you see, it comes with a mapping to a product and a custom price field.
 
-This example does **not** take care of displaying that price on the detail page.
-It only shows how to overwrite the price of an item in the cart due to some conditions.
+This example does **not** take care of displaying that price on the detail page. It only shows how to overwrite the price of an item in the cart due to some conditions.
 
 ## Changing the price
 
-To accomplish the goal of changing an item in the cart, you should use the collector pattern.
-For this you need to create your own cart collector.
+To accomplish the goal of changing an item in the cart, you should use the collector pattern. For this you need to create your own cart collector.
 
-The collector basically compares the product IDs of the products in the cart with the product IDs from the custom table.
-If there's any match, the price has to be overwritten.
+The collector basically compares the product IDs of the products in the cart with the product IDs from the custom table. If there's any match, the price has to be overwritten.
 
 Here's an working example about how this could work:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -231,9 +219,9 @@ class OverwrittenPriceCollector implements CartDataCollectorInterface, CartProce
 }
 ```
 
-
 And for completion's sake, the respective `services.xml`, which registers the collector in the first instance.
-```xml
+
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -242,7 +230,7 @@ And for completion's sake, the respective `services.xml`, which registers the co
 
     <services>
         <!-- <service id="YourCustomEntityDefinition" /> -->
-    
+
         <service id="Swag\CartChangePrice\Cart\Checkout\OverwrittenPriceCollector">
             <argument type="service" id="overwritten_price.repository" />
             <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
@@ -257,5 +245,5 @@ And for completion's sake, the respective `services.xml`, which registers the co
 
 ## Source
 
-There's a GitHub repository available, containing a full example source.
-Check it out [here](https://github.com/shopware/swag-docs-cart-change-price).
+There's a GitHub repository available, containing a full example source. Check it out [here](https://github.com/shopware/swag-docs-cart-change-price).
+

@@ -1,78 +1,68 @@
-[titleEn]: <>(Core Module List)
-[hash]: <>(article:core_modules)
+# 10-modules
 
-All core modules encapsulate domain concepts and provide a varying number of external interfaces to support this. The following list provides a rough overview what domain concepts offer what kinds of interfaces.  
+All core modules encapsulate domain concepts and provide a varying number of external interfaces to support this. The following list provides a rough overview what domain concepts offer what kinds of interfaces.
 
 ## Possible characteristics
 
-<span class="tip is--primary">Data store</span>
-  : These modules are related to database tables and are manageable through the API. Simple CRUD actions will be available.
+Data store : These modules are related to database tables and are manageable through the API. Simple CRUD actions will be available.
 
-<span class="tip is--primary">Maintenance</span>
-  : Provide commands executable through CLI to trigger maintenance tasks.
+Maintenance : Provide commands executable through CLI to trigger maintenance tasks.
 
-<span class="tip is--primary">Custom actions</span>
-  : These modules contain more than simple CRUD actions. They provide special actions and services that ease management and additionally check consistency.
+Custom actions : These modules contain more than simple CRUD actions. They provide special actions and services that ease management and additionally check consistency.
 
-<span class="tip is--primary">SalesChannel-API</span>
-  : These modules provide logic through a sales channel for the storefront.
+SalesChannel-API : These modules provide logic through a sales channel for the storefront.
 
-<span class="tip is--primary">Custom Extendable</span>
-  : These modules contain interfaces, process container tags or provide custom events as extension points.
+Custom Extendable : These modules contain interfaces, process container tags or provide custom events as extension points.
 
-<span class="tip is--primary">Business Event Dispatcher</span>
-  : Provide special events to handle business cases.
+Business Event Dispatcher : Provide special events to handle business cases.
 
-<span class="tip is--primary">Extension</span>
-  : These modules contain extensions of - usually Framework - interfaces and classes to provide more specific functions for Shopware 6. 
+Extension : These modules contain extensions of - usually Framework - interfaces and classes to provide more specific functions for Shopware 6.
 
-<span class="tip is--primary">Custom Rules</span>
-  : Cross-system process to validate workflow decisions. 
-
+Custom Rules : Cross-system process to validate workflow decisions.
 
 ## Modules
 
 ### Checkout Bundle
 
-#### Cart <span class="tip is--primary">Custom actions</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Business Event Dispatcher</span> <span class="tip is--primary">Extension</span> <span class="tip is--primary">Custom Rules</span>
+#### Cart Custom actions Custom Extendable Business Event Dispatcher Extension Custom Rules
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Checkout/Cart) 
 
 Cart processes
 
-#### Customer <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Business Event Dispatcher</span> <span class="tip is--primary">Extension</span> <span class="tip is--primary">Custom Rules</span>
+#### Customer Data store Custom Extendable Business Event Dispatcher Extension Custom Rules
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Checkout/Customer) 
 
 SalesChannel Customer
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-checkout-customer.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-checkout-customer.md)
 
-#### Order <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom actions</span> <span class="tip is--primary">Extension</span>
+#### Order Data store Custom actions Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Checkout/Order) 
 
 Order management
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-checkout-order.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-checkout-order.md)
 
-#### Payment <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Payment Data store Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Checkout/Payment) 
 
 Payment methods
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-checkout-payment.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-checkout-payment.md)
 
-#### Promotion <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Promotion Data store Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Checkout/Promotion) 
 
 Promotions
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-checkout-promotion.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-checkout-promotion.md)
 
-#### Shipping <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Shipping Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Checkout/Shipping) 
 
@@ -80,84 +70,83 @@ Shipping methods
 
 ### Content Bundle
 
-#### Category <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Category Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/Category) 
 
 Product Categories
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-category.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-category.md)
 
-#### Cms <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Cms Data store Maintenance Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/Cms) 
 
 Content Management System
 
-#### DeliveryTime <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### DeliveryTime Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/DeliveryTime) 
 
 Delivery time
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-deliverytime.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-deliverytime.md)
 
-#### ImportExport <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom actions</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### ImportExport Data store Maintenance Custom actions Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/ImportExport) 
 
 Mass imports and exports through files
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-importexport.md)
-  
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-importexport.md)
 
-#### MailTemplate <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom actions</span> <span class="tip is--primary">Extension</span>
+#### MailTemplate Data store Custom actions Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/MailTemplate) 
 
 Mailing
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-mailtemplate.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-mailtemplate.md)
 
-#### Media <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Media Data store Maintenance Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/Media) 
 
 Media/File management
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-media.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-media.md)
 
-#### Newsletter <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Business Event Dispatcher</span> <span class="tip is--primary">Extension</span>
+#### Newsletter Data store Custom Extendable Business Event Dispatcher Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/Newsletter) 
 
 Newsletter
 
-#### Product <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom actions</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Product Data store Custom actions Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/Product) 
 
 Products and Variants
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-product.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-product.md)
 
-#### ProductStream <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### ProductStream Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/ProductStream) 
 
 Product Streams
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-productstream.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-productstream.md)
 
-#### Property <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Property Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/Property) 
 
 Content configuration
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-content-property.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-content-property.md)
 
-#### Rule <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Rule Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Content/Rule) 
 
@@ -165,173 +154,173 @@ Rule Builder
 
 ### Framework Bundle
 
-#### Api <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span>
+#### Api Maintenance Custom Extendable
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Api) 
 
 Rest-API
 
-#### Cache 
+#### Cache
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Cache) 
 
 Cache helpers
 
-#### Console 
+#### Console
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Console) 
 
 Console helpers
 
-#### Context <span class="tip is--primary">Custom Extendable</span>
+#### Context Custom Extendable
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Context) 
 
 Main context
 
-#### CustomField <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom actions</span> <span class="tip is--primary">Extension</span>
+#### CustomField Data store Custom actions Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/CustomField) 
 
 Custom field management
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-framework-customfield.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-framework-customfield.md)
 
-#### DataAbstractionLayer <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### DataAbstractionLayer Maintenance Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/DataAbstractionLayer) 
 
 Data Abstraction Layer - the central component responsible for all storage access.
 
-* [user guide](./130-dal.md)
+* [user guide](130-dal.md)
 
-#### Doctrine 
+#### Doctrine
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Doctrine) 
 
 Doctrine DBAL extension
 
-#### Event <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Business Event Dispatcher</span> <span class="tip is--primary">Extension</span>
+#### Event Data store Custom Extendable Business Event Dispatcher Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Event) 
 
 Business events
 
-#### FeatureFlag <span class="tip is--primary">Maintenance</span>
+#### FeatureFlag Maintenance
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/FeatureFlag) 
 
 Feature Flag configuration
 
-#### Filesystem <span class="tip is--primary">Custom Extendable</span>
+#### Filesystem Custom Extendable
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Filesystem) 
 
 Filesystem handling
 
-#### Language <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Language Data store Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Language) 
 
 Languages
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-framework-language.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-framework-language.md)
 
-#### Log 
+#### Log
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Log) 
 
 Logging
 
-#### MessageQueue <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### MessageQueue Data store Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/MessageQueue) 
 
 Async processing
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-framework-messagequeue.md)
-* [Guide](./00-module/message-queue.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-framework-messagequeue.md)
+* [Guide](00-module/message-queue.md)
 
-#### Migration <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span>
+#### Migration Maintenance Custom Extendable
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Migration) 
 
 Database migration system
 
-#### Plugin <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Plugin Data store Maintenance Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Plugin) 
 
 Plugin services
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-framework-plugin.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-framework-plugin.md)
 
-#### Pricing <span class="tip is--primary">Extension</span>
+#### Pricing Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Pricing) 
 
 Pricing
 
-#### Routing <span class="tip is--primary">Custom Extendable</span>
+#### Routing Custom Extendable
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Routing) 
 
 Routing
 
-#### Rule <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span> <span class="tip is--primary">Custom Rules</span>
+#### Rule Custom Extendable Extension Custom Rules
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Rule) 
 
 Rule matching
 
-#### ScheduledTask <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### ScheduledTask Data store Maintenance Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/ScheduledTask) 
 
 Cron jobs
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-framework-scheduledtask.md)
-* [Guide](./00-module/scheduled-tasks.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-framework-scheduledtask.md)
+* [Guide](00-module/scheduled-tasks.md)
 
-#### Snippet <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Snippet Data store Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Snippet) 
 
 Translation management
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-framework-snippet.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-framework-snippet.md)
 
-#### Store <span class="tip is--primary">Extension</span>
+#### Store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Store) 
 
 Plugin store
 
-#### Struct <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### Struct Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Struct) 
 
 Structured data
 
-#### Translation 
+#### Translation
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Translation) 
 
 Abstract translations
 
-#### Twig 
+#### Twig
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Twig) 
 
 Template extension
 
-#### Uuid 
+#### Uuid
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Uuid) 
 
 UUID Handling
 
-#### Validation <span class="tip is--primary">Custom Extendable</span>
+#### Validation Custom Extendable
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/Framework/Validation) 
 
@@ -339,105 +328,106 @@ Validation
 
 ### System Bundle
 
-#### Country <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Country Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Country) 
 
 Countries
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-country.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-country.md)
 
-#### Currency <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span> <span class="tip is--primary">Custom Rules</span>
+#### Currency Data store Extension Custom Rules
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Currency) 
 
 Currencies
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-currency.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-currency.md)
 
-#### Integration <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Integration Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Integration) 
 
 Admin integrations
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-integration.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-integration.md)
 
-#### Locale <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Locale Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Locale) 
 
 Locales
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-locale.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-locale.md)
 
-#### NumberRange <span class="tip is--primary">Data store</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### NumberRange Data store Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/NumberRange) 
 
-Number ranges (SKU)
+Number ranges \(SKU\)
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-numberrange.md)
-* [Guide](./00-module/number-range.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-numberrange.md)
+* [Guide](00-module/number-range.md)
 
-#### SalesChannel <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Custom Extendable</span> <span class="tip is--primary">Extension</span>
+#### SalesChannel Data store Maintenance Custom Extendable Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/SalesChannel) 
 
 Sales Channels
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-saleschannel.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-saleschannel.md)
 
-#### Salutation <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Salutation Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Salutation) 
 
 Salutation
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-salutation.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-salutation.md)
 
-#### StateMachine <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Extension</span>
+#### StateMachine Data store Maintenance Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/StateMachine) 
 
 Order state management
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-statemachine.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-statemachine.md)
 
-#### SystemConfig <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### SystemConfig Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/SystemConfig) 
 
 Shopware 6 Configuration
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-systemconfig.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-systemconfig.md)
 
-#### Tag <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Tag Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Tag) 
 
 Content Tagging
 
-#### Tax <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Tax Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Tax) 
 
 Taxes
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-tax.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-tax.md)
 
-#### Unit <span class="tip is--primary">Data store</span> <span class="tip is--primary">Extension</span>
+#### Unit Data store Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/Unit) 
 
 Product / Shipping Units
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-unit.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-unit.md)
 
-#### User <span class="tip is--primary">Data store</span> <span class="tip is--primary">Maintenance</span> <span class="tip is--primary">Extension</span>
+#### User Data store Maintenance Extension
 
 * [Sources](https://github.com/shopware/platform/tree/master/src/Core/System/User) 
 
 Admin Users
 
-* [Entity relationship diagram](./10-erd/erd-shopware-core-system-user.md)
+* [Entity relationship diagram](10-erd/erd-shopware-core-system-user.md)
+

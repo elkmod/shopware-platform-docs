@@ -1,41 +1,34 @@
-[titleEn]: <>(Promotions)
-[hash]: <>(article:internals_core_erd_checkout_promotion)
+# erd-shopware-core-checkout-promotion
 
-[Back to modules](./../10-modules.md)
+[Back to modules](../10-modules.md)
 
 Promotions based on rules.
 
-![Promotions](./dist/erd-shopware-core-checkout-promotion.png)
+![Promotions](https://github.com/elkmod/shopware-dx/tree/0c4bd450b25734a607955d03e7f7a908abf1a386/Resources/current/60-references-internals/10-core/10-erd/dist/erd-shopware-core-checkout-promotion.png)
 
-
-### Table `promotion`
+## Table `promotion`
 
 A promotion that is applied during the checkout process.
 
-
-### Table `promotion_sales_channel`
+## Table `promotion_sales_channel`
 
 SalesChannel relation.
 
+## Table `promotion_individual_code`
 
-### Table `promotion_individual_code`
+**EMPTY**
 
-__EMPTY__
-
-
-### Table `promotion_discount`
+## Table `promotion_discount`
 
 A single discount definition of a promotion with a list of satisfiable rules.
 
+## Table `promotion_setgroup`
 
-### Table `promotion_setgroup`
+**EMPTY**
 
-__EMPTY__
+## Table `promotion_discount_prices`
 
+**EMPTY**
 
-### Table `promotion_discount_prices`
+[Back to modules](../10-modules.md)
 
-__EMPTY__
-
-
-[Back to modules](./../10-modules.md)

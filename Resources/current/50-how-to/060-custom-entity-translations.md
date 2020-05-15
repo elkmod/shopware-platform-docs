@@ -1,13 +1,8 @@
-[titleEn]: <>(Translating a custom entity)
-[metaDescriptionEn]: <>(This HowTo will handle how to properly translate your plugin's custom entities.)
-[hash]: <>(article:how_to_custom_entity_translations)
+# 060-custom-entity-translations
 
 ## Overview
 
-This HowTo will handle how to properly translate your custom entities.
-Since [this HowTo](./050-custom-entity.md) already covered creating a custom entity and introducing it to
-Shopware 6, this won't be explained here.
-Furthermore, this example will build upon the fact, that you already got a plugin containing a custom entity.
+This HowTo will handle how to properly translate your custom entities. Since [this HowTo](050-custom-entity.md) already covered creating a custom entity and introducing it to Shopware 6, this won't be explained here. Furthermore, this example will build upon the fact, that you already got a plugin containing a custom entity.
 
 ## Translatable fields in definition
 
@@ -28,12 +23,12 @@ use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 class CustomEntityDefinition extends EntityDefinition
 {
     public const ENTITY_NAME = 'custom_entity';
-    
+
     public function getEntityName(): string
     {
         return self::ENTITY_NAME;
     }
-    
+
     public function getCollectionClass(): string
     {
         return CustomEntityCollection::class;
@@ -54,10 +49,7 @@ class CustomEntityDefinition extends EntityDefinition
 }
 ```
 
-This class defined a string field `technical_name`, which must not be translated, since its main purpose is to be a unique identifier, next to the ID.
-Now imagine this class would also provide a `label` field, which is also basically a `StringField`.
-Simply adding a `StringField` here is tempting, isn't it?
-Since a `label` should be translatable, you have to add a `TranslatedField` instead.
+This class defined a string field `technical_name`, which must not be translated, since its main purpose is to be a unique identifier, next to the ID. Now imagine this class would also provide a `label` field, which is also basically a `StringField`. Simply adding a `StringField` here is tempting, isn't it? Since a `label` should be translatable, you have to add a `TranslatedField` instead.
 
 ```php
 protected function defineFields(): FieldCollection
@@ -77,8 +69,7 @@ Additionally to the `TranslatedField`, you also need an `TranslationsAssociation
 
 ## Translation association in entity
 
-Your custom entity now comes with a new field named 'label', marked as a `TranslatedField`.
-Next thing you gotta add this translation association to your custom entity.
+Your custom entity now comes with a new field named 'label', marked as a `TranslatedField`. Next thing you gotta add this translation association to your custom entity.
 
 ```php
 <?php declare(strict_types=1);
@@ -109,21 +100,17 @@ class CustomEntity extends Entity
         $this->translations = $translations;
     }
 }
-
 ```
 
 The class `CustomEntityTranslationCollection` will be added in the next steps, don't worry.
 
 ## Custom translation entity
 
-Since the translation is going to be saved in another table just for your custom entity,
-the translations need an own `Entity`, `EntityDefinition` and an `EntityCollection` class, such as the `CustomEntityTranslationCollection` mentioned above.
+Since the translation is going to be saved in another table just for your custom entity, the translations need an own `Entity`, `EntityDefinition` and an `EntityCollection` class, such as the `CustomEntityTranslationCollection` mentioned above.
 
-So, once more, let's create all these classes. By default, Shopware 6 places the entity translation classes
-inside a directory called `Aggregate`.
-In this example, the directory structure would look like this:
+So, once more, let's create all these classes. By default, Shopware 6 places the entity translation classes inside a directory called `Aggregate`. In this example, the directory structure would look like this:
 
-```
+```text
 <plugin-root>
     └──src
         ├── Custom
@@ -139,7 +126,7 @@ In this example, the directory structure would look like this:
 
 ### Translation Entity Definition
 
-Since creating an `EntityCollection` was already explained in the [previous HowTo](./050-custom-entity.md), only the differences are going to be explained here.
+Since creating an `EntityCollection` was already explained in the [previous HowTo](050-custom-entity.md), only the differences are going to be explained here.
 
 ```php
 <?php declare(strict_types = 1);
@@ -182,22 +169,13 @@ class CustomEntityTranslationDefinition extends EntityTranslationDefinition
 }
 ```
 
-First of all you need to extend from `EntityTranslationDefinition` here.
-Also have a look at the "new" method `getParentDefinitionClass`, which only has to to the parent definition class,
-`CustomEntityDefinition` in this case.
+First of all you need to extend from `EntityTranslationDefinition` here. Also have a look at the "new" method `getParentDefinitionClass`, which only has to to the parent definition class, `CustomEntityDefinition` in this case.
 
-The fields only have to contain the actually translatable fields from the parent definition, `label` in this case.
-Everything else is already handled by the `EntityTranslationDefinition`, for example adding an `updatedAt`, a `createdAt`
-and a `languageId` field.
+The fields only have to contain the actually translatable fields from the parent definition, `label` in this case. Everything else is already handled by the `EntityTranslationDefinition`, for example adding an `updatedAt`, a `createdAt` and a `languageId` field.
 
 ### Translation Entity
 
-The entity class for the translation also comes with some new requirements.
-First of all, the entity has to extend from `TranslationEntity`.
-This way the translation default fields mentioned in the previous step, like `languageId`, are already added
-as a property with getters and setters. 
-Additional to that you to add your custom translated field(s), `label` in this example, as well as the
-parent's id, `customEntityId` in this case, as well as a property for the actual `CustomEntity` object.
+The entity class for the translation also comes with some new requirements. First of all, the entity has to extend from `TranslationEntity`. This way the translation default fields mentioned in the previous step, like `languageId`, are already added as a property with getters and setters. Additional to that you to add your custom translated field\(s\), `label` in this example, as well as the parent's id, `customEntityId` in this case, as well as a property for the actual `CustomEntity` object.
 
 ```php
 <?php declare(strict_types = 1);
@@ -310,16 +288,15 @@ class CustomEntityTranslationCollection extends EntityCollection
 }
 ```
 
-Note the helper method `filterByLanguageId`, which is **not required**.
-It comes in handy, when searching for the translation for a given language.
+Note the helper method `filterByLanguageId`, which is **not required**. It comes in handy, when searching for the translation for a given language.
 
 ## Registering your custom entity
 
-Now it's time to actually register your new entity in the DI container.
-All you have to do is to register your `EntityDefinition` using the `shopware.entity.definition` tag.
+Now it's time to actually register your new entity in the DI container. All you have to do is to register your `EntityDefinition` using the `shopware.entity.definition` tag.
 
 This is how your `services.xml` could look like:
-```xml
+
+```markup
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -396,18 +373,13 @@ SQL;
 }
 ```
 
-The columns `language_id`, `created_at` and `updated_at` are part of your entity by default, so you have to add them in
-your table.
-Also, the column `custom_entity_id` comes by default, but is obviously named after your parent entity, `custom_entity` in this case.
+The columns `language_id`, `created_at` and `updated_at` are part of your entity by default, so you have to add them in your table. Also, the column `custom_entity_id` comes by default, but is obviously named after your parent entity, `custom_entity` in this case.
 
-Note the primary key definition and the foreign keys, as they are also very important for your database.
-You might have noticed, that the translation table does not come with an actual ID column - the primary key consists
-of the parent entity ID and the language ID.
+Note the primary key definition and the foreign keys, as they are also very important for your database. You might have noticed, that the translation table does not come with an actual ID column - the primary key consists of the parent entity ID and the language ID.
 
 ## Reading your custom entity translations
 
-Reading translations for your entity works exactly like reading an association for your entity,
-since it technically is an association.
+Reading translations for your entity works exactly like reading an association for your entity, since it technically is an association.
 
 ```php
 /** @var EntityRepositoryInterface $customRepository */
@@ -420,10 +392,9 @@ $customEntity = $customRepository->search(
 $customEntityTranslation = $customEntity->getTranslations()->filterByLanguageId(Defaults::LANGUAGE_SYSTEM)->first();
 ```
 
-In this example, the ID of your custom entity, whose technical name equals to 'FOO', is requested.
-Additional to that, the translation for the entity is read.
+In this example, the ID of your custom entity, whose technical name equals to 'FOO', is requested. Additional to that, the translation for the entity is read.
 
 ## Source
 
-There's a GitHub repository available, containing this example source.
-Check it out [here](https://github.com/shopware/swag-docs-custom-entity-translations).
+There's a GitHub repository available, containing this example source. Check it out [here](https://github.com/shopware/swag-docs-custom-entity-translations).
+

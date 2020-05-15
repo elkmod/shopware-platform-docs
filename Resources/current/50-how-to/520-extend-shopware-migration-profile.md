@@ -1,29 +1,16 @@
-[titleEn]: <>(Extending a Shopware migration profile)
-[metaDescriptionEn]: <>(This HowTo will give an example on extending a Shopware migration profile.)
-[hash]: <>(article:how_to_extend_migration_profile)
+# 520-extend-shopware-migration-profile
 
 ## Overview
 
-In this HowTo you will see an example on how you can extend a Shopware migration profile of the 
-[Shopware Migration Assistant](https://store.shopware.com/search?sSearch=Swag257162657297f). For this example the Shopware 5 
-[SwagAdvDevBundle](https://github.com/shopwareLabs/SwagAdvDevBundle) plugin is migrated to the Shopware 6 
-[SwagBundleExample](./010-indepth-guide-bundle/010-introduction.md).
-For simplicities' sake, only the local gateway is implemented.
+In this HowTo you will see an example on how you can extend a Shopware migration profile of the [Shopware Migration Assistant](https://store.shopware.com/search?sSearch=Swag257162657297f). For this example the Shopware 5 [SwagAdvDevBundle](https://github.com/shopwareLabs/SwagAdvDevBundle) plugin is migrated to the Shopware 6 [SwagBundleExample](010-indepth-guide-bundle/010-introduction.md). For simplicities' sake, only the local gateway is implemented.
 
 ## Setup
 
-It is required to already have a basic plugin running and you have installed the
-[SwagAdvDevBundle](https://github.com/shopwareLabs/SwagAdvDevBundle) plugin in Shopware 5,
-the [SwagBundleExample](./010-indepth-guide-bundle/010-introduction.md) and 
-[Shopware Migration Assistant](https://store.shopware.com/search?sSearch=Swag257162657297f) in Shopware 6.
+It is required to already have a basic plugin running and you have installed the [SwagAdvDevBundle](https://github.com/shopwareLabs/SwagAdvDevBundle) plugin in Shopware 5, the [SwagBundleExample](010-indepth-guide-bundle/010-introduction.md) and [Shopware Migration Assistant](https://store.shopware.com/search?sSearch=Swag257162657297f) in Shopware 6.
 
 ## Enrich existing plugin with migration features
 
-Instead of creating a new plugin for the migration, you might want to add migration features to your existing plugin.
-Of course, your plugin should then also be installable without the Migration Assistant plugin.
-So we have an optional requirement. Have a look at this [HowTo](./590-optional-plugin-requirements.md)
-on how to inject the needed migration services only if the Migration Assistant plugin is available.
-You could also have a look at the example plugin, to see how the conditional loading is managed in the plugin base class.
+Instead of creating a new plugin for the migration, you might want to add migration features to your existing plugin. Of course, your plugin should then also be installable without the Migration Assistant plugin. So we have an optional requirement. Have a look at this [HowTo](590-optional-plugin-requirements.md) on how to inject the needed migration services only if the Migration Assistant plugin is available. You could also have a look at the example plugin, to see how the conditional loading is managed in the plugin base class.
 
 ## Creating a new DataSet
 
@@ -73,8 +60,7 @@ class BundleDataSet extends ShopwareDataSet
 }
 ```
 
-The bundle entities must be migrated after the products, because of that you have to extend the `ProductDataSelection`
-as following:
+The bundle entities must be migrated after the products, because of that you have to extend the `ProductDataSelection` as following:
 
 ```php
 <?php declare(strict_types=1);
@@ -140,12 +126,11 @@ class ProductDataSelection implements DataSelectionInterface
 }
 ```
 
-To insert the bundle entity to this `DataSelection`, you have to add this entity to the entities array of the returning
-`DataSelectionStruct` of the `getData` function.
+To insert the bundle entity to this `DataSelection`, you have to add this entity to the entities array of the returning `DataSelectionStruct` of the `getData` function.
 
 Both classes have to be registered in the `migration_assistant_extension.xml`:
 
-```xml
+```markup
 <service id="SwagMigrationBundleExample\Profile\Shopware\DataSelection\ProductDataSelection"
          decorates="SwagMigrationAssistant\Profile\Shopware\DataSelection\ProductDataSelection">
     <argument type="service" id="SwagMigrationBundleExample\Profile\Shopware\DataSelection\ProductDataSelection.inner"/>
@@ -155,18 +140,16 @@ Both classes have to be registered in the `migration_assistant_extension.xml`:
     <tag name="shopware.migration.data_set"/>
 </service>
 ```
-All `DataSets` have to be tagged with `shopware.migration.data_set`. The `DataSetRegistry` fetches all of these classes
-and searches the correct `DataSet` with the `supports` method.
+
+All `DataSets` have to be tagged with `shopware.migration.data_set`. The `DataSetRegistry` fetches all of these classes and searches the correct `DataSet` with the `supports` method.
 
 ## Adding entity count snippets
 
-If you check your current progress in the data selection table of Shopware Migration Assistant in the administration, 
-you can see, that the bundle entities are automatically counted, but the description of the entity count is currently not loaded.
-To get a correct description of the new entity count, you have to add new snippets for this.
+If you check your current progress in the data selection table of Shopware Migration Assistant in the administration, you can see, that the bundle entities are automatically counted, but the description of the entity count is currently not loaded. To get a correct description of the new entity count, you have to add new snippets for this.
 
 First of all you create a new snippet file e.g. `en-GB.json`:
 
-```json
+```javascript
 {
     "swag-migration": {
         "index": {
@@ -179,8 +162,8 @@ First of all you create a new snippet file e.g. `en-GB.json`:
     }
 }
 ```
-All count entity descriptions are located in the `swag-migration.index.selectDataCard.entities` namespace, so you have to
-create a new entry with the entity name of the new bundle entity.
+
+All count entity descriptions are located in the `swag-migration.index.selectDataCard.entities` namespace, so you have to create a new entry with the entity name of the new bundle entity.
 
 At last you have to create the `main.js` in the `Resources/app/administration` directory like this:
 
@@ -196,13 +179,11 @@ Application.addInitializerDecorator('locale', (localeFactory) => {
 });
 ```
 
-As you see in the code above, you register your snippet file for the `en-GB` locale. Now the count entity description
-should display in the administration correctly.
+As you see in the code above, you register your snippet file for the `en-GB` locale. Now the count entity description should display in the administration correctly.
 
 ## Creating a local reader
 
-After creating the `DataSet`, `DataSelection` and the snippets for your new bundle entity, you have to create a new
-local reader to fetch all entity data from your source system:
+After creating the `DataSet`, `DataSelection` and the snippets for your new bundle entity, you have to create a new local reader to fetch all entity data from your source system:
 
 ```php
 <?php declare(strict_types=1);
@@ -234,7 +215,7 @@ class LocalBundleReader extends LocalAbstractReader implements LocalReaderInterf
 
         // Fetch the ids of the given table with the given offset and limit
         $ids = $this->fetchIdentifiers('s_bundles', $migrationContext->getOffset(), $migrationContext->getLimit());
-        
+
         // Strip the table prefix 'bundles' out of the bundles array 
         $bundles = $this->mapData($this->fetchBundles($ids), [], ['bundles']);
         $bundleProducts = $this->fetchBundleProducts($ids);
@@ -282,14 +263,11 @@ class LocalBundleReader extends LocalAbstractReader implements LocalReaderInterf
         return $query->execute()->fetchAll(\PDO::FETCH_GROUP | \PDO::FETCH_COLUMN);
     }
 }
-``` 
+```
 
-In this local reader, you fetch all bundles with associated products and return this in the `read` method. Like the `DataSelection`
-and `DataSet`, you have to register the local reader and tag it with `shopware.migration.local_reader`
-in your `migration_assistant_extension.xml`.
-Also, you have to set the parent property of your local reader to `LocalAbstractReader` to inherit from this class:
+In this local reader, you fetch all bundles with associated products and return this in the `read` method. Like the `DataSelection` and `DataSet`, you have to register the local reader and tag it with `shopware.migration.local_reader` in your `migration_assistant_extension.xml`. Also, you have to set the parent property of your local reader to `LocalAbstractReader` to inherit from this class:
 
-```xml
+```markup
 <service id="SwagMigrationBundleExample\Profile\Shopware\Gateway\Local\Reader\LocalBundleReader"
          parent="SwagMigrationAssistant\Profile\Shopware\Gateway\Local\Reader\LocalAbstractReader">
     <tag name="shopware.migration.local_reader" />
@@ -319,7 +297,7 @@ class BundleConverter extends ShopwareConverter
         return $migrationContext->getProfile() instanceof ShopwareProfileInterface
             && $migrationContext->getDataSet()::getEntity() === BundleDataSet::getEntity();
     }
-    
+
     public function getSourceIdentifier(array $data): string
     {
         return $data['id'];
@@ -339,10 +317,10 @@ class BundleConverter extends ShopwareConverter
             $this->checksum
         );
         $converted['id'] = $this->mainMapping['entityUuid'];
-        
+
         // This method checks if key is available in data array and set value in converted array
         $this->convertValue($converted, 'name', $data, 'name');
-        
+
         // Set default values for required fields, because these data do not exists in SW5
         $converted['discountType'] = 'absolute';
         $converted['discount'] = 0;
@@ -354,7 +332,7 @@ class BundleConverter extends ShopwareConverter
                 $converted['products'] = $products;
             }
         }
-        
+
         // Unset used data keys
         unset(
             // Used
@@ -362,7 +340,7 @@ class BundleConverter extends ShopwareConverter
             $data['name'],
             $data['products']
         );
-        
+
         if (empty($data)) {
             $data = null;
         }
@@ -410,8 +388,7 @@ class BundleConverter extends ShopwareConverter
 }
 ```
 
-The converter is the main logic of the migration and converts old Shopware 5 data to new Shopware 6 data structure.
-If you don't know how the Shopware 6 data structure of your entity looks like, you have to look for the entity definition:
+The converter is the main logic of the migration and converts old Shopware 5 data to new Shopware 6 data structure. If you don't know how the Shopware 6 data structure of your entity looks like, you have to look for the entity definition:
 
 ```php
 <?php declare(strict_types=1);
@@ -463,10 +440,9 @@ class BundleDefinition extends EntityDefinition
 }
 ```
 
-In the `BundleDefinition` you can see which fields the entity has and which are required. (Hint: Always use the property name
-of the field.) In the end of this step, you have to register your new converter in the `migration_assistant_extension.xml` and tag it with `shopware.migration.converter`:
+In the `BundleDefinition` you can see which fields the entity has and which are required. \(Hint: Always use the property name of the field.\) In the end of this step, you have to register your new converter in the `migration_assistant_extension.xml` and tag it with `shopware.migration.converter`:
 
-```xml
+```markup
 <service id="SwagMigrationBundleExample\Profile\Shopware\Converter\BundleConverter">
     <argument type="service" id="SwagMigrationAssistant\Migration\Mapping\MappingService"/>
     <argument type="service" id="SwagMigrationAssistant\Migration\Logging\LoggingService"/>
@@ -474,13 +450,11 @@ of the field.) In the end of this step, you have to register your new converter 
 </service>
 ```
 
-If you need more information on the converter and mapping in general, take a look at [converter, mapping and deltas concept](./../60-references-internals/40-plugins/010-shopware-migration-assistant/070-converter-and-mapping.md).
+If you need more information on the converter and mapping in general, take a look at [converter, mapping and deltas concept](../60-references-internals/40-plugins/010-shopware-migration-assistant/070-converter-and-mapping.md).
 
 ## Adding a writer
 
-After adding a reader and converter, you will receive the product bundle data from your source system and convert it, but the final step is
-to write the converted data into Shopware 6. To finish this tutorial, you have to create a new writer, register and
-tag it with `shopware.migration.writer` in the `migration_assistant_extension.xml`:
+After adding a reader and converter, you will receive the product bundle data from your source system and convert it, but the final step is to write the converted data into Shopware 6. To finish this tutorial, you have to create a new writer, register and tag it with `shopware.migration.writer` in the `migration_assistant_extension.xml`:
 
 ```php
 <?php declare(strict_types=1);
@@ -499,7 +473,7 @@ class BundleWriter extends AbstractWriter
 }
 ```
 
-```xml
+```markup
 <service id="SwagMigrationBundleExample\Migration\Writer\BundleWriter"
          parent="SwagMigrationAssistant\Migration\Writer\AbstractWriter">
     <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriter"/>
@@ -508,14 +482,11 @@ class BundleWriter extends AbstractWriter
 </service>
 ```
 
-You only need to implement the `supports` method and specify the right `Definition` in `migration_assistant_extension.xml`.
-The logic to write the data is defined in the `AbstractWriter` class and should almost always be the same.
-Take a look at [writer concept](./../60-references-internals/40-plugins/010-shopware-migration-assistant/080-writer.md) for more information.
+You only need to implement the `supports` method and specify the right `Definition` in `migration_assistant_extension.xml`. The logic to write the data is defined in the `AbstractWriter` class and should almost always be the same. Take a look at [writer concept](../60-references-internals/40-plugins/010-shopware-migration-assistant/080-writer.md) for more information.
 
-And that's it, you're done and have already implemented your first plugin migration.
-Install your plugin, clear the cache and build the administration anew to see the migration of your bundle entities.
+And that's it, you're done and have already implemented your first plugin migration. Install your plugin, clear the cache and build the administration anew to see the migration of your bundle entities.
 
 ## Source
 
-There's a GitHub repository available, containing a full example source.
-Check it out [here](https://github.com/shopware/swag-docs-extending-shopware-migration-profile).
+There's a GitHub repository available, containing a full example source. Check it out [here](https://github.com/shopware/swag-docs-extending-shopware-migration-profile).
+

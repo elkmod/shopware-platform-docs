@@ -1,23 +1,16 @@
-[titleEn]: <>(Use custom fields with media type)
-[metaDescriptionEn]: <>(This HowTo will give an example how you can work with a custom field of type media.)
-[hash]: <>(article:how_to_custom_field_media)
+# Using custom fields of type media
 
-## Using custom fields of type media
-
-After you added a custom field of type media, over the administration or via plugin, you can assign simply media objects to the different entities.
-This is often used for products to show more information with images on the product detail page.
-On the product detail page, under `page.product.translated.customFields.xxx`, `xxx` is the corresponding custom field, containing the UUID of the media.
+After you added a custom field of type media, over the administration or via plugin, you can assign simply media objects to the different entities. This is often used for products to show more information with images on the product detail page. On the product detail page, under `page.product.translated.customFields.xxx`, `xxx` is the corresponding custom field, containing the UUID of the media.
 
 However, it is not possible to display an image in the storefront with only this media ID. Therefore the function 'searchMedia' exists:
 
-```
+```text
 public function searchMedia(array $ids, Context $context): MediaCollection { ... }
 ```
 
-This function reads out the corresponding media objects for the given IDs in order to continue working with them afterwards.
-Here is an example with a custom field (`custom_sports_media_id`) on the product detail page :
+This function reads out the corresponding media objects for the given IDs in order to continue working with them afterwards. Here is an example with a custom field \(`custom_sports_media_id`\) on the product detail page :
 
-```twig
+```text
 {% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
 
 {% block page_product_detail_media %}
@@ -32,16 +25,13 @@ Here is an example with a custom field (`custom_sports_media_id`) on the product
 
     {{ dump (sportsMedia) }}
 {% endblock %}
-
 ```
 
-### Avoid loops
+## Avoid loops
 
-Please note that this function performs a query against the database and should therefore not be used within a loop.
-The function is already structured in a way that several IDs can be passed.
-To read the media objects within the product listing we recommend the following procedure:
+Please note that this function performs a query against the database and should therefore not be used within a loop. The function is already structured in a way that several IDs can be passed. To read the media objects within the product listing we recommend the following procedure:
 
-```twig
+```text
 {% sw_extends '@Storefront/storefront/component/product/listing.html.twig' %}
 
 {% block element_product_listing_col %}
@@ -70,3 +60,4 @@ To read the media objects within the product listing we recommend the following 
     {% endfor %}
 {% endblock %}
 ```
+

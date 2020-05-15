@@ -1,19 +1,14 @@
-[titleEn]: <>(Sync api)
-[hash]: <>(article:sync_api)
+# Sync API
 
-## Sync API
-The Sync API is an add-on to the Admin API that allows you to perform multiple write operations simultaneously.
-All entities that can be written via the Admin API can also be written via the Sync API.
+The Sync API is an add-on to the Admin API that allows you to perform multiple write operations simultaneously. All entities that can be written via the Admin API can also be written via the Sync API.
 
-### Writing entities
-In contrast to the Admin API, the Sync API does not separate between `CREATE` and `UPDATE` but always performs a `UPSERT`.
-With an `upsert`, the system checks whether the entity already exists in the system and updates it if an ID has been passed, otherwise a new entity is created with this ID.
+## Writing entities
 
-A request always contains a list of operations. An operation defines the `action` to be executed (`upert` or `delete`), the `entity` it is and the `payload` which is an array of multiple records (for `upert`) or multiple IDs (for `delete`).
-Within a request, different entities can therefore be written in batch.
-The operations can be assigned a key, which makes debugging easier. The key is then used in the response to define which entities are written in which operation:
+In contrast to the Admin API, the Sync API does not separate between `CREATE` and `UPDATE` but always performs a `UPSERT`. With an `upsert`, the system checks whether the entity already exists in the system and updates it if an ID has been passed, otherwise a new entity is created with this ID.
 
-```
+A request always contains a list of operations. An operation defines the `action` to be executed \(`upert` or `delete`\), the `entity` it is and the `payload` which is an array of multiple records \(for `upert`\) or multiple IDs \(for `delete`\). Within a request, different entities can therefore be written in batch. The operations can be assigned a key, which makes debugging easier. The key is then used in the response to define which entities are written in which operation:
+
+```text
 POST /api/v1/_action/sync
 {
     "write-tax": {
@@ -103,10 +98,11 @@ POST /api/v1/_action/sync
 }
 ```
 
-### Deleting entities
-To delete entities via the Sync API, the `payload` of an operation contains the IDs. If the entity is a `MappingEntityDefinition` (e.g. `product_category`) the foreign keys, which are the primary key, must be passed:
+## Deleting entities
 
-```
+To delete entities via the Sync API, the `payload` of an operation contains the IDs. If the entity is a `MappingEntityDefinition` \(e.g. `product_category`\) the foreign keys, which are the primary key, must be passed:
+
+```text
 {
     "delete-tax": {
         "entity": "category",
@@ -128,18 +124,17 @@ To delete entities via the Sync API, the `payload` of an operation contains the 
 }
 ```
 
-### More performance
-When using the Sync Api, by default each record is written individually. In addition, various indexing processes are also triggered in the background, depending on 
-which data was written. However, this leads to a high load on the server and can be a problem with large imports.
-Therefore, it is possible that all data is written in a single transaction and the indexing is moved to the background.
-To do this, you have to provide the following headers:
+## More performance
+
+When using the Sync Api, by default each record is written individually. In addition, various indexing processes are also triggered in the background, depending on which data was written. However, this leads to a high load on the server and can be a problem with large imports. Therefore, it is possible that all data is written in a single transaction and the indexing is moved to the background. To do this, you have to provide the following headers:
+
 * `single-operation` - All data will be written in a single transaction
 * `indexing-behavior` - Defines how the data indexing should behave
-    * `null` or not passed - The data will be indexed immediately
-    * `use-queue-indexing` - The data will be indexed over the message queue
-    * `disable-indexing` - The data indexing is completely disabled
+  * `null` or not passed - The data will be indexed immediately
+  * `use-queue-indexing` - The data will be indexed over the message queue
+  * `disable-indexing` - The data indexing is completely disabled
 
-```
+```text
 /api/v1/_action/sync
 --header 'single-operation: 1'
 --header 'indexing-behavior: use-queue-indexing'
@@ -171,3 +166,4 @@ To do this, you have to provide the following headers:
     }
 }
 ```
+

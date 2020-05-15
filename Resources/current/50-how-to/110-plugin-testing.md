@@ -1,27 +1,22 @@
-[titleEn]: <>(Automated tests in plugins)
-[metaDescriptionEn]: <>(To ensure your plugin's functionality, it's highly recommended to automatically test your source code. For this purpose, you can easily setup a PHPUnit testing environment for plugins.)
-[hash]: <>(article:how_to_plugin_testing)
+# 110-plugin-testing
 
 ## Overview
 
-To ensure your plugin's functionality, it's highly recommended to automatically test your source code.
-For this purpose, you can easily setup a [PHPUnit](https://phpunit.readthedocs.io/en/8.0/writing-tests-for-phpunit.html) testing environment for plugins.
+To ensure your plugin's functionality, it's highly recommended to automatically test your source code. For this purpose, you can easily setup a [PHPUnit](https://phpunit.readthedocs.io/en/8.0/writing-tests-for-phpunit.html) testing environment for plugins.
 
 This quick HowTo requires you to have a proper working plugin first.
 
 ## Setup
 
-Basically, the following is just a suggestion on how to setup PHPUnit with your plugin.
-This is by no means a hard requirement, feel free to create your own testing suite.
+Basically, the following is just a suggestion on how to setup PHPUnit with your plugin. This is by no means a hard requirement, feel free to create your own testing suite.
 
 ## PHPUnit config file
 
-PHPUnit is configured using a `phpunit.xml.dist` file.
-Read more about the possible configurations of the `phpunit.xml.dist` file [here](https://phpunit.readthedocs.io/en/8.0/configuration.html?highlight=.xml).
+PHPUnit is configured using a `phpunit.xml.dist` file. Read more about the possible configurations of the `phpunit.xml.dist` file [here](https://phpunit.readthedocs.io/en/8.0/configuration.html?highlight=.xml).
 
 Here's what your plugin's `phpunit.xml.dist` file could look like:
 
-```xml
+```markup
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -52,12 +47,10 @@ Here's what your plugin's `phpunit.xml.dist` file could look like:
 </phpunit>
 ```
 
-You're also free to add and remove configurations, so the testsuite perfectly fits your needs.
-Important to note is the `bootstrap` configuration in the `phpunit` element.
-In this example, you're required to put your tests into the `tests` directory.
+You're also free to add and remove configurations, so the testsuite perfectly fits your needs. Important to note is the `bootstrap` configuration in the `phpunit` element. In this example, you're required to put your tests into the `tests` directory.
 
-Here's an example test, which simply tries to instantiate every `.php` class, to see if any used core classes
-went missing:
+Here's an example test, which simply tries to instantiate every `.php` class, to see if any used core classes went missing:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -97,24 +90,20 @@ class UsedClassesAvailableTest extends TestCase
 }
 ```
 
-Make sure to have a look at the `IntegrationTestBehaviour` trait, which comes in with some handy features,
-such as automatically setting up a database transaction or clearing the cache before starting your tests.
+Make sure to have a look at the `IntegrationTestBehaviour` trait, which comes in with some handy features, such as automatically setting up a database transaction or clearing the cache before starting your tests.
 
 ## Executing the tests
 
-For easier usage, you could create a batch file called `phpunit.sh` into a `bin` directory of your plugin.
-Its only purpose then would be executing the `PHPUnit` testsuite.
-Make sure the path in the following file actually fits.
+For easier usage, you could create a batch file called `phpunit.sh` into a `bin` directory of your plugin. Its only purpose then would be executing the `PHPUnit` testsuite. Make sure the path in the following file actually fits.
 
-```sh
+```bash
 #!/usr/bin/env bash
 ./../../../vendor/bin/phpunit
 ```
 
-Now you can simply run `bin/phpunit.sh` inside your plugin root directory to execute your plugin's tests.
-Also make sure to have a look at the [Symfony PHPUnit documentation](https://symfony.com/doc/current/testing.html).
+Now you can simply run `bin/phpunit.sh` inside your plugin root directory to execute your plugin's tests. Also make sure to have a look at the [Symfony PHPUnit documentation](https://symfony.com/doc/current/testing.html).
 
 ## Source
 
-There's a GitHub repository available, containing this example source.
-Check it out [here](https://github.com/shopware/swag-docs-plugin-testing).
+There's a GitHub repository available, containing this example source. Check it out [here](https://github.com/shopware/swag-docs-plugin-testing).
+

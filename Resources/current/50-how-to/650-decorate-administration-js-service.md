@@ -1,16 +1,12 @@
-[titleEn]: <>(Basic handling of js services in the administration)
-[metaDescriptionEn]: <>(This HowTo will teach you how to register a new service and decorate an existing service via a plugin.)
-[hash]: <>(article:how_to_admin_decorate_js)
+# 650-decorate-administration-js-service
 
 ## Overview
 
-The main entry point for this purpose is the plugin's `main.js` file.
-It has to be placed into the `<plugin root>/src/Resources/app/administration/src` directory in order to be automatically found by Shopware 6.
+The main entry point for this purpose is the plugin's `main.js` file. It has to be placed into the `<plugin root>/src/Resources/app/administration/src` directory in order to be automatically found by Shopware 6.
 
 ## Register a new service
 
-For this example the following service is used to get random jokes.
-It is placed in `<administration root>/services/joke.service.js`
+For this example the following service is used to get random jokes. It is placed in `<administration root>/services/joke.service.js`
 
 ```javascript
 /**
@@ -37,8 +33,7 @@ export default class JokeService {
 }
 ```
 
-For now this service class is not available in the injection container.
-To fix this, a new script is placed at `<administration root>/init/joke-service.init.js` and imported in the `main.js` file of our plugin:
+For now this service class is not available in the injection container. To fix this, a new script is placed at `<administration root>/init/joke-service.init.js` and imported in the `main.js` file of our plugin:
 
 ```javascript
 import JokeService from '../service/joke.service.js';
@@ -81,12 +76,9 @@ Shopware.Component.register('foobar-joke', {
 
 ## Decorating a service
 
-Service decoration can be us in a variety of ways.
-Services can be initialized right after their creation and single methods can get an altered behaviour.
-Like in the service registration a script that is part of the `main.js` is needed.
+Service decoration can be us in a variety of ways. Services can be initialized right after their creation and single methods can get an altered behaviour. Like in the service registration a script that is part of the `main.js` is needed.
 
-If you need to alter a service method return value or add an additional parameter you can also do this using decoration.
-For this example a `funny` attribute is added to the requested jokes by the previously registered `JokeService`:
+If you need to alter a service method return value or add an additional parameter you can also do this using decoration. For this example a `funny` attribute is added to the requested jokes by the previously registered `JokeService`:
 
 ```javascript
 Shopware.Application.addServiceProviderDecorator('joker', joker => {
@@ -102,3 +94,4 @@ Shopware.Application.addServiceProviderDecorator('joker', joker => {
     return joker;
 });
 ```
+

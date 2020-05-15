@@ -1,16 +1,14 @@
-[titleEn]: <>(Store api cart routes)
-[hash]: <>(article:store_api_cart)
+# Cart
 
-## Cart
 Here you can find all the available routes for the cart.
 
-### Available Payment methods
-To get all available payment methods you can use this route: `store-api.payment.method`
-You can use the `onlyAvailable` to list only ...
+## Available Payment methods
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
+To get all available payment methods you can use this route: `store-api.payment.method` You can use the `onlyAvailable` to list only ...
 
-```
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
+
+```text
 POST /store-api/v1/payment-method
 
 {
@@ -35,13 +33,13 @@ POST /store-api/v1/payment-method
 ]
 ```
 
-### Available Shipping methods
-You can get all available shipping methods via this route: `store-api.shipping.method`
-For this route you also have the `onlyAvailable` parameter to fetch only ...
+## Available Shipping methods
 
-Additionally can use the api basic parameters (`filter`,  `aggregations`, etc.) for more information look [here](./../40-admin-api-guide/20-reading-entities.md).
+You can get all available shipping methods via this route: `store-api.shipping.method` For this route you also have the `onlyAvailable` parameter to fetch only ...
 
-```
+Additionally can use the api basic parameters \(`filter`, `aggregations`, etc.\) for more information look [here](../40-admin-api-guide/20-reading-entities.md).
+
+```text
 POST /store-api/v1/shipping-method
 
 {
@@ -64,3 +62,4 @@ POST /store-api/v1/shipping-method
     }
 ]
 ```
+

@@ -1,11 +1,10 @@
-[titleEn]: <>(Plugin - Base Class)
-[hash]: <>(article:plugin_base)
+# 020-plugin-base-class
 
-# Overview
-In this guide, you will learn what a plugin base class is and how to use it.
-Below you'll find a valid plugin file structure.
+## Overview
 
-```
+In this guide, you will learn what a plugin base class is and how to use it. Below you'll find a valid plugin file structure.
+
+```text
 custom
 └── plugins
     └──  BaseClass
@@ -13,14 +12,14 @@ custom
          │   └──BaseClass.php
          └── composer.json
 ```
-*File Structure*
 
-Read more about the `composer.json` file [here](./050-plugin-information.md).
+_File Structure_
 
-# Base Class
-Your plugin base class is used, to configure your plugin and manage plugin lifecycle events such as `update` and `install`.
-Every plugin base class must extend from the `Shopware\Core\Framework\Plugin` class.
-Take a look at the most minimalistic plugin base class:
+Read more about the `composer.json` file [here](050-plugin-information.md).
+
+## Base Class
+
+Your plugin base class is used, to configure your plugin and manage plugin lifecycle events such as `update` and `install`. Every plugin base class must extend from the `Shopware\Core\Framework\Plugin` class. Take a look at the most minimalistic plugin base class:
 
 ```php
 <?php declare(strict_types=1);
@@ -33,33 +32,30 @@ class BaseClass extends Plugin
 {
 }
 ```
-*BaseClass/src/BaseClass.php*
 
-Right now you got a valid base class without any functionality.
-Below you find lists of methods you can overwrite in your plugin base class.
+_BaseClass/src/BaseClass.php_
 
-## Plugin lifecycle
+Right now you got a valid base class without any functionality. Below you find lists of methods you can overwrite in your plugin base class.
 
-Those methods are used to deal with certain lifecycle events of your plugin.
-They are only executed once, when the user triggers one of those actions.
-The core Shopware DI container is available for all of them.
+### Plugin lifecycle
 
-| Method                                                | Arguments                                                      | Usage                                     |
-|-------------------------------------------------------|----------------------------------------------------------------|-------------------------------------------|
-| [install](./020-plugin-base-class.md#install)         | [InstallContext](./040-plugin-contexts.md#installContext)      | Called while your plugin gets installed   |
-| [postInstall](./020-plugin-base-class.md#postInstall) | [InstallContext](./040-plugin-contexts.md#installContext)      | Called after your plugin got installed    |
-| [update](./020-plugin-base-class.md#update)           | [UpdateContext](./040-plugin-contexts.md#updateContext)        | Called while your plugin gets updated     |
-| [postUpdate](./020-plugin-base-class.md#postUpdate)   | [UpdateContext](./040-plugin-contexts.md#updateContext)        | Called after your plugin got updated      |
-| [activate](./020-plugin-base-class.md#activate)       | [ActivateContext](./040-plugin-contexts.md#activateContext)    | Called while your plugin gets activated   |
-| [deactivate](./020-plugin-base-class.md#deactivate)   | [DeactivateContext](./040-plugin-contexts.md#deactivateContext)| Called while your plugin gets deactivated |
-| [uninstall](./020-plugin-base-class.md#uninstall)     | [UninstallContext](./040-plugin-contexts.md#uninstallContext)  | Called while your plugin gets uninstalled |
+Those methods are used to deal with certain lifecycle events of your plugin. They are only executed once, when the user triggers one of those actions. The core Shopware DI container is available for all of them.
 
-Also have a look at this diagram for a more detailed overview of the lifecycle methods:
-![Plugin lifecycle](./img/plugin-lifecycle.png)
+| Method | Arguments | Usage |
+| :--- | :--- | :--- |
+| [install](020-plugin-base-class.md#install) | [InstallContext](040-plugin-contexts.md#installContext) | Called while your plugin gets installed |
+| [postInstall](020-plugin-base-class.md#postInstall) | [InstallContext](040-plugin-contexts.md#installContext) | Called after your plugin got installed |
+| [update](020-plugin-base-class.md#update) | [UpdateContext](040-plugin-contexts.md#updateContext) | Called while your plugin gets updated |
+| [postUpdate](020-plugin-base-class.md#postUpdate) | [UpdateContext](040-plugin-contexts.md#updateContext) | Called after your plugin got updated |
+| [activate](020-plugin-base-class.md#activate) | [ActivateContext](040-plugin-contexts.md#activateContext) | Called while your plugin gets activated |
+| [deactivate](020-plugin-base-class.md#deactivate) | [DeactivateContext](040-plugin-contexts.md#deactivateContext) | Called while your plugin gets deactivated |
+| [uninstall](020-plugin-base-class.md#uninstall) | [UninstallContext](040-plugin-contexts.md#uninstallContext) | Called while your plugin gets uninstalled |
 
-### install
-You can use this method to execute code you need to run while your plugin gets installed.
-For example, you could use this method to create a new payment method.
+Also have a look at this diagram for a more detailed overview of the lifecycle methods: ![Plugin lifecycle](../../.gitbook/assets/plugin-lifecycle.png)
+
+#### install
+
+You can use this method to execute code you need to run while your plugin gets installed. For example, you could use this method to create a new payment method.
 
 ```php
 <?php declare(strict_types=1);
@@ -77,9 +73,11 @@ class BaseClass extends Plugin
     }
 }
 ```
-*Please note, if your code fails or throws an exception, your plugin will not be installed.*
 
-### postInstall
+_Please note, if your code fails or throws an exception, your plugin will not be installed._
+
+#### postInstall
+
 You can use this method to execute code you need to run after your plugin is installed and migrations have run.
 
 ```php
@@ -98,9 +96,11 @@ class BaseClass extends Plugin
     }
 }
 ```
-*Please note, if your code fails or throws an exception, your plugin will not be activated in the same step.*
 
-### update
+_Please note, if your code fails or throws an exception, your plugin will not be activated in the same step._
+
+#### update
+
 You can use this method to execute code you need to run while your plugin gets updated.
 
 ```php
@@ -120,9 +120,11 @@ class BaseClass extends Plugin
 
 }
 ```
-*Please note, if your code fails or throws an exception, your plugin will not be updated.*
 
-### postUpdate
+_Please note, if your code fails or throws an exception, your plugin will not be updated._
+
+#### postUpdate
+
 You can use this method, to execute code you need to run after your plugin is updated and migrations have run.
 
 ```php
@@ -142,7 +144,8 @@ class BaseClass extends Plugin
 }
 ```
 
-### activate
+#### activate
+
 You can use this method, to execute code you need to run while your plugin gets activated.
 
 ```php
@@ -162,9 +165,11 @@ class BaseClass extends Plugin
 
 }
 ```
-*Please note, if your code fails or throws an exception your plugin will not be activated.*
 
-### deactivate
+_Please note, if your code fails or throws an exception your plugin will not be activated._
+
+#### deactivate
+
 You can use this method, to execute code you need to run while your plugin gets deactivated.
 
 ```php
@@ -183,9 +188,11 @@ class BaseClass extends Plugin
     }
 }
 ```
-*Please note, if your code fails or throws an exception, your plugin will not be deactivated.*
 
-### uninstall
+_Please note, if your code fails or throws an exception, your plugin will not be deactivated._
+
+#### uninstall
+
 You can use this method, to execute code you need to run while your plugin gets uninstalled.
 
 ```php
@@ -204,24 +211,23 @@ class BaseClass extends Plugin
     }
 }
 ```
-*Please note, if your code fails or throws an exception, your plugin will not be uninstalled.*
 
-## Configuring your plugin
+_Please note, if your code fails or throws an exception, your plugin will not be uninstalled._
 
-Those methods are called to configure your plugin, e.g. configuring the path for your `routes.xml` file or to add `ActionEvents`.
-These are executed with each request, so be careful with them, due to performance and fatal error issues.
+### Configuring your plugin
 
-| Method                                                                              | Arguments                                   | Usage                                                                                                            | Container available |
-|-------------------------------------------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------|---------------------|
-| [build](./020-plugin-base-class.md#build)                                           | ContainerBuilder                            | Called while Symfony builds the [DI container](https://symfony.com/doc/current/service_container.html)           |      Partially      |
-| [configureRoutes](./020-plugin-base-class.md#configureRoutes)                       | RouteCollectionBuilder, string $environment | Called on each kernel boot to register your controller routes                                                    |         No          |
-| [getMigrationNamespace](./020-plugin-base-class.md#getMigrationNamespace)           | N/A                                         | Called whenever migrations get executed to add your migration namespace to the migration collection              |         Yes         |
-| [getActionEvents](./020-plugin-base-class.md#getActionEvents)                       | N/A                                         | Registers action events for your plugin                                                                          |      Partially      |
+Those methods are called to configure your plugin, e.g. configuring the path for your `routes.xml` file or to add `ActionEvents`. These are executed with each request, so be careful with them, due to performance and fatal error issues.
 
-### build
+| Method | Arguments | Usage | Container available |
+| :--- | :--- | :--- | :--- |
+| [build](020-plugin-base-class.md#build) | ContainerBuilder | Called while Symfony builds the [DI container](https://symfony.com/doc/current/service_container.html) | Partially |
+| [configureRoutes](020-plugin-base-class.md#configureRoutes) | RouteCollectionBuilder, string $environment | Called on each kernel boot to register your controller routes | No |
+| [getMigrationNamespace](020-plugin-base-class.md#getMigrationNamespace) | N/A | Called whenever migrations get executed to add your migration namespace to the migration collection | Yes |
+| [getActionEvents](020-plugin-base-class.md#getActionEvents) | N/A | Registers action events for your plugin | Partially |
 
-You can use this method to change the DI container while it's still being built, e.g. by adding new compiler passes.
-Have a look [here](https://symfony.com/doc/current/service_container/compiler_passes.html) to figure out how to work with a Symfony compiler pass.
+#### build
+
+You can use this method to change the DI container while it's still being built, e.g. by adding new compiler passes. Have a look [here](https://symfony.com/doc/current/service_container/compiler_passes.html) to figure out how to work with a Symfony compiler pass.
 
 ```php
 <?php declare(strict_types=1);
@@ -239,13 +245,12 @@ class BaseClass extends Plugin
     }
 }
 ```
-*Please note, if your code fails or throws an exception, the `Symfony Kernel` will no longer be able to boot.*
 
-### configureRoutes
+_Please note, if your code fails or throws an exception, the `Symfony Kernel` will no longer be able to boot._
 
-You can use this method, to configure routing for your plugin.
-Per default, you can configure your routes in `YourPlugin/src/Resources/config/routes.xml`.
-Click [here](./../../50-how-to/020-api-controller.md#Loading the controllers via routes.xml) if you want to learn more.
+#### configureRoutes
+
+You can use this method, to configure routing for your plugin. Per default, you can configure your routes in `YourPlugin/src/Resources/config/routes.xml`. Click [here](../../50-how-to/020-api-controller.md#Loading%20the%20controllers%20via%20routes.xml) if you want to learn more.
 
 ```php
 <?php declare(strict_types=1);
@@ -263,13 +268,12 @@ class BaseClass extends Plugin
     }
 }
 ```
-*Please note, if your code fails or throws an exception, the `Symfony Kernel` will no longer be able to boot.*
 
-### getMigrationNamespace
+_Please note, if your code fails or throws an exception, the `Symfony Kernel` will no longer be able to boot._
 
-You can use this method, to configure a custom migration namespace.
-For your example plugin `BaseClass` the default migration namespace would be `BaseClass\Migration`.
-If you're not familiar with plugin migrations yet, make sure to read our guide about the [plugin migration system](./080-plugin-migrations.md).
+#### getMigrationNamespace
+
+You can use this method, to configure a custom migration namespace. For your example plugin `BaseClass` the default migration namespace would be `BaseClass\Migration`. If you're not familiar with plugin migrations yet, make sure to read our guide about the [plugin migration system](080-plugin-migrations.md).
 
 ```php
 <?php declare(strict_types=1);
@@ -286,20 +290,20 @@ class BaseClass extends Plugin
     }
 }
 ```
-*Please note, if your code fails or throws an exception, your plugin migrations will no longer work.*
 
-## Plugin boot process
+_Please note, if your code fails or throws an exception, your plugin migrations will no longer work._
+
+### Plugin boot process
 
 This method is executed at a very early point of the Shopware stack, but only if your plugin is active already.
 
-|Method                                   | Arguments                   | Usage                                      | Container available |
-|-----------------------------------------|-----------------------------|--------------------------------------------|---------------------|
-| [boot](./020-plugin-base-class.md#boot) | N/A                         | Called while the Shopware kernel is booted |         Yes         |
+| Method | Arguments | Usage | Container available |
+| :--- | :--- | :--- | :--- |
+| [boot](020-plugin-base-class.md#boot) | N/A | Called while the Shopware kernel is booted | Yes |
 
-## boot
+### boot
 
-Boots your plugin and is called when the kernel gets booted.
-The container is available here already.
+Boots your plugin and is called when the kernel gets booted. The container is available here already.
 
 ```php
 <?php declare(strict_types=1);
@@ -317,7 +321,7 @@ class BaseClass extends Plugin
 }
 ```
 
-## Source
+### Source
 
-There's a GitHub repository available, containing this example source.
-Check it out [here](https://github.com/shopware/swag-docs-base-class).
+There's a GitHub repository available, containing this example source. Check it out [here](https://github.com/shopware/swag-docs-base-class).
+

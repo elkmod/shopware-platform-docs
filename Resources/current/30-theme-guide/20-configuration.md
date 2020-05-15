@@ -1,11 +1,10 @@
-[titleEn]: <>(Theme configuration)
-[hash]: <>(article:theme_configuration)
+# 20-configuration
 
 ## Structure of the theme.json
 
 Open up the `src/Rescoure/theme.json` file with your favorite code-editor. The configuration looks like this.
 
-```json
+```javascript
 # src/Resources/theme.json
 {
   "name": "MyTheme",
@@ -32,7 +31,7 @@ Open up the `src/Rescoure/theme.json` file with your favorite code-editor. The c
 
 Let's have a closer look at each section.
 
-```json
+```javascript
 # src/Resources/theme.json
 {
   "name": "MyTheme",
@@ -45,15 +44,13 @@ Let's have a closer look at each section.
 }
 ```
 
-Here change the `name` of your theme and the `author`.
-The `description` section is optional and as you notice it is also translateable.
+Here change the `name` of your theme and the `author`. The `description` section is optional and as you notice it is also translateable.
 
 ## Theme template inheritance
 
-The inheritance of the templates can be controlled via the `views` option. Here you define the order in which the templates are to be loaded.
-To illustrate this, here is an example for the `views` configuration:
+The inheritance of the templates can be controlled via the `views` option. Here you define the order in which the templates are to be loaded. To illustrate this, here is an example for the `views` configuration:
 
-```json
+```javascript
 # src/Resources/theme.json
 {
   ...
@@ -68,6 +65,7 @@ To illustrate this, here is an example for the `views` configuration:
 ```
 
 Defining the above configuration results in the following behavior:
+
 * Templates are first searched in `@MyTheme`.
 * The specification of `@PayPal` allows to control the order for a specific plugin more precisely
 * `@Plugins` serves as a placeholder and defines that the `@MyTheme` and `@PayPal` should be searched for in all other plugins for the templates
@@ -75,7 +73,7 @@ Defining the above configuration results in the following behavior:
 
 ## Styles
 
-```json
+```javascript
 # src/Resources/theme.json
 {
   ...
@@ -88,12 +86,11 @@ Defining the above configuration results in the following behavior:
 }
 ```
 
-The `style` section determines the order of the CSS compilation. In the `app/storefront/src/scss/base.scss` file you can apply your changes your want to make to the `@Storefront` standard styles or add other styles you need.
-The `app/storefront/src/scss/overrides.scss` file is used for a special case. Maybe you need to override some defined `variables` or `functions` defined by Shopware or Boostraop, you can implement your changes here.
+The `style` section determines the order of the CSS compilation. In the `app/storefront/src/scss/base.scss` file you can apply your changes your want to make to the `@Storefront` standard styles or add other styles you need. The `app/storefront/src/scss/overrides.scss` file is used for a special case. Maybe you need to override some defined `variables` or `functions` defined by Shopware or Boostraop, you can implement your changes here.
 
 ## Assets
 
-```json
+```javascript
 # src/Resources/theme.json
 {
   ...
@@ -104,15 +101,13 @@ The `app/storefront/src/scss/overrides.scss` file is used for a special case. Ma
 }
 ```
 
-The `asset` option you can configure you paths to your assets like images, fonts, etc.
-The standard location to put your assets to is the `app/storefront/src/assets` folder.
+The `asset` option you can configure you paths to your assets like images, fonts, etc. The standard location to put your assets to is the `app/storefront/src/assets` folder.
 
 ## Config fields
 
-One of the benefits of creating a theme is that you can overwrite the theme configuration of 
-the default theme or add your own configurations.
+One of the benefits of creating a theme is that you can overwrite the theme configuration of the default theme or add your own configurations.
 
-```json
+```javascript
 # src/Resources/theme.json
 {
   ... 
@@ -130,37 +125,33 @@ the default theme or add your own configurations.
 }
 ```
 
-
-In the example above, we change the primary color to green. You always inherit from the storefront
-config and both configurations are merged. This also means that you only have to provide the values you
-actually want to change. You can find a more detailed explanation of the configuration inheritance
-in the next section.
+In the example above, we change the primary color to green. You always inherit from the storefront config and both configurations are merged. This also means that you only have to provide the values you actually want to change. You can find a more detailed explanation of the configuration inheritance in the next section.
 
 The `theme.json` contains a `config` property which consists a list of tabs, blocks, sections and fields.
 
-The key of each config fields item is also the technical name which you use to access the config option
-in your theme or scss files. `config` entries will show up in the administration and 
-can be customized by the enduser (if `editable` is set to `true`, see table below).
+The key of each config fields item is also the technical name which you use to access the config option in your theme or scss files. `config` entries will show up in the administration and can be customized by the enduser \(if `editable` is set to `true`, see table below\).
 
 The following parameters can be defined for a config field item:
 
-| Name         | Meaning                                                                                          |
-|------------- |--------------------------------------------------------------------------------------------------|
-| label        | Array of translations with locale code as key                                                    |
-| type         | Type of the config. Possible values: color, text, number, fontFamily, media, checkbox and switch |
-| editable     | If set to false, the config option will not be displayed (e.g. in the administration)            |
-| tab          | Name of a tab to organize the config options                                                     |
-| block        | Name of a block to organize the config options                                                   |
-| section      | Name of a section to organize the config options                                                 |
-| custom       | The defined data will not be processed but is available via API                                  |
-| scss         | If set to false, the config option will not be injected as a SCSS variable                       |
+| Name | Meaning |
+| :--- | :--- |
+| label | Array of translations with locale code as key |
+| type | Type of the config. Possible values: color, text, number, fontFamily, media, checkbox and switch |
+| editable | If set to false, the config option will not be displayed \(e.g. in the administration\) |
+| tab | Name of a tab to organize the config options |
+| block | Name of a block to organize the config options |
+| section | Name of a section to organize the config options |
+| custom | The defined data will not be processed but is available via API |
+| scss | If set to false, the config option will not be injected as a SCSS variable |
 
 ### Field types
+
 You can use different field types in your theme manager:
 
 * A text field example:
-```json
-"modal-padding": {
+
+  ```javascript
+  "modal-padding": {
     "label": {
       "en-GB": "Modal padding",
       "de-DE": "Modal Innenabstand"
@@ -168,12 +159,13 @@ You can use different field types in your theme manager:
     "type": "text",
     "value": "(0, 0, 0, 0)",
     "editable": true
-}
-```
+  }
+  ```
 
-* A number field example: 
-```json
-"visible-slides": {
+* A number field example:
+
+  ```javascript
+  "visible-slides": {
     "label": {
       "en-GB": "Number of visible slides",
       "de-DE": "Anzahl an sichtbaren Slider Bildern"
@@ -186,12 +178,13 @@ You can use different field types in your theme manager:
     },
     "value": 3,
     "editable": true
-}
-```
+  }
+  ```
 
 * Two boolean field examples:
-```json
-"navigation-fixed": {
+
+  ```javascript
+  "navigation-fixed": {
     "label": {
       "en-GB": "Fix navigation",
       "de-DE": "Navigation fixieren"
@@ -199,12 +192,12 @@ You can use different field types in your theme manager:
     "type": "switch",
     "value": true,
     "editable": true
-}
-```
+  }
+  ```
 
 or
 
-```json
+```javascript
 "navigation-fixed": {
     "label": {
       "en-GB": "Fix navigation",
@@ -220,7 +213,7 @@ or
 
 * A custom single-select field example
 
-```json
+```javascript
 {
   "name": "Just another theme",
   "author": "Just another author",
@@ -305,11 +298,11 @@ or
 }
 ```
 
-![Example of a custom single-select field](./img/example-single-select-config.png)
+![Example of a custom single-select field](../.gitbook/assets/example-single-select-config.png)
 
 * A custom multi-select field example
 
-````json
+```javascript
 {
   "name": "Just another theme",
   "author": "Just another author",
@@ -402,22 +395,23 @@ or
     }
   }
 }
-````
+```
 
-![Example of a custom multi-select field](./img/example-multi-select-config.png)
+![Example of a custom multi-select field](../.gitbook/assets/example-multi-select-config.png)
 
 ## Tabs, blocks and sections
+
 You can use tabs, blocks and sections to structure and group the config options.
 
-![Example of tabs, blocks and sections](./img/theme-config.png)
+![Example of tabs, blocks and sections](../.gitbook/assets/theme-config.png)
 
-In the picture above are four tabs. In the "Colours" tab there is one block "Theme colours" which contains two sections 
-named "Important colors" and "Other". You can define the block and section individually for each item. Example:
-```json
+In the picture above are four tabs. In the "Colours" tab there is one block "Theme colours" which contains two sections named "Important colors" and "Other". You can define the block and section individually for each item. Example:
+
+```javascript
 {
   "name": "Just another theme",
   "author": "Just another author",
-  
+
   "config": {
     "fields": {
       "sw-color-brand-primary": {
@@ -440,11 +434,12 @@ named "Important colors" and "Other". You can define the block and section indiv
 The tab and section property is not required.
 
 You can extend the config to add translated labels for the tabs, blocks and sections:
-```json
+
+```javascript
 {
   "name": "Just another theme",
   "author": "Just another author",
-  
+
   "config": {
     "blocks": {
       "colors": {
@@ -487,3 +482,4 @@ You can extend the config to add translated labels for the tabs, blocks and sect
   }
 }
 ```
+

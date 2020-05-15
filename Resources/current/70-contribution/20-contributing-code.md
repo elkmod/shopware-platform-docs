@@ -1,24 +1,22 @@
-[titleEn]: <>(Contributing Code)
-[metaDescriptionEn]: <>(How to contribute code to Shopware Platform)
-[hash]: <>(article:contributing_code)
+# 20-contributing-code
 
 ## Introduction
 
-This is a short HowTo, which will show you, how you could contribute code to Shopware.
-Please also have a look at our [contribution guideline](./10-contribution-guideline.md).
+This is a short HowTo, which will show you, how you could contribute code to Shopware. Please also have a look at our [contribution guideline](10-contribution-guideline.md).
 
 ## Configure Git
 
 Set up your user information with your real name and a working email address:
 
-```git config --global user.name "Your Name"```
+`git config --global user.name "Your Name"`
 
-```git config --global user.email you@example.com```
+`git config --global user.email you@example.com`
 
 ## Create a Fork
+
 Navigate to the [Shopware Platform Github Repository](https://github.com/shopware/platform) and click the **"Fork"**-Button in the upper right hand corner.
 
-![GitHub fork button](./img/github-fork-button.png)
+![GitHub fork button](../.gitbook/assets/github-fork-button.png)
 
 This will create a "copy" of the entire Shopware Platform repository into your personal user namespace.
 
@@ -33,7 +31,6 @@ Add your fork repository as `fork` remote:
 `cd platform`
 
 `git remote add fork https://github.com/USERNAME/platform.git`
-
 
 Verify the new remote named `fork`:
 
@@ -55,17 +52,15 @@ Each time you want to work on a patch, create a feature branch:
 
 `git checkout -b my-new-feature origin/master`
 
-The first command will fetch the latest updates from the original project (shopware/platform).
-The second will create a new branch named `my-new-feature`, that is based off the `master`-branch of the `origin` remote.
+The first command will fetch the latest updates from the original project \(shopware/platform\). The second will create a new branch named `my-new-feature`, that is based off the `master`-branch of the `origin` remote.
 
 ## Running tests
-The tests are located in different directories according to the domains they are testing.
-You can run the entire test suite with the following command from the development template:
+
+The tests are located in different directories according to the domains they are testing. You can run the entire test suite with the following command from the development template:
 
 `./psh.phar unit`
 
-Please also use the commands `./psh.phar fix-cs`, to fix the code style according to our rules
-and `./psh.phar static-analyze` to run a static code analysis, which will check your code quality with help of [PHPStan](https://github.com/phpstan/phpstan) and [Psalm](https://github.com/vimeo/psalm).
+Please also use the commands `./psh.phar fix-cs`, to fix the code style according to our rules and `./psh.phar static-analyze` to run a static code analysis, which will check your code quality with help of [PHPStan](https://github.com/phpstan/phpstan) and [Psalm](https://github.com/vimeo/psalm).
 
 ## Submit your pull request
 
@@ -74,13 +69,15 @@ Push your branch to your github fork:
 `git push fork my-new-feature`
 
 ## Create a Pull Request on Github
+
 Navigate back to the [Shopware Platform Github repository](https://github.com/shopware/platform) and click the **"Compare & pull request"-Button**.
 
-![GitHub create pull request](./img/github-create-pull-request.png)
+![GitHub create pull request](../.gitbook/assets/github-create-pull-request.png)
 
-Before creating your pull request make sure that it fits our [contribution guideline](./10-contribution-guideline.md).
+Before creating your pull request make sure that it fits our [contribution guideline](10-contribution-guideline.md).
 
 ### How to create a Pull Request
 
-- [https://git-scm.com/book](https://git-scm.com/book)
-- [https://try.github.io](https://try.github.io)
+* [https://git-scm.com/book](https://git-scm.com/book)
+* [https://try.github.io](https://try.github.io)
+

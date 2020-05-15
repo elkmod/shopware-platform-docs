@@ -1,26 +1,22 @@
-[titleEn]: <>(__EMPTY__)
-[hash]: <>(article:internals_core_erd_framework_seo)
+# erd-shopware-core-framework-seo
 
-[Back to modules](./../10-modules.md)
+[Back to modules](../10-modules.md)
 
-__EMPTY__
+**EMPTY**
 
-![__EMPTY__](./dist/erd-shopware-core-framework-seo.png)
+![\_\_EMPTY\_\_](https://github.com/elkmod/shopware-dx/tree/0c4bd450b25734a607955d03e7f7a908abf1a386/Resources/current/60-references-internals/10-core/10-erd/dist/erd-shopware-core-framework-seo.png)
 
+## Table `seo_url`
 
-### Table `seo_url`
+**EMPTY**
 
-__EMPTY__
+## Table `seo_url_template`
 
+**EMPTY**
 
-### Table `seo_url_template`
+## Table `main_category`
 
-__EMPTY__
+**EMPTY**
 
+[Back to modules](../10-modules.md)
 
-### Table `main_category`
-
-__EMPTY__
-
-
-[Back to modules](./../10-modules.md)
