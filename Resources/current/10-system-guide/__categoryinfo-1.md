@@ -1,6 +1,8 @@
-# \_\_categoryInfo
+---
+description: 'Now that you have Shopware 6 up and running, what can you do with it?'
+---
 
-Now that you have Shopware 6 up and running, what can you do with it?
+# Startup Guide
 
 ## User Interfaces
 
@@ -68,7 +70,7 @@ To get help information about required and optional parameters, you can always s
 
 ## The sources
 
-Now that you have a idea how to execute the various Shopware 6 stacks, we will briefly point you to the sources directories. But keep in mind that there are entire documents describing the [directory structure](../../60-references-internals/70-other/10-directory-structure.md) of Shopware 6.
+Now that you have a idea how to execute the various Shopware 6 stacks, we will briefly point you to the sources directories. But keep in mind that there are entire documents describing the [directory structure](../60-references-internals/70-other/10-directory-structure.md) of Shopware 6.
 
 | Stack | Description | Path |  |
 | :--- | :--- | :--- | :--- |
@@ -89,5 +91,5 @@ Although these credentials are far from hardcoded and may of course vary for pro
 
 ## And now?
 
-Look around! Add products, trigger orders, register customers and use Shopware 6. Maybe you want to add debug statements to some sources to get a deeper insight and if you are ready to learn more hop over to the [Developer guide](../../20-developer-guide/__categoryinfo.md).
+Look around! Add products, trigger orders, register customers and use Shopware 6. Maybe you want to add debug statements to some sources to get a deeper insight and if you are ready to learn more hop over to the [Developer guide](../20-developer-guide/__categoryinfo.md).
 

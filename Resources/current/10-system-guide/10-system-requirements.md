@@ -1,6 +1,10 @@
-# TODO: Refactor internal links
+---
+description: >-
+  Before installing Shopware 6, you should take a quick look at the requirements
+  to check if your local environment is capable of running it.
+---
 
-Before installing Shopware 6, you should take a quick look at the requirements to check if your local environment is capable of running it.
+# System Requirements
 
 You can use these commands for checking your actual environment:
 

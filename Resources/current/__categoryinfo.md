@@ -1,40 +1,8 @@
 # \_\_categoryInfo
 
-  
-    .is--xl, .category--articles, .category--details, .category--title {  
-        display: none;  
-    }  
-  
-    .wiki--content {  
-        margin: 0;  
-        padding: 2rem;  
-    }  
-  
-    .wiki-content--category {  
-         max-width: 100%;  
-     }  
-  
-    .platform-main-content .is--subhead {  
-        font-size: 12px;  
-        letter-spacing: 2px;  
-        font-weight: 300;  
-        margin-bottom: 5px;  
-    }  
-  
-    .platform-main-content .ct-button {  
-        margin-top: 10px;  
-    }  
-  
-    .platform-main-content .has--no-border {  
-        border: 0 none;  
-    }  
-  
-    .platform-main-content .has--no-border:hover {  
-        border: 0 none;  
-    }  
+ 
 
-
-## Shopware 6
+## Shopware 6 - Getting started
 
 ![](https://s3.eu-central-1.amazonaws.com/wiki-assets.shopware.com/1562139879/group.png)
 
