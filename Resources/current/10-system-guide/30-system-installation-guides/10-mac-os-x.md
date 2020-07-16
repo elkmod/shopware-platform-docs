@@ -1,4 +1,4 @@
-# Local installation on mac \(MAMP\)
+# Local Installation on Mac \(MAMP\)
 
 For quick and easy installation you can also use **MAMP** on mac.
 
