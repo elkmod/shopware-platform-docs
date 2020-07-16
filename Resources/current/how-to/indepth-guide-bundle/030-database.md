@@ -1,4 +1,4 @@
-# 030-database
+# Step 3: Database setup
 
 The plugin is fully setup, yet it's not doing anything as of now.
 

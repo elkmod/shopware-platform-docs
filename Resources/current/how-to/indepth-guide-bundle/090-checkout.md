@@ -1,4 +1,4 @@
-# 090-checkout
+# Step 9: Checkout logic
 
 You're already putting a bundle into the cart, or at least you created a new line item with a custom type `swagbundle`. And that's the scenario given for this chapter, which will be all about properly handling this new line item type and therefore changing the cart's behavior.
 

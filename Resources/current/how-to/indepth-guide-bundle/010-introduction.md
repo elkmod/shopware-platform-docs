@@ -1,4 +1,4 @@
-# 010-introduction
+# Step 1: Introduction
 
 There's plenty of explanations about [how to set-up your first plugin](../../20-developer-guide/10-plugin-base.md), with possibilities of [configuring your plugin](../../60-references-internals/40-plugins/070-plugin-config.md) and [several smaller examples on how to solve a specific problem](https://docs.shopware.com/en/shopware-platform-dev-en/how-to) with your plugin.
 

@@ -8,7 +8,7 @@ In case you're not familiar with the wording here - A route is essentially an ex
 
 ### Adding controllers to a plugin
 
-Since Shopware plugins are essentially [Symfony bundles](https://symfony.com/doc/current/bundles.html#creating-a-bundle) , the [configuration pattern](https://symfony.com/doc/current/configuration.html) of Symfony applies. To make Shopware aware of a new controller, you need to place a config file in the `Resources/config` directory of your plugin. This config file has to have the string `routes` [in its filename or path](../50-how-to/020-api-controller.md#loading-the-controllers-via-routesxml) and can be written in `yaml`, `xml` or `php`.
+Since Shopware plugins are essentially [Symfony bundles](https://symfony.com/doc/current/bundles.html#creating-a-bundle) , the [configuration pattern](https://symfony.com/doc/current/configuration.html) of Symfony applies. To make Shopware aware of a new controller, you need to place a config file in the `Resources/config` directory of your plugin. This config file has to have the string `routes` [in its filename or path](../how-to/020-api-controller.md#loading-the-controllers-via-routesxml) and can be written in `yaml`, `xml` or `php`.
 
 ```text
 ./
@@ -78,7 +78,7 @@ Shopware does not offer one API, but multiple purpose-built ones for different u
 
 ### Admin API Controller
 
-An [admin API controller](../50-how-to/020-api-controller.md) can be registered like described above, the only thing to remember apart from that is to use the corresponding `RouteScope`:
+An [admin API controller](../how-to/020-api-controller.md) can be registered like described above, the only thing to remember apart from that is to use the corresponding `RouteScope`:
 
 ```php
 /**
@@ -96,7 +96,7 @@ Since Shopware v6.2, there's a new concept we suggest for creating storefront co
 
 ### Storefront controller
 
-A [storefront controller](../50-how-to/580-custom-storefront-controller.md) can be registered like described [above](20-controller.md#adding-controllers-to-a-plugin) . Apart from that, use the `storefront` `RouteScope` and extend from the `StorefrontController` instead of the `AbstractController`:
+A [storefront controller](../how-to/580-custom-storefront-controller.md) can be registered like described [above](20-controller.md#adding-controllers-to-a-plugin) . Apart from that, use the `storefront` `RouteScope` and extend from the `StorefrontController` instead of the `AbstractController`:
 
 ```php
 /**

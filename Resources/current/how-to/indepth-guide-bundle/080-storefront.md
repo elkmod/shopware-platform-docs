@@ -1,4 +1,4 @@
-# 080-storefront
+# Step 8: Extending the product detail page
 
 Time to show your Bundle where it really counts: On the detail page in the Storefront!
 

@@ -1,4 +1,4 @@
-# 020-setup
+# Step 2: The plugin setup
 
 ## Basic structure
 

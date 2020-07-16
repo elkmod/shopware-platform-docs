@@ -1,4 +1,4 @@
-# 070-administration
+# Step 7: New module in the administration
 
 You've got a running custom entity with its very own database tables - but how does a shop manager actually create a bundle now? Sure, you could just define your bundles in the database itself, but you know that's not a viable solution for the shop manager, he needs to be able to configure his bundles in the administration.
 

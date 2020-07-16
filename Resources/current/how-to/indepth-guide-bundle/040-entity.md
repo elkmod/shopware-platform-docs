@@ -1,4 +1,4 @@
-# 040-entity
+# Step 4: Creating an entity
 
 While it's good to have the database tables running already, Shopware 6 does not know your new table yet.
 

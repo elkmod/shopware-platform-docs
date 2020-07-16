@@ -1,4 +1,4 @@
-# 060-entity-translation
+# Step 6: Entity translations
 
 While setting up the previous tables for the bundle, it felt like something is missing here. After having a look at the `BundleEntity` once more, you might have figured out that it would be pretty nice to have a translatable name for the bundle as well.
 
