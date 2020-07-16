@@ -4,7 +4,7 @@ By default Shopware 6 uses the [Vue I18n](https://kazupon.github.io/vue-i18n/sta
 
 Normally you want to use snippets in you custom module. To keep things organized create a new directory named `snippet` inside you module directory `<plugin root>/src/Resources/app/administration/src/module/<your-module>/snippet`. For each language you want to support you need a json file inside here, e.g. `de-DE.json` and of course `en-GB.json`.
 
-By default Shopware 6 will collect those files automatically when your plugin was activate.
+By default Shopware 6 will collect those files automatically when your plugin was activated.
 
 Each language then receives a nested object of translations, so let's have a look at an example `snippet/en-GB.json`:
 
