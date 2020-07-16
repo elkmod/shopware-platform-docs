@@ -1,12 +1,6 @@
----
-description: >-
-  The administration of Shopware 6 mainly uses VueJS as a framework. Of course
-  any Shopware 6 specific code will be explained, don't worry about that.
----
-
 # Administration
 
-How to develop with VueJS is **not** explained here, head over to the [official documentation](https://vuejs.org/v2/guide/) to learn more about the framework itself.
+The administration of Shopware 6 mainly uses VueJS as a framework. How to develop with VueJS is **not** explained here, head over to the [official documentation](https://vuejs.org/v2/guide/) to learn more about the framework itself. Of course, any Shopware 6 specific code will be explained, don't worry about that.
 
 ## Setting up the administration
 
