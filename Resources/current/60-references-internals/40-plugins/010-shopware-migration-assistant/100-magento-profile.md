@@ -17,5 +17,5 @@ To migrate the data from a Magento 1.9.x system, Shopware has created a [Magento
 * Product reviews
 * Seo urls
 
-Currently the profile downloads all media files, but does not download order documents. Important: In order to download the WYSIWYG-media-files, Shopware 6 has to be located on the same server as the Magento system. All data will be migrated via the Magento database. Like the Shopware 5.x profiles it can be [extended](../../../how-to/520-extend-shopware-migration-profile.md) and [decorated](../../../how-to/550-decorate-shopware-migration-converter.md) by plugin developers, because it is implemented in the same way \(have a look at the [migration concept](010-introduction.md) for more information\).
+Currently the profile downloads all media files, but does not download order documents. Important: In order to download the WYSIWYG-media-files, Shopware 6 has to be located on the same server as the Magento system. All data will be migrated via the Magento database. Like the Shopware 5.x profiles it can be [extended](../../../50-how-to/520-extend-shopware-migration-profile.md) and [decorated](../../../50-how-to/550-decorate-shopware-migration-converter.md) by plugin developers, because it is implemented in the same way \(have a look at the [migration concept](010-introduction.md) for more information\).
 

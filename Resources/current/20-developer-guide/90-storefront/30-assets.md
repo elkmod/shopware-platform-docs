@@ -1,4 +1,4 @@
-# 30-assets
+# Assets
 
 Your plugin can include custom SCSS, JavaScript and other assets. It may require some custom styling to look decent and a few lines of JavaScript to add special features.
 
@@ -111,5 +111,5 @@ If you want to use custom assets, please put those assets here: ​
 
 ## HowTo guide concerning storefront assets
 
-If you want a detailed tutorial on how to use custom storefront assets, we got you covered. Please refer to [the how-to-guide concerning assets](../../how-to/330-storefront-assets.md) for further information.
+If you want a detailed tutorial on how to use custom storefront assets, we got you covered. Please refer to [the how-to-guide concerning assets](../../50-how-to/330-storefront-assets.md) for further information.
 

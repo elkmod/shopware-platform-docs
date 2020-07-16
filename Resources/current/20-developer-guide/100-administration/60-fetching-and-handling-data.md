@@ -1,4 +1,4 @@
-# 60-fetching-and-handling-data
+# Fetching and Handling Data
 
 The data handling was created with **predictability** as its main design goal. It uses a _repository pattern_ which is strongly based on the [Database Abstraction Layer](../../60-references-internals/10-core/130-dal.md) from the core.
 

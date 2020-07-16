@@ -1,4 +1,4 @@
-# 30-components
+# Components
 
 Component are the building blocks which you can use to implement your plugin features. You can find various components which comes with Shopware 6 in the [component library](https://component-library.shopware.com/).
 

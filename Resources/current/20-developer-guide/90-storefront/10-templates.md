@@ -1,4 +1,4 @@
-# 10-templates
+# Templates
 
 The storefront theme is using [Boostrap](https://getbootstrap.com/). Therefore the template structure is a derivate of the [bootstrap starter template](https://getbootstrap.com/docs/4.3/getting-started/introduction/#starter-template). The templating engine used is [Twig](https://twig.symfony.com/). For styling [SASS](https://sass-lang.com/) is used as CSS preprocessor. The bundling and transpiling of the javascript is done with [Webpack](https://webpack.js.org/).
 

@@ -1,4 +1,4 @@
-# 50-snippets
+# Snippets
 
 By default Shopware 6 uses the [Vue I18n](https://kazupon.github.io/vue-i18n/started.html#html) plugin in the `Administration` to deal with translation. To define you custom snippets you have create files in the `json` format.
 

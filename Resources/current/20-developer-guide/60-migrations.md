@@ -1,4 +1,4 @@
-# Migrations guide
+# Migrations
 
 Migrations are php classes containing database schema changesets. These changesets can be applied or reverted to bring the database into a certain state. You might know the concept of migrations from other Frameworks or Symfony as well. Read on to find out how to add your own migrations to Shopware when implementing a plugin.
 

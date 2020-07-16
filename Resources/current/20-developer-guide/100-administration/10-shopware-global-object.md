@@ -1,4 +1,4 @@
-# 10-shopware-global-object
+# Shopware global object
 
 `Shopware` is a global object and it was created for third party developers. It is mainly the bridge between the Shopware Administration and your plugin.
 

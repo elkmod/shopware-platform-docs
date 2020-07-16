@@ -1,4 +1,4 @@
-# 10-plugin-base
+# Plugin Base
 
 ## Plugin system guide
 

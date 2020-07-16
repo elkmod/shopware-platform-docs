@@ -1,4 +1,4 @@
-# Content translations
+# Content Translations
 
 ## DAL
 

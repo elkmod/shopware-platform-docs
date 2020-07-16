@@ -1,4 +1,4 @@
-# 40-snippets
+# Snippets
 
 To extend a language in Shopware 6 you can add your own snippets in your plugin.
 
@@ -52,7 +52,7 @@ Example:
 
 ## Extending Storefront snippets
 
-In this guide, we will give you an overview on how to extend Storefront snippets. In case you need further assistance, we got you covered. In our HowTo section, we provide a detailed tutorial on [extending Storefront snippets](../../how-to/245-adding-snippets.md).
+In this guide, we will give you an overview on how to extend Storefront snippets. In case you need further assistance, we got you covered. In our HowTo section, we provide a detailed tutorial on [extending Storefront snippets](../../50-how-to/245-adding-snippets.md).
 
 ### SnippetFile
 

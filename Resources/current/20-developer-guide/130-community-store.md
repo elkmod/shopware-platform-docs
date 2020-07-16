@@ -1,4 +1,4 @@
-# 130-community-store
+# Community Store
 
 This guide will take you through the steps to get a plugin ready for the community store. Our [Quality Guidelines for Plugins in the Shopware Community Store](https://docs.shopware.com/en/plugin-standard-for-community-store) should also be read very carefully.
 

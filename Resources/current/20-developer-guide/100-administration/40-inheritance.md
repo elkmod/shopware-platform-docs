@@ -1,4 +1,4 @@
-# 40-inheritance
+# Inheritance
 
 To add new functionality or change the behavior of a existing component, you can either override or extend the component.
 

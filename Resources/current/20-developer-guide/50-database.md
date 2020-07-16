@@ -1,4 +1,4 @@
-# 50-database
+# Database Access
 
 ## Database guide
 
@@ -33,7 +33,7 @@ Then, configure the `product.repository` service to be injected:
 </service>
 ```
 
-You can read more about dependency injection and service registration in Shopware in the [services HowTo](../how-to/070-add-service.md) .
+You can read more about dependency injection and service registration in Shopware in the [services HowTo](../50-how-to/070-add-service.md) .
 
 ### Creating entities
 
@@ -131,5 +131,5 @@ Learn more in the [associations](../60-references-internals/10-core/130-dal.md) 
 
 ## Going further with extensions and custom entities
 
-The DAL makes it possible to extend existing entities using new relations. This can be useful when you need just a bit of additional data. Read more about entity extensions [here](../60-references-internals/10-core/130-dal.md) . Adding your own custom entity is possible as well and covered in-depth in the [custom entity HowTo](../how-to/050-custom-entity.md) .
+The DAL makes it possible to extend existing entities using new relations. This can be useful when you need just a bit of additional data. Read more about entity extensions [here](../60-references-internals/10-core/130-dal.md) . Adding your own custom entity is possible as well and covered in-depth in the [custom entity HowTo](../50-how-to/050-custom-entity.md) .
 

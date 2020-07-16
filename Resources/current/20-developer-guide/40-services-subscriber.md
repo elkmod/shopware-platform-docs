@@ -1,4 +1,4 @@
-# 40-services-subscriber
+# Services & Subscriber
 
 ## Plugin base class
 

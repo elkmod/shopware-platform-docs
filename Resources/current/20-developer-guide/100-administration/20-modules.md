@@ -1,4 +1,4 @@
-# 20-modules
+# Modules
 
 To create a new module you have to create a new directory `<plugin root>/src/Resources/app/administration/src/module/swag-plugin`, so you can store your own modules files in there. In this case we named our module `swag-plugin`. Right afterwards create a new file called `index.js` in there. This is necessary, because Shopware 6 is automatically requiring an `index.js` file for each module. Consider it to be the main file for your custom module.
 
