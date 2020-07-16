@@ -3,7 +3,7 @@
 * [This is our new Developer Home](README.md)
 * [System Guide](10-system-guide/README.md)
   * [System Installation Guides](10-system-guide/30-system-installation-guides/README.md)
-    * [Local Installation on Mac \(MAMP\)](10-system-guide/30-system-installation-guides/10-mac-os-x.md)
+    * [Local Installation on Mac](10-system-guide/30-system-installation-guides/10-mac-os-x.md)
     * [Vagrant](10-system-guide/30-system-installation-guides/20-vagrant.md)
     * [Using native mounting with Docker Volumes and docker-sync](10-system-guide/30-system-installation-guides/30-docker-sync.md)
   * [Startup Guide](10-system-guide/__categoryinfo-1.md)

@@ -1,6 +1,8 @@
-# Local Installation on Mac \(MAMP\)
+---
+description: For quick and easy installation you can also use MAMP on mac.
+---
 
-For quick and easy installation you can also use **MAMP** on mac.
+# Local Installation on Mac
 
 ## Preparation
 
