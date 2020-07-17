@@ -1,4 +1,4 @@
-# 60-javascript
+# JavaScript
 
 You can add JavaScript to theme to interact with the DOM, make some API calls or change the behavior of the storefront.
 

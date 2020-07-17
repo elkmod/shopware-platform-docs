@@ -1,6 +1,10 @@
-# Vagrant
+---
+description: >-
+  If using docker is not an option for you, vagrant is another great technology
+  to quickly get a local Shopware up and running.
+---
 
-If using docker is not an option for you, vagrant is another great technology to quickly get a local Shopware up and running.
+# Vagrant
 
 Other than with the docker or local setup, with vagrant you will have a complete seperate server on your machine.
 

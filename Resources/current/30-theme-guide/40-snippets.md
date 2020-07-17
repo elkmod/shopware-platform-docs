@@ -1,4 +1,4 @@
-# 40-snippets
+# Snippets
 
 To extend a language in Shopware 6 you can add your own snippets in your theme. You can also add a completely new language to Shopware 6.
 

@@ -150,5 +150,5 @@ class AcmeExampleRoute
 }
 ```
 
-To learn more about Store API controllers, have a look at the [Store API](../45-store-api-guide/__categoryinfo.md) documentation.
+To learn more about Store API controllers, have a look at the [Store API]() documentation.
 

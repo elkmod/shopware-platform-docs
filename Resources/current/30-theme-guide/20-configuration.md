@@ -1,4 +1,4 @@
-# 20-configuration
+# Theme Configuration
 
 ## Structure of the theme.json
 

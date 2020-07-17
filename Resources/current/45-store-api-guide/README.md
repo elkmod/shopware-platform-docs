@@ -1,2 +1,2 @@
-# 45-store-api-guide
+# Store API Guide
 

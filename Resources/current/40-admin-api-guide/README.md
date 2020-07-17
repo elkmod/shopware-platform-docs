@@ -1,2 +1,2 @@
-# 40-admin-api-guide
+# Admin API Guide
 

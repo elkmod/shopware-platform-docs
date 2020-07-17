@@ -303,7 +303,7 @@ The second parameter is the route / entity name you want to call. Some examples 
 
 The third parameter is the data you might want to send to the API. These data can be written as an `array` and is encoded by PHP according to the JSON scheme.
 
-If you want to know more about how to work with the API, we recommend you take a look at the [API documentation](../40-admin-api-guide/__categoryinfo.md)
+If you want to know more about how to work with the API, we recommend you take a look at the [API documentation]()
 
 ## Source
 

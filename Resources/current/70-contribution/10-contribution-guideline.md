@@ -1,4 +1,4 @@
-# 10-contribution-guideline
+# Contribution Guideline
 
 ## Introduction
 

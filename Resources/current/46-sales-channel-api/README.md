@@ -1,2 +1,2 @@
-# 46-sales-channel-api
+# SalesChannel API Guide
 

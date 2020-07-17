@@ -1,6 +1,6 @@
 # 030-sales-channel-api-controller
 
-This HowTo will give you a brief introduction on how to setup a custom SalesChannel-API controller with your plugin. Read [here](../45-store-api-guide/__categoryinfo.md) for more information about the SalesChannel-API. Also, [this](020-api-controller.md) guide covers the same subject for the Admin API.
+This HowTo will give you a brief introduction on how to setup a custom SalesChannel-API controller with your plugin. Read [here]() for more information about the SalesChannel-API. Also, [this](020-api-controller.md) guide covers the same subject for the Admin API.
 
 ## Plugin base class
 

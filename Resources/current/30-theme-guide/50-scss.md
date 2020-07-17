@@ -1,4 +1,4 @@
-# 50-scss
+# SCSS & Styling
 
 The stylesheets are written in [SASS](https://sass-lang.com/). The folder structure is inspired by the [7-1 pattern](https://sass-guidelin.es/#architecture) structure.
 

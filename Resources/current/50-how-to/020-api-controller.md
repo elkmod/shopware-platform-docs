@@ -1,6 +1,6 @@
 # 020-api-controller
 
-This HowTo will give you a brief introduction on how to setup a custom Admin API controller with your plugin. Read [here](../40-admin-api-guide/__categoryinfo.md) for more information about the Admin API itself.
+This HowTo will give you a brief introduction on how to setup a custom Admin API controller with your plugin. Read [here]() for more information about the Admin API itself.
 
 ## Plugin base class
 

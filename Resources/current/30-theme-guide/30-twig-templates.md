@@ -1,4 +1,4 @@
-# 30-twig-templates
+# Twig Templates
 
 In Shopware 6 we use the [Twig](https://twig.symfony.com/) template engine to render the HTML in the storefront.
 

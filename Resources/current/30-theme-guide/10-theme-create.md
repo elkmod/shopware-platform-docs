@@ -1,4 +1,4 @@
-# 10-theme-create
+# Creating a new Theme
 
 ## Difference between "themes" and "regular" plugins
 

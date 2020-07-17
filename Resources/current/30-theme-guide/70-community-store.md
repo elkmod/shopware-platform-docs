@@ -1,4 +1,4 @@
-# 70-community-store
+# Community store
 
 To publish your plugins in the Shopware Community Store, you need to register your own developer prefix in your Shopware account.
 
